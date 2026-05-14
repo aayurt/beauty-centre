@@ -1,9 +1,8 @@
 "use client";
 
-import { useState } from "react";
 import AnimatedSection from "./AnimatedSection";
 import Image from "next/image";
-import { X } from "lucide-react";
+import { X, ChevronLeft, ChevronRight } from "lucide-react";
 
 const galleryImages = [
   {
@@ -49,13 +48,13 @@ const galleryImages = [
 ];
 
 export default function Gallery() {
-  const [selectedImage, setSelectedImage] = useState<string | null>(null);
-
   return (
     <section id="gallery" className="py-24 md:py-32 bg-white">
       <div className="max-w-7xl mx-auto px-6">
-        {/* Header */}
-        <AnimatedSection direction="up" className="text-center max-w-3xl mx-auto mb-16">
+        <AnimatedSection
+          direction="up"
+          className="text-center max-w-3xl mx-auto mb-16"
+        >
           <span className="inline-block px-4 py-2 bg-primary-pink-light text-sage-green rounded-full text-sm font-medium mb-6">
             Our Gallery
           </span>
@@ -64,11 +63,12 @@ export default function Gallery() {
             <span className="text-sage-green">Our World</span>
           </h2>
           <p className="text-text-light text-lg leading-relaxed">
-            Step inside our sanctuary and experience the ambiance that makes K & S Beauty Centre a destination for relaxation and transformation.
+            Step inside our sanctuary and experience the ambiance that makes K
+            &amp; S Beauty Centre a destination for relaxation and
+            transformation.
           </p>
         </AnimatedSection>
 
-        {/* Gallery Grid */}
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6 auto-rows-[200px]">
           {galleryImages.map((image, index) => (
             <AnimatedSection
@@ -76,46 +76,74 @@ export default function Gallery() {
               direction="scale"
               delay={index * 0.1}
               className={`${image.span} relative group cursor-pointer overflow-hidden rounded-xl`}
-              onClick={() => setSelectedImage(image.src)}
             >
-              <Image
-                src={image.src}
-                alt={image.alt}
-                fill
-                className="object-cover transition-transform duration-700 group-hover:scale-110"
-              />
-              {/* Overlay on hover */}
-              <div className="absolute inset-0 bg-black/0 group-hover:bg-black/30 transition-all duration-300 flex items-center justify-center">
-                <span className="text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300 font-medium">
-                  View
-                </span>
-              </div>
+              <a
+                href={`#lightbox-${index}`}
+                className="block relative w-full h-full"
+              >
+                <Image
+                  src={image.src}
+                  alt={image.alt}
+                  fill
+                  className="object-cover transition-transform duration-700 group-hover:scale-110"
+                />
+                <div className="absolute inset-0 bg-black/0 group-hover:bg-black/30 transition-all duration-300 flex items-center justify-center">
+                  <span className="text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300 font-medium translate-y-2 group-hover:translate-y-0 inline-block">
+                    View
+                  </span>
+                </div>
+              </a>
             </AnimatedSection>
           ))}
         </div>
       </div>
 
-      {/* Lightbox */}
-      {selectedImage && (
-        <div
-          className="fixed inset-0 z-50 bg-black/90 flex items-center justify-center p-4"
-          onClick={() => setSelectedImage(null)}
-        >
-          <button
-            className="absolute top-6 right-6 text-white hover:text-primary-pink transition-colors"
-            onClick={() => setSelectedImage(null)}
+      {/* CSS-only lightboxes */}
+      {galleryImages.map((image, index) => (
+        <div key={index} id={`lightbox-${index}`} className="lightbox">
+          <a href="#gallery" className="lightbox-backdrop" aria-label="Close lightbox" />
+          <a
+            href="#gallery"
+            className="lightbox-close"
+            aria-label="Close lightbox"
           >
-            <X className="w-8 h-8" />
-          </button>
+            <X className="w-6 h-6" />
+          </a>
+
+          {index > 0 && (
+            <a
+              href={`#lightbox-${index - 1}`}
+              className="lightbox-nav prev"
+              aria-label="Previous image"
+            >
+              <ChevronLeft className="w-6 h-6" />
+            </a>
+          )}
+
+          {index < galleryImages.length - 1 && (
+            <a
+              href={`#lightbox-${index + 1}`}
+              className="lightbox-nav next"
+              aria-label="Next image"
+            >
+              <ChevronRight className="w-6 h-6" />
+            </a>
+          )}
+
           <Image
-            src={selectedImage}
-            alt="Gallery image"
+            src={image.src}
+            alt={image.alt}
             width={1200}
             height={800}
-            className="max-w-full max-h-[90vh] object-contain rounded-lg"
+            className="lightbox-content"
+            unoptimized
           />
+
+          <span className="lightbox-counter">
+            {index + 1} / {galleryImages.length}
+          </span>
         </div>
-      )}
+      ))}
     </section>
   );
 }

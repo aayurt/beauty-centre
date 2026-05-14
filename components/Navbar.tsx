@@ -1,32 +1,51 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { motion } from "framer-motion";
 import { Menu, X } from "lucide-react";
-import Link from "next/link";
+import { useActiveSection } from "@/lib/hooks/useSmoothScroll";
 
 const navLinks = [
-  { name: "Home", href: "#home" },
-  { name: "About", href: "#about" },
-  { name: "Services", href: "#services" },
-  { name: "Gallery", href: "#gallery" },
-  { name: "Team", href: "#team" },
-  { name: "Testimonials", href: "#testimonials" },
-  { name: "Contact", href: "#contact" },
+  { name: "Home", href: "#home", id: "home" },
+  { name: "About", href: "#about", id: "about" },
+  { name: "Services", href: "#services", id: "services" },
+  { name: "Gallery", href: "#gallery", id: "gallery" },
+  { name: "Location", href: "#location", id: "location" },
+  { name: "Team", href: "#team", id: "team" },
+  { name: "Testimonials", href: "#testimonials", id: "testimonials" },
+  { name: "Contact", href: "#contact", id: "contact" },
 ];
+
+const sectionIds = navLinks.map((l) => l.id);
 
 export default function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const activeSection = useActiveSection(sectionIds);
 
   useEffect(() => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 50);
     };
 
-    window.addEventListener("scroll", handleScroll);
+    window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
+
+  const handleNavClick = useCallback(
+    (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
+      e.preventDefault();
+      const id = href.replace("#", "");
+      const el = document.getElementById(id);
+      if (el) {
+        const offset = 80;
+        const top = el.getBoundingClientRect().top + window.scrollY - offset;
+        window.scrollTo({ top, behavior: "smooth" });
+      }
+      setIsMobileMenuOpen(false);
+    },
+    [],
+  );
 
   return (
     <motion.nav
@@ -41,30 +60,37 @@ export default function Navbar() {
     >
       <div className="max-w-7xl mx-auto px-6 flex items-center justify-between">
         {/* Logo */}
-        <Link
+        <a
           href="#home"
+          onClick={(e) => handleNavClick(e, "#home")}
           className={`text-2xl font-serif font-bold tracking-wide transition-colors duration-300 ${
             isScrolled ? "text-sage-green" : "text-white drop-shadow-lg"
           }`}
         >
           K & S Beauty
-        </Link>
+        </a>
 
         {/* Desktop Navigation */}
         <div className="hidden md:flex items-center space-x-8">
           {navLinks.map((link) => (
-            <Link
+            <a
               key={link.name}
               href={link.href}
+              onClick={(e) => handleNavClick(e, link.href)}
               className={`text-sm font-medium tracking-wide transition-colors duration-300 hover:text-primary-pink ${
-                isScrolled ? "text-text-dark" : "text-white drop-shadow-md"
+                activeSection === link.id
+                  ? "text-primary-pink"
+                  : isScrolled
+                    ? "text-text-dark"
+                    : "text-white drop-shadow-md"
               }`}
             >
               {link.name}
-            </Link>
+            </a>
           ))}
-          <Link
+          <a
             href="#contact"
+            onClick={(e) => handleNavClick(e, "#contact")}
             className={`px-6 py-2.5 rounded-full text-sm font-medium transition-all duration-300 ${
               isScrolled
                 ? "bg-sage-green text-white hover:bg-sage-green-dark"
@@ -72,7 +98,7 @@ export default function Navbar() {
             }`}
           >
             Book Now
-          </Link>
+          </a>
         </div>
 
         {/* Mobile Menu Button */}
@@ -107,22 +133,26 @@ export default function Navbar() {
         >
           <div className="px-6 py-4 flex flex-col space-y-4">
             {navLinks.map((link) => (
-              <Link
+              <a
                 key={link.name}
                 href={link.href}
-                className="text-text-dark font-medium hover:text-sage-green transition-colors"
-                onClick={() => setIsMobileMenuOpen(false)}
+                onClick={(e) => handleNavClick(e, link.href)}
+                className={`font-medium transition-colors ${
+                  activeSection === link.id
+                    ? "text-primary-pink"
+                    : "text-text-dark hover:text-sage-green"
+                }`}
               >
                 {link.name}
-              </Link>
+              </a>
             ))}
-            <Link
+            <a
               href="#contact"
+              onClick={(e) => handleNavClick(e, "#contact")}
               className="text-center px-6 py-3 bg-sage-green text-white rounded-full font-medium hover:bg-sage-green-dark transition-colors"
-              onClick={() => setIsMobileMenuOpen(false)}
             >
               Book Now
-            </Link>
+            </a>
           </div>
         </motion.div>
       )}

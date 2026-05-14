@@ -1,6 +1,6 @@
 import AnimatedSection from "./AnimatedSection";
 import Image from "next/image";
-import { Mail } from "lucide-react";
+import { Mail, ExternalLink, Camera } from "lucide-react";
 
 const teamMembers = [
   {
@@ -37,8 +37,10 @@ export default function Team() {
   return (
     <section id="team" className="py-24 md:py-32 bg-primary-pink-light">
       <div className="max-w-7xl mx-auto px-6">
-        {/* Header */}
-        <AnimatedSection direction="up" className="text-center max-w-3xl mx-auto mb-16">
+        <AnimatedSection
+          direction="up"
+          className="text-center max-w-3xl mx-auto mb-16"
+        >
           <span className="inline-block px-4 py-2 bg-white text-sage-green rounded-full text-sm font-medium mb-6">
             Our Team
           </span>
@@ -47,11 +49,11 @@ export default function Team() {
             <span className="text-sage-green">Artists</span> Behind Your Beauty
           </h2>
           <p className="text-text-light text-lg leading-relaxed">
-            Our talented team of certified professionals is dedicated to making you look and feel your absolute best.
+            Our talented team of certified professionals is dedicated to making
+            you look and feel your absolute best.
           </p>
         </AnimatedSection>
 
-        {/* Team Grid */}
         <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
           {teamMembers.map((member, index) => (
             <AnimatedSection
@@ -59,8 +61,7 @@ export default function Team() {
               direction="up"
               delay={index * 0.15}
             >
-              <div className="bg-white rounded-2xl overflow-hidden shadow-xl hover:shadow-2xl transition-all duration-500 group">
-                {/* Image */}
+              <div className="team-card bg-white rounded-2xl overflow-hidden shadow-xl hover:shadow-2xl transition-all duration-500 group">
                 <div className="relative h-72 overflow-hidden">
                   <Image
                     src={member.image}
@@ -68,19 +69,39 @@ export default function Team() {
                     fill
                     className="object-cover object-top transition-transform duration-700 group-hover:scale-105"
                   />
-                  {/* Social overlay */}
-                  <div className="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center gap-4">
-                    <a
-                      href={member.social.email}
-                      className="w-10 h-10 rounded-full bg-white flex items-center justify-center hover:bg-primary-pink transition-colors"
-                      aria-label={`Email ${member.name}`}
-                    >
-                      <Mail className="w-5 h-5 text-text-dark" />
-                    </a>
+
+                  {/* Enhanced overlay on hover */}
+                  <div className="team-overlay">
+                    <div className="team-overlay-content">
+                      <div className="team-overlay-name">{member.name}</div>
+                      <div className="team-overlay-role">{member.role}</div>
+                      <div className="flex gap-2">
+                        <a
+                          href={member.social.email}
+                          className="team-social-icon"
+                          aria-label={`Email ${member.name}`}
+                        >
+                          <Mail className="w-4 h-4" />
+                        </a>
+                        <a
+                          href={member.social.instagram}
+                          className="team-social-icon"
+                          aria-label={`${member.name} on Instagram`}
+                        >
+                          <Camera className="w-4 h-4" />
+                        </a>
+                        <a
+                          href={member.social.linkedin}
+                          className="team-social-icon"
+                          aria-label={`${member.name} on LinkedIn`}
+                        >
+                          <ExternalLink className="w-4 h-4" />
+                        </a>
+                      </div>
+                    </div>
                   </div>
                 </div>
 
-                {/* Content */}
                 <div className="p-6 text-center">
                   <h3 className="text-xl font-serif font-bold text-text-dark mb-1">
                     {member.name}

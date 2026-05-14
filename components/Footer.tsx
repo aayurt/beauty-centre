@@ -86,11 +86,11 @@ export default function Footer() {
           <div>
             <h4 className="text-lg font-semibold mb-6">Contact Info</h4>
             <ul className="space-y-3 text-gray-300">
-              <li>123 Beauty Lane, Suite 100</li>
-              <li>City Centre, State 12345</li>
+              <li>Jamal, Kathmandu 44600</li>
+              <li>Nepal</li>
               <li className="pt-2">
-                <a href="tel:+15551234567" className="hover:text-primary-pink transition-colors">
-                  +1 (555) 123-4567
+                <a href="tel:+977144XXXXX" className="hover:text-primary-pink transition-colors">
+                  +977-1-4XXXXXX
                 </a>
               </li>
               <li>

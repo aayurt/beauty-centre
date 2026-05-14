@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef, useEffect, useState, useMemo, useCallback } from "react";
+import { useRef, useEffect, useState, useCallback } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
 import Image from "next/image";
 
@@ -14,7 +14,6 @@ export default function ScrollVideoFrames({
   className = "",
 }: ScrollVideoFramesProps) {
   const containerRef = useRef<HTMLDivElement>(null);
-  const [loadedFrames, setLoadedFrames] = useState<Record<number, boolean>>({});
   const [currentFrame, setCurrentFrame] = useState(1);
 
   const { scrollYProgress } = useScroll({
@@ -37,7 +36,6 @@ export default function ScrollVideoFrames({
       const img = new window.Image() as HTMLImageElement;
       img.src = `/video-frames/frame_${String(frameNum).padStart(4, "0")}.jpg`;
       img.onload = () => {
-        setLoadedFrames((prev) => ({ ...prev, [frameNum]: true }));
         loadedCount++;
         if (loadedCount === framesToLoad.length) {
           console.log(`All ${totalFrames} frames loaded`);
@@ -171,7 +169,7 @@ export default function ScrollVideoFrames({
       </div>
 
       {/* Extra scrollable space */}
-      <div style={{ height: "300vh" }} />
+      <div style={{ height: "150vh" }} />
     </div>
   );
 }

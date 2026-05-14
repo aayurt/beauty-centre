@@ -1,18 +1,21 @@
 import { NextRequest, NextResponse } from "next/server";
-import { createContactEntry } from "@/lib/db";
+import { createBookingInquiryEntry } from "@/lib/db";
 import { z } from "zod";
 
-const ContactFormSchema = z.object({
+const BookingInquiryFormSchema = z.object({
   name: z.string().min(1),
-  email: z.string().email(),
-  message: z.string().min(1),
+  phone: z.string().min(7),
+  service: z.string().min(1),
+  preferredDate: z.string().min(1),
+  preferredTime: z.string().min(1),
+  message: z.string(),
 });
 
 export async function POST(request: NextRequest) {
   try {
     const body = await request.json();
 
-    const parsed = ContactFormSchema.safeParse(body);
+    const parsed = BookingInquiryFormSchema.safeParse(body);
 
     if (!parsed.success) {
       const errors = parsed.error.flatten().fieldErrors;
@@ -22,18 +25,25 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    const { name, email, message } = parsed.data;
+    const { name, phone, service, preferredDate, preferredTime, message } = parsed.data;
 
-    const result = await createContactEntry({ name, email, message });
+    const result = await createBookingInquiryEntry({
+      name,
+      phone,
+      service,
+      preferredDate,
+      preferredTime,
+      message,
+    });
 
     if (result.success) {
       return NextResponse.json(
-        { data: { message: "Contact saved successfully" }, error: null },
+        { data: { message: "Booking inquiry saved successfully" }, error: null },
         { status: 200 }
       );
     } else {
       return NextResponse.json(
-        { data: null, error: "Failed to save contact" },
+        { data: null, error: "Failed to save booking inquiry" },
         { status: 500 }
       );
     }

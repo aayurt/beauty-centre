@@ -1,0 +1,84 @@
+generator client {
+  provider      = "prisma-client-js"
+  binaryTargets = ["native", "darwin-arm64"]
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model BusinessInfo {
+  id          Int      @id @default(autoincrement())
+  name        String
+  tagline     String?
+  description String
+  address     String
+  phone       String
+  email       String
+  hours       String
+  mission     String?
+  vision      String?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+model Service {
+  id           Int      @id @default(autoincrement())
+  title        String
+  description  String
+  iconName     String
+  imageUrl     String?
+  features     String[]
+  displayOrder Int      @default(0)
+  isActive     Boolean  @default(true)
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+}
+
+model GalleryItem {
+  id           Int      @id @default(autoincrement())
+  src          String
+  alt          String
+  span         String   @default("")
+  displayOrder Int      @default(0)
+  isActive     Boolean  @default(true)
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+}
+
+model Review {
+  id           Int      @id @default(autoincrement())
+  name         String
+  rating       Int
+  text         String
+  service      String?
+  displayOrder Int      @default(0)
+  isActive     Boolean  @default(true)
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+}
+
+model Contact {
+  id        Int      @id @default(autoincrement())
+  name      String
+  email     String
+  message   String
+  createdAt DateTime @default(now())
+
+  @@index([email])
+  @@index([createdAt])
+}
+
+model BookingInquiry {
+  id            Int      @id @default(autoincrement())
+  name          String
+  phone         String
+  service       String
+  preferredDate DateTime
+  preferredTime String
+  message       String
+  createdAt     DateTime @default(now())
+
+  @@index([createdAt])
+}

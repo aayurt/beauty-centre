@@ -1,71 +1,242 @@
+"use client";
+
+import { motion, useScroll, useTransform } from "framer-motion";
+import { useRef } from "react";
 import AnimatedSection from "./AnimatedSection";
-import Image from "next/image";
+import CountUp from "./animations/CountUp";
+import TextReveal from "./animations/TextReveal";
+import { Sparkles, MapPin, Users, Building2, Award } from "lucide-react";
+
+const milestones = [
+  {
+    year: "1980s",
+    title: "The Pioneer Era",
+    description:
+      "Founded by Mr. Keshav in Jamal, Kathmandu, K & S Beauty Centre emerged when fewer than ten professional hair salons existed in the entire valley — securing a defining first-mover advantage.",
+    icon: Sparkles,
+  },
+  {
+    year: "1990s",
+    title: "Growth & Recognition",
+    description:
+      "As Kathmandu transformed from a centralized marketplace to a sophisticated service economy, the salon expanded its clientele and became a trusted institution for beauty in the capital.",
+    icon: Building2,
+  },
+  {
+    year: "2000s",
+    title: "Generational Leadership",
+    description:
+      "Navigating the complexities of generational leadership, the centre maintained its legacy while adapting to the changing beauty landscape of a rapidly modernizing Kathmandu Valley.",
+    icon: Users,
+  },
+  {
+    year: "2010s",
+    title: "Digital Integration",
+    description:
+      "Embracing the digital transformation sweeping Nepal's service sector, K & S Beauty Centre began its journey of technological integration — modernizing operations while preserving its heritage.",
+    icon: Award,
+  },
+];
+
+const staggerVariants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.2,
+      delayChildren: 0.1,
+    },
+  },
+};
+
+const defaultEasing = [0.25, 0.1, 0.25, 1] as const;
+
+const itemVariants = {
+  hidden: { opacity: 0, y: 30 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      duration: 0.6,
+      ease: defaultEasing,
+    },
+  },
+};
+
+function ParallaxImage() {
+  const ref = useRef<HTMLDivElement>(null);
+  const { scrollYProgress } = useScroll({
+    target: ref,
+    offset: ["start end", "end start"],
+  });
+  const y = useTransform(scrollYProgress, [0, 1], ["-15%", "15%"]);
+  const scale = useTransform(scrollYProgress, [0, 1], [1.05, 1]);
+
+  return (
+    <div ref={ref} className="relative aspect-[4/5] rounded-2xl overflow-hidden shadow-2xl">
+      <motion.div style={{ y, scale }} className="absolute inset-0">
+        <div className="absolute inset-0 bg-gradient-to-br from-sage-green to-sage-green-dark" />
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_70%,rgba(255,255,255,0.15)_0%,transparent_70%)]" />
+        <div className="absolute inset-0 flex items-center justify-center">
+          <div className="text-center text-white/90 px-8">
+            <motion.div
+              initial={{ scale: 0 }}
+              whileInView={{ scale: 1 }}
+              viewport={{ once: true }}
+              transition={{ type: "spring", stiffness: 200, damping: 15, delay: 0.3 }}
+              className="w-24 h-24 mx-auto mb-6 rounded-full bg-white/15 backdrop-blur-sm flex items-center justify-center border-2 border-white/20"
+            >
+              <Sparkles className="w-10 h-10" />
+            </motion.div>
+            <p className="text-2xl md:text-3xl font-serif font-bold mb-2">Since 1980s</p>
+            <p className="text-white/70 text-sm uppercase tracking-widest">Jamal, Kathmandu</p>
+          </div>
+        </div>
+      </motion.div>
+      <div className="absolute top-6 left-6 bg-white/90 backdrop-blur-sm px-4 py-2 rounded-full shadow-lg">
+        <span className="text-sage-green font-bold text-sm flex items-center gap-2">
+          <MapPin className="w-3.5 h-3.5" />
+          Jamal, Kathmandu
+        </span>
+      </div>
+    </div>
+  );
+}
 
 export default function About() {
   return (
-    <section id="about" className="py-24 md:py-32 bg-white">
-      <div className="max-w-7xl mx-auto px-6">
-        <div className="grid md:grid-cols-2 gap-16 items-center">
-          {/* Image Side */}
+    <section id="about" className="py-24 md:py-32 bg-white relative overflow-hidden">
+      {/* Decorative background */}
+      <div className="absolute inset-0 pointer-events-none" aria-hidden>
+        <div className="absolute top-1/3 -left-48 w-96 h-96 bg-primary-pink-light/60 rounded-full blur-3xl" />
+        <div className="absolute bottom-1/3 -right-48 w-96 h-96 bg-sage-green/5 rounded-full blur-3xl" />
+      </div>
+
+      <div className="max-w-7xl mx-auto px-6 relative">
+        <div className="grid md:grid-cols-2 gap-16 items-center mb-24 md:mb-32">
           <AnimatedSection direction="left" className="relative">
-            <div className="relative aspect-[4/5] rounded-2xl overflow-hidden shadow-2xl">
-              <Image
-                src="https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=800&q=80"
-                alt="Beauty salon interior with elegant decor"
-                fill
-                className="object-cover"
-              />
-            </div>
-            {/* Decorative element */}
+            <ParallaxImage />
             <div className="absolute -bottom-6 -right-6 w-48 h-48 bg-primary-pink-light rounded-2xl -z-10" />
-            <div className="absolute -top-6 -left-6 w-32 h-32 border-2 border-sage-green rounded-2xl -z-10" />
+            <div className="absolute -top-6 -left-6 w-32 h-32 border-2 border-sage-green/30 rounded-2xl -z-10" />
           </AnimatedSection>
 
-          {/* Text Side */}
           <AnimatedSection direction="right">
             <div className="max-w-lg">
               <span className="inline-block px-4 py-2 bg-primary-pink-light text-sage-green rounded-full text-sm font-medium mb-6">
-                About Us
+                Our Story
               </span>
               <h2 className="text-4xl md:text-5xl font-serif font-bold text-text-dark mb-6 leading-tight">
-                Crafting Beauty,{" "}
-                <span className="text-sage-green">One Client</span> at a Time
+                A Pioneer of{" "}
+                <span className="text-sage-green">Beauty in Kathmandu</span>
               </h2>
-              <p className="text-text-light leading-relaxed mb-6 text-lg">
-                At K & S Beauty Centre, we believe that beauty is an art form, and every client is our canvas. Founded with a passion for excellence, our sanctuary combines cutting-edge techniques with timeless elegance to deliver transformative experiences.
-              </p>
-              <p className="text-text-light leading-relaxed mb-8">
-                Our team of certified professionals brings years of expertise in hair styling, skincare, and therapeutic treatments. We use only premium, cruelty-free products to ensure your beauty journey is as ethical as it is exquisite.
-              </p>
+              <TextReveal
+                text="K & S Beauty Centre, nestled in the historic Jamal district of Kathmandu, stands as a testament to vision and resilience. At a time when fewer than ten professional hair salons operated across the entire Kathmandu Valley, founder Mr. Keshav dared to pioneer — securing a first-mover advantage that would define the salon's trajectory for generations."
+                className="text-text-light leading-relaxed mb-6 text-lg"
+              />
+              <TextReveal
+                text="From those humble beginnings in a centralized traditional marketplace, the centre has evolved alongside Kathmandu's transformation into a sophisticated service economy. Today, it remains a primary case study in understanding the evolution of Nepal's beauty and wellness sector — a beacon of urban prosperity and social change."
+                className="text-text-light leading-relaxed mb-8 text-lg"
+              />
 
-              {/* Values */}
-              <div className="grid grid-cols-2 gap-6">
-                <div className="flex items-start gap-3">
-                  <div className="w-10 h-10 rounded-full bg-primary-pink flex items-center justify-center flex-shrink-0">
-                    <svg className="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 20 20">
-                      <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-                    </svg>
+              <div className="grid grid-cols-3 gap-6">
+                <div>
+                  <div className="text-3xl font-serif font-bold text-sage-green">
+                    <CountUp from={0} to={4} suffix="+" duration={2} />
                   </div>
-                  <div>
-                    <h4 className="font-semibold text-text-dark">Expert Team</h4>
-                    <p className="text-sm text-text-light">Certified professionals</p>
-                  </div>
+                  <div className="text-sm text-text-light">Decades of Beauty</div>
                 </div>
-                <div className="flex items-start gap-3">
-                  <div className="w-10 h-10 rounded-full bg-sage-green flex items-center justify-center flex-shrink-0">
-                    <svg className="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 20 20">
-                      <path fillRule="evenodd" d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z" clipRule="evenodd" />
-                    </svg>
+                <div>
+                  <div className="text-3xl font-serif font-bold text-sage-green">
+                    <CountUp from={0} to={10} suffix="+" duration={2} />
                   </div>
-                  <div>
-                    <h4 className="font-semibold text-text-dark">Premium Products</h4>
-                    <p className="text-sm text-text-light">Cruelty-free & organic</p>
+                  <div className="text-sm text-text-light">Pioneer #{""} Establishment</div>
+                </div>
+                <div>
+                  <div className="text-3xl font-serif font-bold text-sage-green">
+                    <CountUp from={0} to={1} suffix="K+" duration={2} />
                   </div>
+                  <div className="text-sm text-text-light">Happy Clients</div>
                 </div>
               </div>
             </div>
           </AnimatedSection>
         </div>
+
+        {/* Timeline Section */}
+        <AnimatedSection direction="up">
+          <div className="text-center max-w-3xl mx-auto mb-16">
+            <span className="inline-block px-4 py-2 bg-primary-pink-light text-sage-green rounded-full text-sm font-medium mb-6">
+              Our Journey
+            </span>
+            <h2 className="text-4xl md:text-5xl font-serif font-bold text-text-dark mb-6">
+              The Story of{" "}
+              <span className="text-sage-green">A Beauty Institution</span>
+            </h2>
+            <p className="text-text-light text-lg leading-relaxed">
+              From the commercial landscape of a transforming Kathmandu Valley to a
+              modern digital-ready enterprise — every chapter reflects the spirit
+              of Nepali entrepreneurship.
+            </p>
+          </div>
+        </AnimatedSection>
+
+        <motion.div
+          className="timeline max-w-4xl mx-auto"
+          variants={staggerVariants}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.2 }}
+        >
+          {milestones.map((milestone) => (
+            <motion.div
+              key={milestone.year}
+              className="timeline-item"
+              variants={itemVariants}
+            >
+              <div className="timeline-dot" />
+              <div className="timeline-content group hover:border-sage-green/40 hover:shadow-xl transition-all duration-500">
+                <div className="flex items-start gap-4">
+                  <motion.div
+                    className="w-12 h-12 rounded-full bg-primary-pink-light flex items-center justify-center shrink-0"
+                    whileHover={{ scale: 1.1, backgroundColor: "#9caf88" }}
+                    transition={{ type: "spring", stiffness: 300, damping: 20 }}
+                  >
+                    <milestone.icon className="w-5 h-5 text-sage-green group-hover:text-white transition-colors" />
+                  </motion.div>
+                  <div className="flex-1">
+                    <span className="timeline-year">{milestone.year}</span>
+                    <h3 className="timeline-title">{milestone.title}</h3>
+                    <p className="timeline-description">{milestone.description}</p>
+                  </div>
+                </div>
+              </div>
+            </motion.div>
+          ))}
+        </motion.div>
+
+        {/* Quote Section */}
+        <AnimatedSection direction="up" className="mt-24">
+          <div className="max-w-4xl mx-auto text-center">
+            <div className="relative">
+              <svg
+                className="absolute -top-8 -left-8 w-16 h-16 text-primary-pink/30 -z-10"
+                viewBox="0 0 24 24"
+                fill="currentColor"
+              >
+                <path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10H14.017zM0 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151C7.546 6.068 5.983 8.789 5.983 11H10v10H0z" />
+              </svg>
+              <TextReveal
+                text="K & S Beauty Centre is not merely a salon — it is a living chronicle of Kathmandu's transformation, a pioneer that shaped an industry, and a family legacy that continues to define beauty in Nepal."
+                as="blockquote"
+                className="text-2xl md:text-3xl font-serif italic text-text-dark leading-relaxed"
+              />
+              <div className="mt-6">
+                <p className="font-bold text-text-dark">— Mr. Keshav</p>
+                <p className="text-text-light text-sm">Founder, K & S Beauty Centre</p>
+              </div>
+            </div>
+          </div>
+        </AnimatedSection>
       </div>
     </section>
   );
