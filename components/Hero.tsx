@@ -4,6 +4,7 @@ import { motion, useScroll, useTransform } from "framer-motion";
 import { useRef, useState, useEffect, useCallback } from "react";
 import Link from "next/link";
 import { MapPin, Sparkles, Flower2, ScrollText } from "lucide-react";
+import { useCompany } from "@/lib/company-context";
 
 const taglines = [
   "Where elegance meets expertise",
@@ -95,6 +96,7 @@ function FloatingDecorations() {
 export default function Hero() {
   const containerRef = useRef<HTMLElement>(null);
   const { scrollY } = useScroll();
+  const company = useCompany();
   const y = useTransform(scrollY, [0, 500], [0, 150]);
   const opacity = useTransform(scrollY, [0, 300], [1, 0.8]);
   const scale = useTransform(scrollY, [0, 300], [1, 0.98]);
@@ -146,7 +148,7 @@ export default function Hero() {
           transition={{ duration: 0.8, delay: 0.8 }}
           className="text-5xl md:text-7xl lg:text-8xl font-serif font-bold text-white mb-6 leading-tight"
         >
-          K & S Beauty Centre
+          {company.name}
         </motion.h1>
 
         {/* Typewriter Tagline */}
@@ -192,7 +194,7 @@ export default function Hero() {
           className="mt-8 flex items-center justify-center gap-2 text-white/70 text-sm"
         >
           <MapPin className="w-4 h-4" />
-          <span>Located in the Heart of Jamal, Kathmandu</span>
+          <span>{company.address.split("\n")[0]}</span>
         </motion.div>
       </motion.div>
 

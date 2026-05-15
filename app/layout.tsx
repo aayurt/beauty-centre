@@ -3,6 +3,9 @@ import { Playfair_Display, Inter } from "next/font/google";
 import "./globals.css";
 import AnimationProvider from "@/components/animations/AnimationProvider";
 import ScrollProgressBar from "@/components/animations/ScrollProgressBar";
+import { CompanyProvider } from "@/lib/company-context";
+import { Toaster } from "@/components/ui/sonner";
+import { ThemeProvider } from "@/components/theme-provider";
 
 const playfairDisplay = Playfair_Display({
   subsets: ["latin"],
@@ -33,10 +36,15 @@ export default function RootLayout({
       className={`${playfairDisplay.variable} ${inter.variable} scroll-smooth`}
     >
       <body className="antialiased">
-        <AnimationProvider>
-          <ScrollProgressBar />
-          {children}
-        </AnimationProvider>
+        <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>
+          <AnimationProvider>
+            <CompanyProvider>
+              <ScrollProgressBar />
+              {children}
+              <Toaster />
+            </CompanyProvider>
+          </AnimationProvider>
+        </ThemeProvider>
         <script
           dangerouslySetInnerHTML={{
             __html: `

@@ -4,6 +4,7 @@ import { useState, useCallback } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import AnimatedSection from "./AnimatedSection";
 import { MapPin, Phone, Clock, Mail } from "lucide-react";
+import { useCompany } from "@/lib/company-context";
 
 interface FormData {
   name: string;
@@ -26,6 +27,7 @@ const fieldMeta = [
 ];
 
 export default function Contact() {
+  const company = useCompany();
   const [formData, setFormData] = useState<FormData>({ name: "", email: "", message: "" });
   const [focused, setFocused] = useState<Record<string, boolean>>({});
   const [errors, setErrors] = useState<FieldErrors>({});
@@ -108,7 +110,7 @@ export default function Contact() {
             <span className="text-sage-green">Appointment</span> Today
           </h2>
           <p className="text-text-light text-lg leading-relaxed">
-            Ready to experience the K & S difference? Reach out to us and let&apos;s create your perfect beauty moment.
+            Ready to experience the {company.name.split(" ")[0]} difference? Reach out to us and let&apos;s create your perfect beauty moment.
           </p>
         </AnimatedSection>
 
@@ -284,10 +286,10 @@ export default function Contact() {
 
               <div className="space-y-6">
                 {[
-                  { icon: MapPin, title: "Address", children: <>Jamal, Kathmandu 44600<br />Nepal</> },
-                  { icon: Phone, title: "Phone", children: "+977-1-4XXXXXX" },
-                  { icon: Mail, title: "Email", children: "hello@ksbeautycentre.com" },
-                  { icon: Clock, title: "Opening Hours", children: <>Monday - Friday: 9:00 AM - 8:00 PM<br />Saturday: 9:00 AM - 6:00 PM<br />Sunday: 10:00 AM - 4:00 PM</> },
+                  { icon: MapPin, title: "Address", children: company.address.split("\n").map((line, i) => <span key={i}>{line}{i < company.address.split("\n").length - 1 && <br />}</span>) },
+                  { icon: Phone, title: "Phone", children: company.phone || "+977-1-4XXXXXX" },
+                  { icon: Mail, title: "Email", children: company.email },
+                  { icon: Clock, title: "Opening Hours", children: company.hours ? company.hours.split("\n").map((line, i) => <span key={i}>{line}{i < company.hours!.split("\n").length - 1 && <br />}</span>) : <>Monday - Friday: 9:00 AM - 8:00 PM<br />Saturday: 9:00 AM - 6:00 PM<br />Sunday: 10:00 AM - 4:00 PM</> },
                 ].map((item) => (
                   <div key={item.title} className="flex items-start gap-4">
                     <div className="w-12 h-12 rounded-full bg-primary-pink flex items-center justify-center flex-shrink-0">

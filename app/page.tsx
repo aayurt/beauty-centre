@@ -1,4 +1,4 @@
-import Navbar from "@/components/Navbar";
+import PublicSiteShell from "@/components/layout/PublicSiteShell";
 import Hero from "@/components/Hero";
 import ScrollVideoFrames from "@/components/ScrollVideoFrames";
 import About from "@/components/About";
@@ -9,12 +9,11 @@ import Team from "@/components/Team";
 import Testimonials from "@/components/Testimonials";
 import BookingInquiry from "@/components/BookingInquiry";
 import Contact from "@/components/Contact";
-import Footer from "@/components/Footer";
+import InstagramFeed from "@/components/InstagramFeed";
 
 export default function Home() {
   return (
-    <main className="min-h-screen">
-      <Navbar />
+    <PublicSiteShell>
       <Hero />
       <ScrollVideoFrames totalFrames={80} />
       <About />
@@ -25,7 +24,7 @@ export default function Home() {
       <Testimonials />
       <BookingInquiry />
       <Contact />
-      <Footer />
-    </main>
+      <InstagramFeed />
+    </PublicSiteShell>
   );
 }

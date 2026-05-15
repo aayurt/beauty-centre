@@ -1,7 +1,11 @@
+"use client";
+
 import AnimatedSection from "./AnimatedSection";
 import { MapPin, Phone, Clock } from "lucide-react";
+import { useCompany } from "@/lib/company-context";
 
 export default function LocationHours() {
+  const company = useCompany();
   return (
     <section id="location" className="py-24 md:py-32 bg-white">
       <div className="max-w-7xl mx-auto px-6">
@@ -15,7 +19,7 @@ export default function LocationHours() {
             <span className="text-sage-green">Beauty Sanctuary</span>
           </h2>
           <p className="text-text-light text-lg leading-relaxed">
-            We&apos;re conveniently located in the heart of Jamal, Kathmandu. Come experience the K & S difference.
+            We&apos;re conveniently located. Come experience the {company.name.split(" ")[0]} difference.
           </p>
         </AnimatedSection>
 
@@ -48,9 +52,9 @@ export default function LocationHours() {
                   <div>
                     <h3 className="text-xl font-serif font-bold text-text-dark mb-2">Our Address</h3>
                     <p className="text-text-light">
-                      Jamal, Kathmandu 44600
-                      <br />
-                      Nepal
+                      {company.address.split("\n").map((line, i) => (
+                        <span key={i}>{line}{i < company.address.split("\n").length - 1 && <br />}</span>
+                      ))}
                     </p>
                   </div>
                 </div>
@@ -64,18 +68,15 @@ export default function LocationHours() {
                   <div>
                     <h3 className="text-xl font-serif font-bold text-text-dark mb-2">Opening Hours</h3>
                     <div className="space-y-1 text-text-light">
-                      <div className="flex justify-between gap-8">
-                        <span>Mon - Fri</span>
-                        <span className="font-medium text-text-dark">9:00 AM - 8:00 PM</span>
-                      </div>
-                      <div className="flex justify-between gap-8">
-                        <span>Saturday</span>
-                        <span className="font-medium text-text-dark">9:00 AM - 6:00 PM</span>
-                      </div>
-                      <div className="flex justify-between gap-8">
-                        <span>Sunday</span>
-                        <span className="font-medium text-text-dark">10:00 AM - 4:00 PM</span>
-                      </div>
+                      {(company.hours || "Mon - Fri: 9:00 AM - 8:00 PM\nSaturday: 9:00 AM - 6:00 PM\nSunday: 10:00 AM - 4:00 PM").split("\n").map((line, i) => {
+                        const parts = line.split(/:\s*/);
+                        return (
+                          <div key={i} className="flex justify-between gap-8">
+                            <span>{parts[0]}</span>
+                            <span className="font-medium text-text-dark">{parts.slice(1).join(": ")}</span>
+                          </div>
+                        );
+                      })}
                     </div>
                   </div>
                 </div>
@@ -89,10 +90,10 @@ export default function LocationHours() {
                   <div>
                     <h3 className="text-xl font-serif font-bold text-text-dark mb-2">Call Us</h3>
                     <a
-                      href="tel:+977144XXXXX"
+                      href={`tel:${company.phone || "+977144XXXXX"}`}
                       className="text-text-light hover:text-sage-green transition-colors text-lg"
                     >
-                      +977-1-4XXXXXX
+                      {company.phone || "+977-1-4XXXXXX"}
                     </a>
                   </div>
                 </div>

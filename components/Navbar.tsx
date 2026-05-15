@@ -1,9 +1,20 @@
-"use client";
+"use client"
 
-import { useState, useEffect, useCallback } from "react";
-import { motion } from "framer-motion";
-import { Menu, X } from "lucide-react";
-import { useActiveSection } from "@/lib/hooks/useSmoothScroll";
+import { useState, useEffect, useCallback } from "react"
+import { motion, AnimatePresence } from "framer-motion"
+import { Menu, X } from "lucide-react"
+import { useActiveSection } from "@/lib/hooks/useSmoothScroll"
+import { useCompany } from "@/lib/company-context"
+import { cn } from "@/lib/utils"
+import { Button, buttonVariants } from "@/components/ui/button"
+import {
+  Drawer,
+  DrawerTrigger,
+  DrawerPopup,
+  DrawerHeader,
+  DrawerClose,
+  DrawerContent,
+} from "@/components/ui/drawer"
 
 const navLinks = [
   { name: "Home", href: "#home", id: "home" },
@@ -14,148 +25,181 @@ const navLinks = [
   { name: "Team", href: "#team", id: "team" },
   { name: "Testimonials", href: "#testimonials", id: "testimonials" },
   { name: "Contact", href: "#contact", id: "contact" },
-];
+]
 
-const sectionIds = navLinks.map((l) => l.id);
+const sectionIds = navLinks.map((l) => l.id)
 
 export default function Navbar() {
-  const [isScrolled, setIsScrolled] = useState(false);
-  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const activeSection = useActiveSection(sectionIds);
+  const [isScrolled, setIsScrolled] = useState(false)
+  const activeSection = useActiveSection(sectionIds)
+  const company = useCompany()
 
   useEffect(() => {
     const handleScroll = () => {
-      setIsScrolled(window.scrollY > 50);
-    };
-
-    window.addEventListener("scroll", handleScroll, { passive: true });
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
+      setIsScrolled(window.scrollY > 50)
+    }
+    window.addEventListener("scroll", handleScroll, { passive: true })
+    return () => window.removeEventListener("scroll", handleScroll)
+  }, [])
 
   const handleNavClick = useCallback(
     (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
-      e.preventDefault();
-      const id = href.replace("#", "");
-      const el = document.getElementById(id);
+      e.preventDefault()
+      const id = href.replace("#", "")
+      const el = document.getElementById(id)
       if (el) {
-        const offset = 80;
-        const top = el.getBoundingClientRect().top + window.scrollY - offset;
-        window.scrollTo({ top, behavior: "smooth" });
+        const offset = 80
+        const top = el.getBoundingClientRect().top + window.scrollY - offset
+        window.scrollTo({ top, behavior: "smooth" })
       }
-      setIsMobileMenuOpen(false);
     },
     [],
-  );
+  )
 
   return (
     <motion.nav
       initial={{ y: -100 }}
       animate={{ y: 0 }}
       transition={{ duration: 0.6, ease: "easeOut" }}
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
+      className={cn(
+        "fixed top-0 left-0 right-0 z-50 transition-all duration-500",
         isScrolled
-          ? "bg-white/95 backdrop-blur-md shadow-lg py-3"
-          : "bg-transparent py-5"
-      }`}
+          ? "bg-background/95 backdrop-blur-md shadow-lg py-3 dark:bg-neutral-900/95"
+          : "bg-transparent py-5",
+      )}
     >
-      <div className="max-w-7xl mx-auto px-6 flex items-center justify-between">
-        {/* Logo */}
+      <div className="mx-auto max-w-7xl flex items-center justify-between px-6">
         <a
           href="#home"
           onClick={(e) => handleNavClick(e, "#home")}
-          className={`text-2xl font-serif font-bold tracking-wide transition-colors duration-300 ${
-            isScrolled ? "text-sage-green" : "text-white drop-shadow-lg"
-          }`}
+          className={cn(
+            "font-serif text-2xl font-bold tracking-wide transition-colors duration-300",
+            isScrolled
+              ? "text-primary"
+              : "text-white drop-shadow-lg",
+          )}
         >
-          K & S Beauty
+          {company.name}
         </a>
 
-        {/* Desktop Navigation */}
-        <div className="hidden md:flex items-center space-x-8">
+        <div className="hidden items-center gap-1 md:flex">
           {navLinks.map((link) => (
             <a
-              key={link.name}
+              key={link.id}
               href={link.href}
               onClick={(e) => handleNavClick(e, link.href)}
-              className={`text-sm font-medium tracking-wide transition-colors duration-300 hover:text-primary-pink ${
+              className={cn(
+                "relative px-3 py-2 text-sm font-medium tracking-wide transition-colors duration-300",
                 activeSection === link.id
-                  ? "text-primary-pink"
+                  ? "text-primary"
                   : isScrolled
-                    ? "text-text-dark"
-                    : "text-white drop-shadow-md"
-              }`}
+                    ? "text-foreground hover:text-primary"
+                    : "text-white/90 drop-shadow-md hover:text-white",
+              )}
             >
               {link.name}
+              {activeSection === link.id && (
+                <motion.span
+                  layoutId="nav-active"
+                  className={cn(
+                    "absolute bottom-0 left-3 right-3 h-0.5 rounded-full",
+                    isScrolled ? "bg-primary" : "bg-white",
+                  )}
+                  transition={{ type: "spring", stiffness: 380, damping: 30 }}
+                />
+              )}
             </a>
           ))}
-          <a
-            href="#contact"
-            onClick={(e) => handleNavClick(e, "#contact")}
-            className={`px-6 py-2.5 rounded-full text-sm font-medium transition-all duration-300 ${
-              isScrolled
-                ? "bg-sage-green text-white hover:bg-sage-green-dark"
-                : "bg-white text-sage-green hover:bg-primary-pink hover:text-white"
-            }`}
-          >
-            Book Now
-          </a>
+          <div className="ml-4">
+            <Button
+              variant={isScrolled ? "default" : "secondary"}
+              size="sm"
+              asChild
+            >
+              <a
+                href="#contact"
+                onClick={(e) => handleNavClick(e, "#contact")}
+              >
+                Book Now
+              </a>
+            </Button>
+          </div>
         </div>
 
-        {/* Mobile Menu Button */}
-        <button
-          className="md:hidden"
-          onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-          aria-label="Toggle menu"
-        >
-          {isMobileMenuOpen ? (
-            <X
-              className={`w-6 h-6 ${
-                isScrolled ? "text-text-dark" : "text-white"
-              }`}
-            />
-          ) : (
-            <Menu
-              className={`w-6 h-6 ${
-                isScrolled ? "text-text-dark" : "text-white"
-              }`}
-            />
-          )}
-        </button>
-      </div>
+        <Drawer>
+          <DrawerTrigger
+            data-slot="drawer-trigger"
+            className={cn(
+              "inline-flex items-center justify-center rounded-md p-2 focus:outline-none focus-visible:ring-2 focus-visible:ring-ring md:hidden",
+              isScrolled
+                ? "text-foreground hover:bg-muted"
+                : "text-white hover:bg-white/10",
+            )}
+            aria-label="Open navigation menu"
+          >
+            <Menu className="size-6" />
+          </DrawerTrigger>
 
-      {/* Mobile Menu */}
-      {isMobileMenuOpen && (
-        <motion.div
-          initial={{ opacity: 0, height: 0 }}
-          animate={{ opacity: 1, height: "auto" }}
-          exit={{ opacity: 0, height: 0 }}
-          className="md:hidden bg-white border-t"
-        >
-          <div className="px-6 py-4 flex flex-col space-y-4">
-            {navLinks.map((link) => (
-              <a
-                key={link.name}
-                href={link.href}
-                onClick={(e) => handleNavClick(e, link.href)}
-                className={`font-medium transition-colors ${
-                  activeSection === link.id
-                    ? "text-primary-pink"
-                    : "text-text-dark hover:text-sage-green"
-                }`}
+          <DrawerPopup side="left">
+            <DrawerHeader>
+              <span className="font-serif text-lg font-bold text-primary">
+                {company.name}
+              </span>
+              <DrawerClose
+                data-slot="drawer-close"
+                className="inline-flex items-center justify-center rounded-md p-1 text-muted-foreground transition-colors hover:bg-muted hover:text-foreground focus:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+                aria-label="Close navigation menu"
               >
-                {link.name}
-              </a>
-            ))}
-            <a
-              href="#contact"
-              onClick={(e) => handleNavClick(e, "#contact")}
-              className="text-center px-6 py-3 bg-sage-green text-white rounded-full font-medium hover:bg-sage-green-dark transition-colors"
-            >
-              Book Now
-            </a>
-          </div>
-        </motion.div>
-      )}
+                <X className="size-5" />
+              </DrawerClose>
+            </DrawerHeader>
+
+            <DrawerContent>
+              <nav className="flex flex-col gap-1">
+                {navLinks.map((link) => (
+                  <a
+                    key={link.id}
+                    href={link.href}
+                    onClick={(e) => {
+                      handleNavClick(e, link.href)
+                      const popup = (
+                        e.currentTarget as HTMLElement
+                      ).closest('[data-slot="drawer-popup"]') as HTMLElement | null
+                      if (!popup) return
+                      const root = popup.closest(
+                        '[data-slot="drawer"]',
+                      ) as HTMLElement | null
+                      if (!root) return
+                      const closeBtn =
+                        root.querySelector<HTMLButtonElement>(
+                          '[data-slot="drawer-close"]',
+                        )
+                      closeBtn?.click()
+                    }}
+                    className={cn(
+                      "rounded-lg px-3 py-2.5 text-sm font-medium transition-colors",
+                      activeSection === link.id
+                        ? "bg-primary/10 text-primary"
+                        : "text-foreground hover:bg-muted",
+                    )}
+                  >
+                    {link.name}
+                  </a>
+                ))}
+                <div className="my-2" />
+                <Button variant="default" size="default" asChild>
+                  <a
+                    href="#contact"
+                    onClick={(e) => handleNavClick(e, "#contact")}
+                  >
+                    Book Now
+                  </a>
+                </Button>
+              </nav>
+            </DrawerContent>
+          </DrawerPopup>
+        </Drawer>
+      </div>
     </motion.nav>
-  );
+  )
 }

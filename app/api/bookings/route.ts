@@ -1,6 +1,32 @@
 import { NextRequest, NextResponse } from "next/server";
+import { prisma } from "@/lib/prisma";
 import { createBookingInquiryEntry } from "@/lib/db";
+import { verifySession } from "@/lib/auth";
 import { z } from "zod";
+
+export async function GET() {
+  try {
+    const authed = await verifySession();
+    if (!authed) {
+      return NextResponse.json(
+        { data: null, error: "Unauthorized" },
+        { status: 401 }
+      );
+    }
+
+    const inquiries = await prisma.bookingInquiry.findMany({
+      orderBy: { createdAt: "desc" },
+    });
+
+    return NextResponse.json({ data: inquiries, error: null });
+  } catch (error) {
+    console.error("Failed to fetch bookings:", error);
+    return NextResponse.json(
+      { data: null, error: "Internal server error" },
+      { status: 500 }
+    );
+  }
+}
 
 const BookingInquiryFormSchema = z.object({
   name: z.string().min(1),

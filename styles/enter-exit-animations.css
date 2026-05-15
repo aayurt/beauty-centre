@@ -1,0 +1,156 @@
+/* ==========================================================================
+   Enter / Exit Animation Utilities
+   Tailwind CSS v4 does not ship built-in data-attribute enter/exit
+   animations.  These utilities provide the `animate-in`, `animate-out`,
+   `fade-in-*`, `zoom-in-*`, `slide-in-from-*` and `slide-out-to-*`
+   classes consumed by shadcn/ui base-nova components.
+
+   Usage (compose with Tailwind data-* variants):
+     <div class="data-open:animate-in data-open:fade-in-0 data-open:zoom-in-95
+                 data-closed:animate-out data-closed:fade-out-0 data-closed:zoom-out-95">
+   ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   Shared keyframes — read CSS custom properties set by the utility classes.
+   Each property defaults to a no-op value (1 / 0 / none) when unset.
+   -------------------------------------------------------------------------- */
+@keyframes enter {
+  from {
+    opacity: var(--tw-enter-opacity, 1);
+    transform: translate3d(
+        var(--tw-enter-translate-x, 0),
+        var(--tw-enter-translate-y, 0),
+        0
+      )
+      scale3d(
+        var(--tw-enter-scale-x, 1),
+        var(--tw-enter-scale-y, 1),
+        1
+      )
+      rotate(var(--tw-enter-rotate, 0));
+  }
+}
+
+@keyframes exit {
+  to {
+    opacity: var(--tw-exit-opacity, 1);
+    transform: translate3d(
+        var(--tw-exit-translate-x, 0),
+        var(--tw-exit-translate-y, 0),
+        0
+      )
+      scale3d(
+        var(--tw-exit-scale-x, 1),
+        var(--tw-exit-scale-y, 1),
+        1
+      )
+      rotate(var(--tw-exit-rotate, 0));
+  }
+}
+
+/* --------------------------------------------------------------------------
+   Base classes
+   -------------------------------------------------------------------------- */
+.animate-in {
+  animation-name: enter;
+  animation-duration: 150ms;
+  animation-fill-mode: both;
+}
+
+.animate-out {
+  animation-name: exit;
+  animation-duration: 150ms;
+  animation-fill-mode: both;
+}
+
+.animate-none {
+  animation: none;
+}
+
+/* --------------------------------------------------------------------------
+   Opacity
+   -------------------------------------------------------------------------- */
+.fade-in-0 {
+  --tw-enter-opacity: 0;
+}
+
+.fade-out-0 {
+  --tw-exit-opacity: 0;
+}
+
+/* --------------------------------------------------------------------------
+   Scale (zoom)
+   -------------------------------------------------------------------------- */
+.zoom-in-95 {
+  --tw-enter-scale-x: 0.95;
+  --tw-enter-scale-y: 0.95;
+}
+
+.zoom-out-95 {
+  --tw-exit-scale-x: 0.95;
+  --tw-exit-scale-y: 0.95;
+}
+
+/* --------------------------------------------------------------------------
+   Slide In (enter) – direction + distance
+   -------------------------------------------------------------------------- */
+.slide-in-from-top-full {
+  --tw-enter-translate-y: -100%;
+}
+
+.slide-in-from-bottom-full {
+  --tw-enter-translate-y: 100%;
+}
+
+.slide-in-from-left-full {
+  --tw-enter-translate-x: -100%;
+}
+
+.slide-in-from-right-full {
+  --tw-enter-translate-x: 100%;
+}
+
+.slide-in-from-top-2 {
+  --tw-enter-translate-y: -0.5rem;
+}
+
+.slide-in-from-bottom-2 {
+  --tw-enter-translate-y: 0.5rem;
+}
+
+.slide-in-from-left-2 {
+  --tw-enter-translate-x: -0.5rem;
+}
+
+.slide-in-from-right-2 {
+  --tw-enter-translate-x: 0.5rem;
+}
+
+/* --------------------------------------------------------------------------
+   Slide Out (exit) – direction + distance
+   -------------------------------------------------------------------------- */
+.slide-out-to-top-full {
+  --tw-exit-translate-y: -100%;
+}
+
+.slide-out-to-bottom-full {
+  --tw-exit-translate-y: 100%;
+}
+
+.slide-out-to-left-full {
+  --tw-exit-translate-x: -100%;
+}
+
+.slide-out-to-right-full {
+  --tw-exit-translate-x: 100%;
+}
+
+/* --------------------------------------------------------------------------
+   Respect user's reduced-motion preference
+   -------------------------------------------------------------------------- */
+@media (prefers-reduced-motion: reduce) {
+  .animate-in,
+  .animate-out {
+    animation: none !important;
+  }
+}
