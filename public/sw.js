@@ -1,7 +1,6 @@
 const CACHE_NAME = "ks-beauty-cache-v1"
 const ASSETS_TO_CACHE = [
   "/",
-  "/video-frames/",
 ]
 
 self.addEventListener("install", (event) => {

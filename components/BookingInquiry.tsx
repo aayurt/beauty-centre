@@ -268,24 +268,24 @@ export default function BookingInquiry() {
   };
 
   return (
-    <section id="booking" className="py-24 md:py-32 bg-primary-pink-light">
-      <div className="max-w-7xl mx-auto px-6">
+    <section id="booking" className="py-24 md:py-32 bg-primary-pink-light overflow-hidden">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6">
         <AnimatedSection direction="up" className="text-center max-w-3xl mx-auto mb-16">
           <span className="inline-block px-4 py-2 bg-white text-sage-green rounded-full text-sm font-medium mb-6">
             Book an Appointment
           </span>
-          <h2 className="text-4xl md:text-5xl font-serif font-bold text-text-dark mb-6">
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-serif font-bold text-text-dark mb-6">
             Request a{" "}
             <span className="text-sage-green">Booking</span>
           </h2>
-          <p className="text-text-light text-lg leading-relaxed">
+          <p className="text-text-light text-base sm:text-lg leading-relaxed">
             Fill in your details below and we&apos;ll get back to you to confirm your appointment.
           </p>
         </AnimatedSection>
 
         <div className="max-w-2xl mx-auto">
           <AnimatedSection direction="up">
-            <div className="bg-white rounded-2xl p-8 shadow-xl border border-gray-100">
+            <div className="bg-white rounded-2xl p-4 sm:p-6 md:p-8 shadow-xl border border-gray-100">
               <AnimatePresence mode="wait">
                 {status === "success" ? (
                   <motion.div
@@ -390,7 +390,7 @@ export default function BookingInquiry() {
                             type="button"
                             onClick={goBack}
                             disabled={status === "loading"}
-                            className="flex items-center gap-2 px-5 py-3 text-text-dark font-medium rounded-lg hover:bg-gray-50 transition-colors disabled:opacity-50"
+                             className="flex items-center gap-2 px-5 py-3 text-text-dark font-medium rounded-lg hover:bg-gray-50 active:bg-gray-100 transition-colors disabled:opacity-50 focus-visible:ring-3 focus-visible:ring-ring/50 outline-none"
                           >
                             <ChevronLeft className="w-4 h-4" />
                             Back
@@ -403,7 +403,7 @@ export default function BookingInquiry() {
                           <button
                             type="button"
                             onClick={goNext}
-                            className="flex items-center gap-2 px-6 py-3 bg-sage-green text-white rounded-lg font-medium hover:bg-sage-green-dark transition-colors"
+                            className="flex items-center gap-2 px-6 py-3 bg-sage-green text-white rounded-lg font-medium hover:bg-sage-green-dark active:bg-sage-green-dark/80 transition-colors focus-visible:ring-3 focus-visible:ring-ring/50 outline-none"
                           >
                             Next
                             <ChevronRight className="w-4 h-4" />
@@ -412,7 +412,7 @@ export default function BookingInquiry() {
                           <button
                             type="submit"
                             disabled={status === "loading"}
-                            className="flex items-center gap-2 px-6 py-3 bg-sage-green text-white rounded-lg font-medium hover:bg-sage-green-dark transition-colors disabled:opacity-70 disabled:cursor-not-allowed min-w-[140px] justify-center"
+                             className="flex items-center gap-2 px-6 py-3 bg-sage-green text-white rounded-lg font-medium hover:bg-sage-green-dark active:bg-sage-green-dark/80 transition-colors disabled:opacity-70 disabled:cursor-not-allowed min-w-[140px] justify-center focus-visible:ring-3 focus-visible:ring-ring/50 outline-none"
                           >
                             {status === "loading" ? (
                               <>

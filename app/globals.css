@@ -43,6 +43,14 @@
   --color-white: var(--color-white);
   --color-black: var(--color-black);
 
+  /* -- Semantic color name aliases -- */
+  --color-sage-green: var(--color-sage-green);
+  --color-sage-green-dark: var(--color-sage-green-dark);
+  --color-primary-pink: var(--color-primary-pink);
+  --color-primary-pink-light: var(--color-primary-pink-light);
+  --color-text-dark: var(--text-dark);
+  --color-text-light: var(--text-light);
+
   /* -- Semantic tokens -- */
   --color-background: var(--background);
   --color-foreground: var(--foreground);
@@ -183,6 +191,14 @@ body {
   background: var(--background);
   color: var(--foreground);
   font-family: var(--font-sans), system-ui, sans-serif;
+  overflow-x: hidden;
+  width: 100%;
+}
+
+/* Prevent transition flicker on page load */
+html.preload * {
+  transition-duration: 0s !important;
+  animation-duration: 0s !important;
 }
 
 h1, h2, h3, h4, h5, h6 {

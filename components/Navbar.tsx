@@ -6,7 +6,7 @@ import { Menu, X } from "lucide-react"
 import { useActiveSection } from "@/lib/hooks/useSmoothScroll"
 import { useCompany } from "@/lib/company-context"
 import { cn } from "@/lib/utils"
-import { Button, buttonVariants } from "@/components/ui/button"
+import { buttonVariants } from "@/components/ui/button"
 import {
   Drawer,
   DrawerTrigger,
@@ -68,7 +68,7 @@ export default function Navbar() {
           : "bg-transparent py-5",
       )}
     >
-      <div className="mx-auto max-w-7xl flex items-center justify-between px-6">
+      <div className="mx-auto max-w-7xl flex items-center justify-between px-4 sm:px-6">
         <a
           href="#home"
           onClick={(e) => handleNavClick(e, "#home")}
@@ -93,8 +93,8 @@ export default function Navbar() {
                 activeSection === link.id
                   ? "text-primary"
                   : isScrolled
-                    ? "text-foreground hover:text-primary"
-                    : "text-white/90 drop-shadow-md hover:text-white",
+                    ? "text-foreground hover:text-primary active:text-primary/80"
+                    : "text-white/90 drop-shadow-md hover:text-white active:text-white/70",
               )}
             >
               {link.name}
@@ -111,18 +111,16 @@ export default function Navbar() {
             </a>
           ))}
           <div className="ml-4">
-            <Button
-              variant={isScrolled ? "default" : "secondary"}
-              size="sm"
-              asChild
+            <a
+              href="#contact"
+              onClick={(e) => handleNavClick(e, "#contact")}
+              className={buttonVariants({
+                variant: isScrolled ? "default" : "secondary",
+                size: "sm",
+              })}
             >
-              <a
-                href="#contact"
-                onClick={(e) => handleNavClick(e, "#contact")}
-              >
-                Book Now
-              </a>
-            </Button>
+              Book Now
+            </a>
           </div>
         </div>
 
@@ -130,10 +128,10 @@ export default function Navbar() {
           <DrawerTrigger
             data-slot="drawer-trigger"
             className={cn(
-              "inline-flex items-center justify-center rounded-md p-2 focus:outline-none focus-visible:ring-2 focus-visible:ring-ring md:hidden",
+              "inline-flex items-center justify-center rounded-md p-2 focus:outline-none focus-visible:ring-2 focus-visible:ring-ring active:scale-95 md:hidden",
               isScrolled
-                ? "text-foreground hover:bg-muted"
-                : "text-white hover:bg-white/10",
+                ? "text-foreground hover:bg-muted active:bg-muted/80"
+                : "text-white hover:bg-white/10 active:bg-white/20",
             )}
             aria-label="Open navigation menu"
           >
@@ -147,7 +145,7 @@ export default function Navbar() {
               </span>
               <DrawerClose
                 data-slot="drawer-close"
-                className="inline-flex items-center justify-center rounded-md p-1 text-muted-foreground transition-colors hover:bg-muted hover:text-foreground focus:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+                className="inline-flex items-center justify-center rounded-md p-1 text-muted-foreground transition-colors hover:bg-muted hover:text-foreground active:bg-muted/80 focus:outline-none focus-visible:ring-2 focus-visible:ring-ring"
                 aria-label="Close navigation menu"
               >
                 <X className="size-5" />
@@ -180,21 +178,20 @@ export default function Navbar() {
                       "rounded-lg px-3 py-2.5 text-sm font-medium transition-colors",
                       activeSection === link.id
                         ? "bg-primary/10 text-primary"
-                        : "text-foreground hover:bg-muted",
+                        : "text-foreground hover:bg-muted active:bg-muted/80",
                     )}
                   >
                     {link.name}
                   </a>
                 ))}
                 <div className="my-2" />
-                <Button variant="default" size="default" asChild>
-                  <a
-                    href="#contact"
-                    onClick={(e) => handleNavClick(e, "#contact")}
-                  >
-                    Book Now
-                  </a>
-                </Button>
+                <a
+                  href="#contact"
+                  onClick={(e) => handleNavClick(e, "#contact")}
+                  className={buttonVariants({ variant: "default", size: "default" })}
+                >
+                  Book Now
+                </a>
               </nav>
             </DrawerContent>
           </DrawerPopup>

@@ -53,13 +53,13 @@
    -------------------------------------------------------------------------- */
 .animate-in {
   animation-name: enter;
-  animation-duration: 150ms;
+  animation-duration: var(--motion-duration-micro, 150ms);
   animation-fill-mode: both;
 }
 
 .animate-out {
   animation-name: exit;
-  animation-duration: 150ms;
+  animation-duration: var(--motion-duration-micro, 150ms);
   animation-fill-mode: both;
 }
 

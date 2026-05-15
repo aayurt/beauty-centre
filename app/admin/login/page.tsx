@@ -41,13 +41,13 @@ export default function AdminLoginPage() {
   return (
     <div className="min-h-screen bg-gradient-to-br from-primary-pink-light via-white to-primary-pink-light flex items-center justify-center p-4">
       <div className="w-full max-w-sm">
-        <div className="bg-white rounded-2xl shadow-xl p-8">
+        <div className="bg-white rounded-2xl shadow-xl p-6 sm:p-8">
           <div className="flex flex-col items-center mb-8">
             <div className="w-14 h-14 bg-sage-green rounded-full flex items-center justify-center mb-4">
               <Lock className="w-6 h-6 text-white" />
             </div>
-            <h1 className="text-2xl font-serif text-gray-800">Admin Login</h1>
-            <p className="text-sm text-gray-500 mt-1">Enter your credentials to continue</p>
+            <h1 className="text-2xl font-serif text-text-dark">Admin Login</h1>
+            <p className="text-sm text-text-light mt-1">Enter your credentials to continue</p>
           </div>
 
           <form onSubmit={handleSubmit} className="space-y-4">
@@ -87,7 +87,7 @@ export default function AdminLoginPage() {
           </form>
         </div>
 
-        <p className="text-center text-xs text-gray-400 mt-6">
+        <p className="text-center text-xs text-text-light mt-6">
           K &amp; S Beauty Centre Admin
         </p>
       </div>

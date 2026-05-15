@@ -65,10 +65,10 @@ export default function AdminSidebar() {
               key={item.href}
               href={item.href}
               className={cn(
-                "flex items-center gap-3 rounded-xl px-3 py-2.5 text-sm font-medium transition-colors",
+                "flex items-center gap-3 rounded-xl px-3 py-2.5 text-sm font-medium transition-colors outline-none focus-visible:ring-3 focus-visible:ring-ring/50",
                 isActive
-                  ? "bg-primary/10 text-primary"
-                  : "text-muted-foreground hover:bg-muted hover:text-foreground",
+                  ? "bg-primary/10 text-primary active:bg-primary/15"
+                  : "text-muted-foreground hover:bg-muted hover:text-foreground active:bg-muted/80",
               )}
             >
               <Icon className="size-4 shrink-0" />

@@ -99,17 +99,17 @@ export default function Contact() {
       : "border-gray-200 focus:border-sage-green focus:ring-2 focus:ring-sage-green/20";
 
   return (
-    <section id="contact" className="py-24 md:py-32 bg-primary-pink-light">
-      <div className="max-w-7xl mx-auto px-6">
+    <section id="contact" className="py-24 md:py-32 bg-primary-pink-light overflow-hidden">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6">
         <AnimatedSection direction="up" className="text-center max-w-3xl mx-auto mb-16">
           <span className="inline-block px-4 py-2 bg-white text-sage-green rounded-full text-sm font-medium mb-6">
             Contact Us
           </span>
-          <h2 className="text-4xl md:text-5xl font-serif font-bold text-text-dark mb-6">
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-serif font-bold text-text-dark mb-6">
             Book Your{" "}
             <span className="text-sage-green">Appointment</span> Today
           </h2>
-          <p className="text-text-light text-lg leading-relaxed">
+          <p className="text-text-light text-base sm:text-lg leading-relaxed">
             Ready to experience the {company.name.split(" ")[0]} difference? Reach out to us and let&apos;s create your perfect beauty moment.
           </p>
         </AnimatedSection>
@@ -119,7 +119,7 @@ export default function Contact() {
             <form
               onSubmit={handleSubmit}
               noValidate
-              className="bg-white rounded-2xl p-8 shadow-xl"
+              className="bg-white rounded-2xl p-4 sm:p-6 md:p-8 shadow-xl"
             >
               <AnimatePresence mode="wait">
                 {status === "success" ? (
@@ -229,7 +229,7 @@ export default function Contact() {
                     <button
                       type="submit"
                       disabled={status === "loading"}
-                      className="w-full py-4 bg-sage-green text-white rounded-lg font-medium flex items-center justify-center gap-2 hover:bg-sage-green-dark transition-colors disabled:opacity-70 disabled:cursor-not-allowed group relative overflow-hidden"
+                      className="w-full py-4 bg-sage-green text-white rounded-lg font-medium flex items-center justify-center gap-2 hover:bg-sage-green-dark active:bg-sage-green-dark/80 transition-colors disabled:opacity-70 disabled:cursor-not-allowed group relative overflow-hidden focus-visible:ring-3 focus-visible:ring-ring/50 outline-none"
                     >
                       {status === "loading" ? (
                         <>
@@ -279,8 +279,8 @@ export default function Contact() {
           </AnimatedSection>
 
           <AnimatedSection direction="right" className="space-y-8">
-            <div className="bg-white rounded-2xl p-8 shadow-xl">
-              <h3 className="text-2xl font-serif font-bold text-text-dark mb-6">
+            <div className="bg-white rounded-2xl p-4 sm:p-6 md:p-8 shadow-xl">
+              <h3 className="text-xl sm:text-2xl font-serif font-bold text-text-dark mb-4 sm:mb-6">
                 Get in Touch
               </h3>
 
@@ -304,7 +304,7 @@ export default function Contact() {
               </div>
             </div>
 
-            <div className="bg-white rounded-2xl overflow-hidden shadow-xl h-72">
+            <div className="bg-white rounded-2xl overflow-hidden shadow-xl h-56 sm:h-72">
               <iframe
                 src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3532.5!2d85.3240!3d27.7172!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x39eb1905d7e7c5d5%3A0x0!2sJamal%2C+Kathmandu%2C+Nepal!5e0!3m2!1sen!2snp!4v1"
                 width="100%"

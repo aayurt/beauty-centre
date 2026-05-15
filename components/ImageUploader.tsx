@@ -154,11 +154,11 @@ export default function ImageUploader({
           onDragLeave={() => setDragOver(false)}
           onDrop={handleDrop}
           onClick={() => inputRef.current?.click()}
-          className={`cursor-pointer rounded-lg border-2 border-dashed p-6 text-center transition-colors ${
+          className={`cursor-pointer rounded-lg border-2 border-dashed p-6 text-center transition-colors outline-none will-change-transform ${
             dragOver
               ? "border-primary bg-primary/5"
               : "border-input hover:border-primary hover:bg-muted"
-          }`}
+          } focus-visible:border-primary focus-visible:ring-3 focus-visible:ring-ring/50`}
         >
           {uploading ? (
             <div className="flex flex-col items-center gap-2">
@@ -187,7 +187,7 @@ export default function ImageUploader({
                   e.stopPropagation();
                   setShowUrlInput(true);
                 }}
-                className="text-xs text-muted-foreground underline transition-colors hover:text-primary"
+                className="text-xs text-muted-foreground underline transition-colors hover:text-primary focus-visible:text-primary outline-none rounded"
               >
                 Or paste an image URL
               </button>

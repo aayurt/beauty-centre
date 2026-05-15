@@ -34,6 +34,7 @@ export default function RootLayout({
     <html
       lang="en"
       className={`${playfairDisplay.variable} ${inter.variable} scroll-smooth`}
+      suppressHydrationWarning
     >
       <body className="antialiased">
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>
@@ -48,6 +49,12 @@ export default function RootLayout({
         <script
           dangerouslySetInnerHTML={{
             __html: `
+              document.documentElement.classList.add('preload');
+              document.addEventListener('DOMContentLoaded', () => {
+                requestAnimationFrame(() => {
+                  document.documentElement.classList.remove('preload');
+                });
+              });
               if ('serviceWorker' in navigator) {
                 window.addEventListener('load', () => {
                   navigator.serviceWorker.register('/sw.js').catch(() => {});

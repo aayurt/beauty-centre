@@ -70,7 +70,7 @@ export default function Services() {
         <div className="absolute bottom-1/4 -right-32 w-96 h-96 bg-primary-pink/20 rounded-full blur-3xl" />
       </div>
 
-      <div className="max-w-7xl mx-auto px-6 relative">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 relative">
         {/* Header */}
         <AnimatedSection
           direction="up"
@@ -79,11 +79,11 @@ export default function Services() {
           <span className="inline-block px-4 py-2 bg-white text-sage-green rounded-full text-sm font-medium mb-6">
             Our Services
           </span>
-          <h2 className="text-4xl md:text-5xl font-serif font-bold text-text-dark mb-6">
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-serif font-bold text-text-dark mb-6">
             Pamper Yourself with{" "}
             <span className="text-sage-green">Luxury Treatments</span>
           </h2>
-          <p className="text-text-light text-lg leading-relaxed">
+          <p className="text-text-light text-base sm:text-lg leading-relaxed">
             Discover our comprehensive range of beauty and wellness services,
             designed to help you look and feel your absolute best.
           </p>
@@ -91,7 +91,7 @@ export default function Services() {
 
         {/* Staggered Cards Grid */}
         <motion.div
-          className="grid md:grid-cols-3 gap-8"
+          className="grid sm:grid-cols-2 md:grid-cols-3 gap-6 md:gap-8"
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, amount: 0.1 }}
@@ -126,10 +126,10 @@ function ServiceCard({
           : "0 4px 20px rgba(0,0,0,0.06)",
       }}
       transition={{ type: "spring", stiffness: 300, damping: 24 }}
-      className="bg-white rounded-2xl overflow-hidden shadow-xl h-full flex flex-col will-change-transform cursor-pointer"
+      className="bg-white rounded-2xl overflow-hidden shadow-xl h-full flex flex-col will-change-transform will-change-box-shadow cursor-pointer"
     >
       {/* Image */}
-      <div className="relative h-56 overflow-hidden">
+          <div className="relative h-48 sm:h-56 overflow-hidden">
         <motion.div
           className="relative w-full h-full"
           animate={{ scale: hovered ? 1.1 : 1 }}
@@ -146,7 +146,7 @@ function ServiceCard({
       </div>
 
       {/* Content */}
-      <div className="p-8 flex-1 flex flex-col">
+      <div className="p-6 sm:p-8 flex-1 flex flex-col">
         {/* Icon with Morphing */}
         <div className="mb-6">
           <div className="relative w-14 h-14">

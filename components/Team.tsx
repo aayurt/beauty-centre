@@ -35,8 +35,8 @@ const teamMembers = [
 
 export default function Team() {
   return (
-    <section id="team" className="py-24 md:py-32 bg-primary-pink-light">
-      <div className="max-w-7xl mx-auto px-6">
+    <section id="team" className="py-24 md:py-32 bg-primary-pink-light overflow-hidden">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6">
         <AnimatedSection
           direction="up"
           className="text-center max-w-3xl mx-auto mb-16"
@@ -44,17 +44,17 @@ export default function Team() {
           <span className="inline-block px-4 py-2 bg-white text-sage-green rounded-full text-sm font-medium mb-6">
             Our Team
           </span>
-          <h2 className="text-4xl md:text-5xl font-serif font-bold text-text-dark mb-6">
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-serif font-bold text-text-dark mb-6">
             Meet the{" "}
             <span className="text-sage-green">Artists</span> Behind Your Beauty
           </h2>
-          <p className="text-text-light text-lg leading-relaxed">
+          <p className="text-text-light text-base sm:text-lg leading-relaxed">
             Our talented team of certified professionals is dedicated to making
             you look and feel your absolute best.
           </p>
         </AnimatedSection>
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8">
           {teamMembers.map((member, index) => (
             <AnimatedSection
               key={member.name}
@@ -62,7 +62,7 @@ export default function Team() {
               delay={index * 0.15}
             >
               <div className="team-card bg-white rounded-2xl overflow-hidden shadow-xl hover:shadow-2xl transition-all duration-500 group">
-                <div className="relative h-72 overflow-hidden">
+                <div className="relative h-56 sm:h-64 md:h-72 overflow-hidden">
                   <Image
                     src={member.image}
                     alt={member.name}
@@ -102,7 +102,7 @@ export default function Team() {
                   </div>
                 </div>
 
-                <div className="p-6 text-center">
+                <div className="p-4 sm:p-5 md:p-6 text-center">
                   <h3 className="text-xl font-serif font-bold text-text-dark mb-1">
                     {member.name}
                   </h3>

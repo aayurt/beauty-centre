@@ -11,7 +11,7 @@ export default function Footer() {
 
   return (
     <footer className="bg-neutral-900 text-neutral-100 dark:bg-neutral-950">
-      <div className="mx-auto max-w-7xl px-6 py-16">
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 py-12 sm:py-16">
         <div className="grid gap-12 sm:grid-cols-2 lg:grid-cols-4">
           <div className="sm:col-span-2 lg:col-span-2">
             <h3 className="font-serif text-3xl font-bold text-white">
@@ -27,7 +27,7 @@ export default function Footer() {
                     href={`https://instagram.com/${company.instagram.replace("@", "")}`}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="flex size-10 items-center justify-center rounded-full bg-neutral-800 text-neutral-400 transition-colors hover:bg-primary hover:text-white"
+                    className="flex size-10 items-center justify-center rounded-full bg-neutral-800 text-neutral-400 transition-colors hover:bg-primary hover:text-white active:bg-primary/80 focus-visible:ring-3 focus-visible:ring-ring/50 outline-none"
                     aria-label="Instagram"
                   >
                     <svg className="size-5" fill="currentColor" viewBox="0 0 24 24">
@@ -40,7 +40,7 @@ export default function Footer() {
                     href={`https://facebook.com/${company.facebook}`}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="flex size-10 items-center justify-center rounded-full bg-neutral-800 text-neutral-400 transition-colors hover:bg-primary hover:text-white"
+                    className="flex size-10 items-center justify-center rounded-full bg-neutral-800 text-neutral-400 transition-colors hover:bg-primary hover:text-white active:bg-primary/80 focus-visible:ring-3 focus-visible:ring-ring/50 outline-none"
                     aria-label="Facebook"
                   >
                     <svg className="size-5" fill="currentColor" viewBox="0 0 24 24">
@@ -53,7 +53,7 @@ export default function Footer() {
                     href={`https://x.com/${company.x.replace("@", "")}`}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="flex size-10 items-center justify-center rounded-full bg-neutral-800 text-neutral-400 transition-colors hover:bg-primary hover:text-white"
+                    className="flex size-10 items-center justify-center rounded-full bg-neutral-800 text-neutral-400 transition-colors hover:bg-primary hover:text-white active:bg-primary/80 focus-visible:ring-3 focus-visible:ring-ring/50 outline-none"
                     aria-label="X"
                   >
                     <svg className="size-5" fill="currentColor" viewBox="0 0 24 24">
@@ -81,7 +81,7 @@ export default function Footer() {
                 <li key={link.href}>
                   <Link
                     href={link.href}
-                    className="text-sm text-neutral-400 transition-colors hover:text-primary"
+                    className="text-sm text-neutral-400 transition-colors hover:text-primary active:text-primary/80 focus-visible:ring-3 focus-visible:ring-ring/50 outline-none rounded"
                   >
                     {link.label}
                   </Link>
@@ -102,7 +102,7 @@ export default function Footer() {
                 <li className="pt-2">
                   <a
                     href={`tel:${company.phone}`}
-                    className="transition-colors hover:text-primary"
+                    className="transition-colors hover:text-primary active:text-primary/80 focus-visible:ring-3 focus-visible:ring-ring/50 outline-none rounded"
                   >
                     {company.phone}
                   </a>
@@ -111,7 +111,7 @@ export default function Footer() {
               <li>
                 <a
                   href={`mailto:${company.email}`}
-                  className="transition-colors hover:text-primary"
+                  className="transition-colors hover:text-primary active:text-primary/80 focus-visible:ring-3 focus-visible:ring-ring/50 outline-none rounded"
                 >
                   {company.email}
                 </a>
@@ -134,13 +134,13 @@ export default function Footer() {
           <div className="flex gap-6 text-sm text-neutral-500">
             <Link
               href="#"
-              className="transition-colors hover:text-primary"
+              className="transition-colors hover:text-primary active:text-primary/80 focus-visible:ring-3 focus-visible:ring-ring/50 outline-none rounded"
             >
               Privacy Policy
             </Link>
             <Link
               href="#"
-              className="transition-colors hover:text-primary"
+              className="transition-colors hover:text-primary active:text-primary/80 focus-visible:ring-3 focus-visible:ring-ring/50 outline-none rounded"
             >
               Terms of Service
             </Link>

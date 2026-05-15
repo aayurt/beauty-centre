@@ -112,7 +112,7 @@ export default function Hero() {
       {/* Animated Gradient Background */}
       <motion.div
         style={{ y, opacity, scale }}
-        className="absolute inset-0 z-0"
+        className="absolute inset-0 z-0 will-change-transform"
       >
         <div className="absolute inset-0 bg-gradient-to-br from-sage-green/90 via-primary-pink/80 to-sage-green-dark/90 animate-gradient" />
         <div className="absolute inset-0 bg-gradient-to-tr from-sage-green-dark/40 via-transparent to-primary-pink/40 animate-gradient" style={{ animationDirection: "reverse", animationDuration: "20s" }} />
@@ -128,7 +128,7 @@ export default function Hero() {
         initial={{ opacity: 0, y: 80 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 1, delay: 0.3, ease: [0.25, 0.1, 0.25, 1] }}
-        className="relative z-10 text-center px-6 max-w-5xl mx-auto"
+          className="relative z-10 text-center px-4 sm:px-6 max-w-5xl mx-auto"
       >
         {/* Welcome badge */}
         <motion.div
@@ -146,7 +146,7 @@ export default function Hero() {
           initial={{ opacity: 0, y: 40 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.8 }}
-          className="text-5xl md:text-7xl lg:text-8xl font-serif font-bold text-white mb-6 leading-tight"
+          className="text-4xl sm:text-5xl md:text-7xl lg:text-8xl font-serif font-bold text-white mb-6 leading-tight"
         >
           {company.name}
         </motion.h1>
@@ -156,9 +156,9 @@ export default function Hero() {
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 1 }}
-          className="h-12 md:h-14 flex items-center justify-center mb-10"
+          className="h-10 sm:h-12 md:h-14 flex items-center justify-center mb-8 sm:mb-10"
         >
-          <p className="text-lg md:text-2xl text-white/95 max-w-2xl mx-auto font-light leading-relaxed">
+          <p className="text-base sm:text-lg md:text-2xl text-white/95 max-w-2xl mx-auto font-light leading-relaxed">
             <span>{tagline}</span>
             <span className="inline-block w-[3px] h-[1.1em] ml-0.5 bg-white/80 rounded-sm animate-cursor-blink align-middle" />
           </p>
@@ -173,14 +173,14 @@ export default function Hero() {
         >
           <Link
             href="#services"
-            className="group px-8 py-4 bg-primary-pink text-white rounded-full font-medium text-lg transition-all duration-300 hover:bg-white hover:text-sage-green hover:scale-105 shadow-lg shadow-primary-pink/25"
+            className="group w-full sm:w-auto px-6 sm:px-8 py-3 sm:py-4 bg-primary-pink text-white rounded-full font-medium text-base sm:text-lg transition-all duration-300 hover:bg-white hover:text-sage-green hover:scale-105 shadow-lg shadow-primary-pink/25 text-center"
           >
             Explore Services
             <span className="inline-block ml-2 transition-transform group-hover:translate-x-1">→</span>
           </Link>
           <Link
             href="#contact"
-            className="px-8 py-4 border-2 border-white/70 text-white rounded-full font-medium text-lg transition-all duration-300 hover:bg-white hover:text-sage-green backdrop-blur-sm"
+            className="w-full sm:w-auto px-6 sm:px-8 py-3 sm:py-4 border-2 border-white/70 text-white rounded-full font-medium text-base sm:text-lg transition-all duration-300 hover:bg-white hover:text-sage-green backdrop-blur-sm text-center"
           >
             Book Appointment
           </Link>

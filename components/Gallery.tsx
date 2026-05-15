@@ -1,5 +1,6 @@
 "use client";
 
+import { useEffect } from "react";
 import AnimatedSection from "./AnimatedSection";
 import Image from "next/image";
 import { X, ChevronLeft, ChevronRight } from "lucide-react";
@@ -48,9 +49,23 @@ const galleryImages = [
 ];
 
 export default function Gallery() {
+  useEffect(() => {
+    const checkHash = () => {
+      const hash = window.location.hash;
+      const isLightboxOpen = /^#lightbox-\d+$/.test(hash);
+      document.body.style.overflow = isLightboxOpen ? "hidden" : "";
+    };
+    checkHash();
+    window.addEventListener("hashchange", checkHash);
+    return () => {
+      window.removeEventListener("hashchange", checkHash);
+      document.body.style.overflow = "";
+    };
+  }, []);
+
   return (
-    <section id="gallery" className="py-24 md:py-32 bg-white">
-      <div className="max-w-7xl mx-auto px-6">
+    <section id="gallery" className="py-24 md:py-32 bg-white overflow-hidden">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6">
         <AnimatedSection
           direction="up"
           className="text-center max-w-3xl mx-auto mb-16"
@@ -58,18 +73,18 @@ export default function Gallery() {
           <span className="inline-block px-4 py-2 bg-primary-pink-light text-sage-green rounded-full text-sm font-medium mb-6">
             Our Gallery
           </span>
-          <h2 className="text-4xl md:text-5xl font-serif font-bold text-text-dark mb-6">
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-serif font-bold text-text-dark mb-6">
             A Glimpse Into{" "}
             <span className="text-sage-green">Our World</span>
           </h2>
-          <p className="text-text-light text-lg leading-relaxed">
+          <p className="text-text-light text-base sm:text-lg leading-relaxed">
             Step inside our sanctuary and experience the ambiance that makes K
             &amp; S Beauty Centre a destination for relaxation and
             transformation.
           </p>
         </AnimatedSection>
 
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6 auto-rows-[200px]">
+        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-3 sm:gap-4 md:gap-6 auto-rows-[160px] sm:auto-rows-[180px] md:auto-rows-[220px]">
           {galleryImages.map((image, index) => (
             <AnimatedSection
               key={index}

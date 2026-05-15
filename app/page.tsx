@@ -1,6 +1,5 @@
 import PublicSiteShell from "@/components/layout/PublicSiteShell";
 import Hero from "@/components/Hero";
-import ScrollVideoFrames from "@/components/ScrollVideoFrames";
 import About from "@/components/About";
 import Services from "@/components/Services";
 import Gallery from "@/components/Gallery";
@@ -15,7 +14,6 @@ export default function Home() {
   return (
     <PublicSiteShell>
       <Hero />
-      <ScrollVideoFrames totalFrames={80} />
       <About />
       <Services />
       <Gallery />

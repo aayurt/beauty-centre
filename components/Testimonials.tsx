@@ -46,13 +46,13 @@ export default function Testimonials() {
 
   return (
     <section id="testimonials" className="py-24 md:py-32 bg-white">
-      <div className="max-w-7xl mx-auto px-6">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6">
         {/* Header */}
         <AnimatedSection direction="up" className="text-center max-w-3xl mx-auto mb-16">
           <span className="inline-block px-4 py-2 bg-primary-pink-light text-sage-green rounded-full text-sm font-medium mb-6">
             Testimonials
           </span>
-          <h2 className="text-4xl md:text-5xl font-serif font-bold text-text-dark mb-6">
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-serif font-bold text-text-dark mb-6">
             What Our Clients{" "}
             <span className="text-sage-green">Say About Us</span>
           </h2>
@@ -61,7 +61,7 @@ export default function Testimonials() {
         {/* Testimonials Carousel */}
         <div className="relative max-w-4xl mx-auto">
           <AnimatedSection direction="scale">
-            <div className="bg-primary-pink-light rounded-3xl p-8 md:p-12 shadow-xl">
+            <div className="bg-primary-pink-light rounded-3xl p-6 sm:p-8 md:p-12 shadow-xl">
               {/* Stars */}
               <div className="flex gap-1 mb-6">
                 {[...Array(testimonials[activeIndex].rating)].map((_, i) => (
@@ -73,7 +73,7 @@ export default function Testimonials() {
               </div>
 
               {/* Quote */}
-              <blockquote className="text-xl md:text-2xl text-text-dark leading-relaxed font-serif italic mb-8">
+              <blockquote className="text-lg sm:text-xl md:text-2xl text-text-dark leading-relaxed font-serif italic mb-6 sm:mb-8">
                 &ldquo;{testimonials[activeIndex].text}&rdquo;
               </blockquote>
 
@@ -92,14 +92,14 @@ export default function Testimonials() {
                 <div className="flex gap-3">
                   <button
                     onClick={prev}
-                    className="w-12 h-12 rounded-full bg-white flex items-center justify-center hover:bg-sage-green hover:text-white transition-colors shadow-md"
+                    className="w-12 h-12 rounded-full bg-white flex items-center justify-center hover:bg-sage-green hover:text-white active:bg-sage-green/80 transition-colors shadow-md focus-visible:ring-3 focus-visible:ring-ring/50 outline-none"
                     aria-label="Previous testimonial"
                   >
                     <ChevronLeft className="w-5 h-5" />
                   </button>
                   <button
                     onClick={next}
-                    className="w-12 h-12 rounded-full bg-white flex items-center justify-center hover:bg-sage-green hover:text-white transition-colors shadow-md"
+                    className="w-12 h-12 rounded-full bg-white flex items-center justify-center hover:bg-sage-green hover:text-white active:bg-sage-green/80 transition-colors shadow-md focus-visible:ring-3 focus-visible:ring-ring/50 outline-none"
                     aria-label="Next testimonial"
                   >
                     <ChevronRight className="w-5 h-5" />
@@ -115,11 +115,11 @@ export default function Testimonials() {
               <button
                 key={index}
                 onClick={() => setActiveIndex(index)}
-                className={`w-3 h-3 rounded-full transition-all duration-300 ${
+                className={`w-3 h-3 rounded-full transition-all duration-300 outline-none ${
                   index === activeIndex
                     ? "bg-sage-green w-8"
-                    : "bg-gray-300 hover:bg-gray-400"
-                }`}
+                    : "bg-gray-300 hover:bg-gray-400 active:bg-gray-500"
+                } focus-visible:ring-3 focus-visible:ring-ring/50`}
                 aria-label={`Go to testimonial ${index + 1}`}
               />
             ))}

@@ -34,7 +34,8 @@ function SkeletonText({ lines = 3, className = "" }: SkeletonTextProps) {
       {Array.from({ length: lines }, (_, i) => (
         <div
           key={i}
-          className={`skeleton skeleton-text ${i === lines - 1 ? "skeleton-text:last-child" : ""}`}
+          className={`skeleton skeleton-text ${i === lines - 1 ? "" : ""}`}
+          style={i === lines - 1 ? { width: "60%" } : undefined}
         />
       ))}
     </div>

@@ -49,6 +49,12 @@
   --color-white: #ffffff;
   --color-black: #000000;
 
+  /* -- Semantic Color Aliases (used across components) -- */
+  --color-sage-green: var(--color-sage-400);
+  --color-sage-green-dark: var(--color-sage-600);
+  --color-primary-pink: var(--color-pink-400);
+  --color-primary-pink-light: var(--color-pink-100);
+
   /* --------------------------------------------------------------------------
      2. Light Mode — Semantic Tokens
      -------------------------------------------------------------------------- */
@@ -254,7 +260,7 @@
 .dark {
   --background: #1a1a1a;
   --foreground: #f0f0f0;
-  --text-dark: #f0f0f0;
+  --text-dark: #2d2d2d;
   --text-light: #a3a3a3;
 
   --card: #262626;

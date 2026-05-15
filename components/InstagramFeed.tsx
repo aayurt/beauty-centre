@@ -54,13 +54,13 @@ export default function InstagramFeed() {
   if (!loaded || posts.length === 0) return null;
 
   return (
-    <section className="py-20 bg-white">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section className="py-16 sm:py-20 bg-white overflow-hidden">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6">
         <div className="text-center mb-12">
-          <h2 className="text-3xl md:text-4xl font-serif text-gray-800 mb-3">
+          <h2 className="text-2xl sm:text-3xl md:text-4xl font-serif text-text-dark mb-3">
             Follow Us on Instagram
           </h2>
-          <p className="text-gray-500 max-w-xl mx-auto">
+          <p className="text-sm sm:text-base text-text-light max-w-xl mx-auto">
             Tag us in your photos for a chance to be featured.
           </p>
         </div>
@@ -69,7 +69,7 @@ export default function InstagramFeed() {
           {posts.map((post) => (
             <div key={post.id} className="flex justify-center">
               <blockquote
-                className="instagram-media"
+                className="instagram-media w-full"
                 data-instgrm-permalink={post.postUrl}
                 data-instgrm-version="14"
                 style={{
@@ -79,8 +79,8 @@ export default function InstagramFeed() {
                   boxShadow: "0 0 1px 0 rgba(0,0,0,0.5),0 1px 10px 0 rgba(0,0,0,0.15)",
                   margin: "1px",
                   width: "100%",
-                  minWidth: "280px",
-                  maxWidth: "350px",
+                  minWidth: "auto",
+                  maxWidth: "100%",
                   padding: 0,
                 }}
               />
