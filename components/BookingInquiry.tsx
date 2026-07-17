@@ -91,7 +91,7 @@ export default function BookingInquiry() {
   const borderColor = (name: keyof FormData) =>
     errors[name]
       ? "border-red-400 focus:border-red-400 focus:ring-2 focus:ring-red-400/20"
-      : "border-gray-200 focus:border-sage-green focus:ring-2 focus:ring-sage-green/20";
+      : "border-gray-200 focus:border-crimson-primary focus:ring-2 focus:ring-crimson-primary/20";
 
   const validateStep = useCallback((stepIndex: number): boolean => {
     const newErrors: FieldErrors = {};
@@ -199,7 +199,7 @@ export default function BookingInquiry() {
             htmlFor={field.name}
             className={`absolute left-4 transition-all duration-200 pointer-events-none ${
               isFloating(field.name)
-                ? "top-2 text-xs text-sage-green font-medium"
+                ? "top-2 text-xs text-crimson-primary font-medium"
                 : "top-1/2 -translate-y-1/2 text-gray-400 text-base"
             }`}
           >
@@ -247,7 +247,7 @@ export default function BookingInquiry() {
 
       return (
         <div className="space-y-5">
-          <div className="bg-primary-pink-light rounded-xl p-5 space-y-3">
+          <div className="bg-blush-light rounded-xl p-5 space-y-3">
             {summaryItems.map((item) => (
               <div key={item.label} className="flex justify-between items-center">
                 <span className="text-text-light text-sm">{item.label}</span>
@@ -268,15 +268,15 @@ export default function BookingInquiry() {
   };
 
   return (
-    <section id="booking" className="py-24 md:py-32 bg-primary-pink-light overflow-hidden">
+    <section id="booking" className="py-24 md:py-32 bg-blush-light overflow-hidden">
       <div className="max-w-7xl mx-auto px-4 sm:px-6">
         <AnimatedSection direction="up" className="text-center max-w-3xl mx-auto mb-16">
-          <span className="inline-block px-4 py-2 bg-white text-sage-green rounded-full text-sm font-medium mb-6">
+          <span className="inline-block px-4 py-2 bg-white text-crimson-primary rounded-full text-sm font-medium mb-6">
             Book an Appointment
           </span>
           <h2 className="text-3xl sm:text-4xl md:text-5xl font-serif font-bold text-text-dark mb-6">
             Request a{" "}
-            <span className="text-sage-green">Booking</span>
+            <span className="text-crimson-primary">Booking</span>
           </h2>
           <p className="text-text-light text-base sm:text-lg leading-relaxed">
             Fill in your details below and we&apos;ll get back to you to confirm your appointment.
@@ -344,9 +344,9 @@ export default function BookingInquiry() {
                               <div
                                 className={`w-10 h-10 rounded-full flex items-center justify-center text-sm font-medium transition-all duration-300 ${
                                   i < step
-                                    ? "bg-sage-green text-white"
+                                    ? "bg-crimson-primary text-white"
                                     : i === step
-                                    ? "bg-sage-green text-white step-dot-active"
+                                    ? "bg-crimson-primary text-white step-dot-active"
                                     : "bg-gray-100 text-gray-400"
                                 }`}
                               >
@@ -370,7 +370,7 @@ export default function BookingInquiry() {
                               <div className="flex-1 h-0.5 mx-3 relative mt-[-1.25rem]">
                                 <div className="absolute inset-0 bg-gray-200 rounded" />
                                 <div
-                                  className={`absolute inset-0 bg-sage-green rounded transition-all duration-500 ${
+                                  className={`absolute inset-0 bg-crimson-primary rounded transition-all duration-500 ${
                                     i < step ? "w-full" : "w-0"
                                   }`}
                                 />
@@ -403,7 +403,7 @@ export default function BookingInquiry() {
                           <button
                             type="button"
                             onClick={goNext}
-                            className="flex items-center gap-2 px-6 py-3 bg-sage-green text-white rounded-lg font-medium hover:bg-sage-green-dark active:bg-sage-green-dark/80 transition-colors focus-visible:ring-3 focus-visible:ring-ring/50 outline-none"
+                            className="flex items-center gap-2 px-6 py-3 bg-crimson-primary text-white rounded-lg font-medium hover:bg-crimson-dark active:bg-crimson-dark/80 transition-colors focus-visible:ring-3 focus-visible:ring-ring/50 outline-none"
                           >
                             Next
                             <ChevronRight className="w-4 h-4" />
@@ -412,7 +412,7 @@ export default function BookingInquiry() {
                           <button
                             type="submit"
                             disabled={status === "loading"}
-                             className="flex items-center gap-2 px-6 py-3 bg-sage-green text-white rounded-lg font-medium hover:bg-sage-green-dark active:bg-sage-green-dark/80 transition-colors disabled:opacity-70 disabled:cursor-not-allowed min-w-[140px] justify-center focus-visible:ring-3 focus-visible:ring-ring/50 outline-none"
+                             className="flex items-center gap-2 px-6 py-3 bg-crimson-primary text-white rounded-lg font-medium hover:bg-crimson-dark active:bg-crimson-dark/80 transition-colors disabled:opacity-70 disabled:cursor-not-allowed min-w-[140px] justify-center focus-visible:ring-3 focus-visible:ring-ring/50 outline-none"
                           >
                             {status === "loading" ? (
                               <>

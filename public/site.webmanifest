@@ -1,0 +1,24 @@
+{
+  "name": "K & S Beauty Centre",
+  "short_name": "K&S Beauty",
+  "icons": [
+    {
+      "src": "/icon.png",
+      "sizes": "48x48",
+      "type": "image/png"
+    },
+    {
+      "src": "/favicon.png",
+      "sizes": "32x32",
+      "type": "image/png"
+    },
+    {
+      "src": "/apple-touch-icon.png",
+      "sizes": "180x180",
+      "type": "image/png"
+    }
+  ],
+  "theme_color": "#c63f7a",
+  "background_color": "#ffffff",
+  "display": "standalone"
+}

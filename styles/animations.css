@@ -451,8 +451,8 @@
 .scroll-progress-bar {
   background: linear-gradient(
     90deg,
-    var(--color-sage-green, #9caf88),
-    var(--color-primary-pink, #e8a0b4)
+    var(--color-crimson-primary, #c63f7a),
+    var(--color-blush-secondary, #e9a7be)
   );
 }
 
@@ -507,7 +507,7 @@
   width: 4px;
   height: 4px;
   border-radius: 50%;
-  background: var(--color-primary-pink, #e8a0b4);
+  background: var(--color-blush-secondary, #e9a7be);
 }
 
 /* --- Page Load Sequence --- */
@@ -939,12 +939,12 @@
 }
 
 .lightbox-close:hover {
-  color: var(--color-primary-pink);
+  color: var(--color-blush-secondary);
   background: rgba(255, 255, 255, 0.2);
 }
 
 .lightbox-close:focus-visible {
-  outline: 2px solid var(--color-sage-green, #9caf88);
+  outline: 2px solid var(--color-crimson-primary, #c63f7a);
   outline-offset: 2px;
 }
 
@@ -966,12 +966,12 @@
 }
 
 .lightbox-nav:hover {
-  color: var(--color-primary-pink);
+  color: var(--color-blush-secondary);
   background: rgba(255, 255, 255, 0.2);
 }
 
 .lightbox-nav:focus-visible {
-  outline: 2px solid var(--color-sage-green, #9caf88);
+  outline: 2px solid var(--color-crimson-primary, #c63f7a);
   outline-offset: 2px;
 }
 
@@ -1080,7 +1080,7 @@
 }
 
 .team-overlay-role {
-  color: var(--color-primary-pink);
+  color: var(--color-blush-secondary);
   font-size: 0.8125rem;
   font-weight: 500;
   margin-bottom: 0.75rem;
@@ -1100,7 +1100,7 @@
 }
 
 .team-social-icon:hover {
-  background: var(--color-primary-pink);
+  background: var(--color-blush-secondary);
   color: var(--text-dark);
   transform: translateY(-2px);
 }
@@ -1122,8 +1122,8 @@
   background: linear-gradient(
     to bottom,
     transparent 0%,
-    var(--color-sage-green) 5%,
-    var(--color-sage-green) 95%,
+    var(--color-crimson-primary) 5%,
+    var(--color-crimson-primary) 95%,
     transparent 100%
   );
   transform: translateX(-50%);
@@ -1155,9 +1155,9 @@
   width: 1rem;
   height: 1rem;
   border-radius: 50%;
-  background: var(--color-sage-green);
+  background: var(--color-crimson-primary);
   border: 3px solid white;
-  box-shadow: 0 0 0 3px var(--color-sage-green);
+  box-shadow: 0 0 0 3px var(--color-crimson-primary);
   transform: translateX(-50%);
   z-index: 2;
 }
@@ -1173,8 +1173,8 @@
 }
 
 .timeline-content:hover {
-  box-shadow: 0 8px 30px color-mix(in srgb, var(--color-sage-green) 30%, transparent);
-  border-color: color-mix(in srgb, var(--color-sage-green) 30%, transparent);
+  box-shadow: 0 8px 30px color-mix(in srgb, var(--color-crimson-primary));
+  border-color: color-mix(in srgb, var(--color-crimson-primary));
 }
 
 .timeline-year {
@@ -1182,7 +1182,7 @@
   font-family: var(--font-serif), Georgia, serif;
   font-weight: 700;
   font-size: 1.25rem;
-  color: var(--color-sage-green);
+  color: var(--color-crimson-primary);
   margin-bottom: 0.25rem;
 }
 
@@ -1226,7 +1226,7 @@
   inset: 0;
   z-index: 9999;
   pointer-events: none;
-  background: var(--color-primary-pink-light, #fdf2f5);
+  background: var(--color-blush-light, #f6c9d6);
   transform: translateX(100%);
 }
 
@@ -1337,7 +1337,7 @@
   }
   50% {
     transform: scale(1.15);
-    color: var(--sage-green);
+    color: var(--color-crimson-primary);
   }
   100% {
     transform: scale(1);
@@ -1405,6 +1405,6 @@
   left: 0;
   width: 100%;
   height: 2px;
-  background: var(--sage-green);
+  background: var(--color-crimson-primary);
   animation: expandUnderline 0.4s var(--motion-ease-out) forwards;
 }

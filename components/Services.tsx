@@ -62,12 +62,12 @@ export default function Services() {
   return (
     <section
       id="services"
-      className="py-24 md:py-32 bg-primary-pink-light relative overflow-hidden"
+      className="py-24 md:py-32 bg-blush-light relative overflow-hidden"
     >
       {/* Decorative background blobs */}
       <div className="absolute inset-0 pointer-events-none" aria-hidden>
-        <div className="absolute top-1/4 -left-32 w-96 h-96 bg-sage-green/5 rounded-full blur-3xl" />
-        <div className="absolute bottom-1/4 -right-32 w-96 h-96 bg-primary-pink/20 rounded-full blur-3xl" />
+        <div className="absolute top-1/4 -left-32 w-96 h-96 bg-crimson-primary/5 rounded-full blur-3xl" />
+        <div className="absolute bottom-1/4 -right-32 w-96 h-96 bg-blush-secondary/20 rounded-full blur-3xl" />
       </div>
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 relative">
@@ -76,12 +76,12 @@ export default function Services() {
           direction="up"
           className="text-center max-w-3xl mx-auto mb-16"
         >
-          <span className="inline-block px-4 py-2 bg-white text-sage-green rounded-full text-sm font-medium mb-6">
+          <span className="inline-block px-4 py-2 bg-white text-crimson-primary rounded-full text-sm font-medium mb-6">
             Our Services
           </span>
           <h2 className="text-3xl sm:text-4xl md:text-5xl font-serif font-bold text-text-dark mb-6">
             Pamper Yourself with{" "}
-            <span className="text-sage-green">Luxury Treatments</span>
+            <span className="text-crimson-primary">Luxury Treatments</span>
           </h2>
           <p className="text-text-light text-base sm:text-lg leading-relaxed">
             Discover our comprehensive range of beauty and wellness services,
@@ -155,7 +155,7 @@ function ServiceCard({
               {hovered && (
                 <motion.div
                   key="morph-ring"
-                  className="absolute inset-0 rounded-full border-2 border-sage-green"
+                  className="absolute inset-0 rounded-full border-2 border-crimson-primary"
                   initial={{ scale: 0.8, opacity: 0.6 }}
                   animate={{ scale: 1.8, opacity: 0 }}
                   exit={{ opacity: 0, scale: 0.8 }}
@@ -188,7 +188,7 @@ function ServiceCard({
 
           {/* Accent underline */}
           <motion.div
-            className="h-0.5 bg-sage-green rounded-full mt-4"
+            className="h-0.5 bg-crimson-primary rounded-full mt-4"
             animate={{
               width: hovered ? "100%" : "0%",
               opacity: hovered ? 1 : 0,
@@ -214,7 +214,7 @@ function ServiceCard({
               className="flex items-center gap-2 text-sm text-text-dark"
             >
               <motion.span
-                className="w-1.5 h-1.5 rounded-full bg-sage-green block shrink-0"
+                className="w-1.5 h-1.5 rounded-full bg-crimson-primary block shrink-0"
                 animate={{
                   scale: hovered ? [1, 1.5, 1] : 1,
                 }}
@@ -235,7 +235,7 @@ function ServiceCard({
           animate={{ opacity: hovered ? 1 : 0.6 }}
           transition={{ duration: 0.2 }}
         >
-          <span className="text-sage-green font-medium text-sm flex items-center gap-2">
+          <span className="text-crimson-primary font-medium text-sm flex items-center gap-2">
             Learn More
             <motion.span
               animate={{ x: hovered ? 4 : 0 }}

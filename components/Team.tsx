@@ -35,18 +35,18 @@ const teamMembers = [
 
 export default function Team() {
   return (
-    <section id="team" className="py-24 md:py-32 bg-primary-pink-light overflow-hidden">
+    <section id="team" className="py-24 md:py-32 bg-blush-light overflow-hidden">
       <div className="max-w-7xl mx-auto px-4 sm:px-6">
         <AnimatedSection
           direction="up"
           className="text-center max-w-3xl mx-auto mb-16"
         >
-          <span className="inline-block px-4 py-2 bg-white text-sage-green rounded-full text-sm font-medium mb-6">
+          <span className="inline-block px-4 py-2 bg-white text-crimson-primary rounded-full text-sm font-medium mb-6">
             Our Team
           </span>
           <h2 className="text-3xl sm:text-4xl md:text-5xl font-serif font-bold text-text-dark mb-6">
             Meet the{" "}
-            <span className="text-sage-green">Artists</span> Behind Your Beauty
+            <span className="text-crimson-primary">Artists</span> Behind Your Beauty
           </h2>
           <p className="text-text-light text-base sm:text-lg leading-relaxed">
             Our talented team of certified professionals is dedicated to making
@@ -106,7 +106,7 @@ export default function Team() {
                   <h3 className="text-xl font-serif font-bold text-text-dark mb-1">
                     {member.name}
                   </h3>
-                  <p className="text-sage-green font-medium text-sm mb-4">
+                  <p className="text-crimson-primary font-medium text-sm mb-4">
                     {member.role}
                   </p>
                   <p className="text-text-light text-sm leading-relaxed">

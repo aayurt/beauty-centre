@@ -23,6 +23,12 @@ export const metadata: Metadata = {
   title: "K & S Beauty Centre | Hair, Facials & Massage",
   description: "Experience luxury beauty treatments at K & S Beauty Centre. Expert hair styling, rejuvenating facials, and relaxing massages in a serene atmosphere.",
   keywords: ["beauty centre", "hair salon", "facials", "massage", "beauty treatments", "K & S Beauty"],
+  icons: {
+    icon: "/favicon.png",
+    shortcut: "/favicon.png",
+    apple: "/apple-touch-icon.png",
+  },
+  manifest: "/site.webmanifest",
 };
 
 export default function RootLayout({

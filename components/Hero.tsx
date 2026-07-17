@@ -50,21 +50,21 @@ function FloatingDecorations() {
       {/* Top-left sparkle cluster */}
       <div className="absolute top-[15%] left-[8%] z-0 animate-float-drift float-delay-1">
         <div className="relative">
-          <Sparkles className="w-8 h-8 text-primary-pink/30" />
-          <div className="absolute -top-2 -right-2 w-3 h-3 rounded-full bg-primary-pink/20 animate-gradient-pulse" />
+          <Sparkles className="w-8 h-8 text-blush-secondary/30" />
+          <div className="absolute -top-2 -right-2 w-3 h-3 rounded-full bg-blush-secondary/20 animate-gradient-pulse" />
         </div>
       </div>
 
       {/* Top-right decorative circle */}
       <div className="absolute top-[20%] right-[12%] z-0 animate-float-sway float-delay-2">
-        <div className="w-20 h-20 rounded-full border-2 border-primary-pink/20 animate-float-rotate">
-          <div className="absolute inset-3 rounded-full bg-sage-green/10" />
+        <div className="w-20 h-20 rounded-full border-2 border-blush-secondary/20 animate-float-rotate">
+          <div className="absolute inset-3 rounded-full bg-crimson-primary/10" />
         </div>
       </div>
 
       {/* Middle-left flower petal */}
       <div className="absolute top-[45%] left-[5%] z-0 animate-float-bob float-delay-3">
-        <Flower2 className="w-10 h-10 text-sage-green/20" />
+        <Flower2 className="w-10 h-10 text-crimson-primary/20" />
       </div>
 
       {/* Middle-right ring */}
@@ -74,12 +74,12 @@ function FloatingDecorations() {
 
       {/* Bottom-left decorative dot */}
       <div className="absolute bottom-[25%] left-[12%] z-0 animate-float-sway float-delay-5">
-        <div className="w-4 h-4 rounded-full bg-primary-pink/20" />
+        <div className="w-4 h-4 rounded-full bg-blush-secondary/20" />
       </div>
 
       {/* Bottom-right sparkle */}
       <div className="absolute bottom-[30%] right-[10%] z-0 animate-float-bob float-delay-1">
-        <ScrollText className="w-9 h-9 text-sage-green/15" />
+        <ScrollText className="w-9 h-9 text-crimson-primary/15" />
       </div>
 
       {/* Additional accent dots */}
@@ -87,7 +87,7 @@ function FloatingDecorations() {
         <div className="w-2 h-2 rounded-full bg-white/10" />
       </div>
       <div className="absolute top-[70%] right-[20%] z-0 animate-float-sway float-delay-3">
-        <div className="w-3 h-3 rounded-full bg-primary-pink/15" />
+        <div className="w-3 h-3 rounded-full bg-blush-secondary/15" />
       </div>
     </>
   );
@@ -114,8 +114,8 @@ export default function Hero() {
         style={{ y, opacity, scale }}
         className="absolute inset-0 z-0 will-change-transform"
       >
-        <div className="absolute inset-0 bg-gradient-to-br from-sage-green/90 via-primary-pink/80 to-sage-green-dark/90 animate-gradient" />
-        <div className="absolute inset-0 bg-gradient-to-tr from-sage-green-dark/40 via-transparent to-primary-pink/40 animate-gradient" style={{ animationDirection: "reverse", animationDuration: "20s" }} />
+        <div className="absolute inset-0 bg-gradient-to-br from-crimson-primary/90 via-blush-secondary/80 to-crimson-dark/90 animate-gradient" />
+        <div className="absolute inset-0 bg-gradient-to-tr from-crimson-dark/40 via-transparent to-blush-secondary/40 animate-gradient" style={{ animationDirection: "reverse", animationDuration: "20s" }} />
         {/* Subtle overlay pattern */}
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(255,255,255,0.05)_0%,transparent_70%)]" />
       </motion.div>
@@ -173,14 +173,14 @@ export default function Hero() {
         >
           <Link
             href="#services"
-            className="group w-full sm:w-auto px-6 sm:px-8 py-3 sm:py-4 bg-primary-pink text-white rounded-full font-medium text-base sm:text-lg transition-all duration-300 hover:bg-white hover:text-sage-green hover:scale-105 shadow-lg shadow-primary-pink/25 text-center"
+            className="group w-full sm:w-auto px-6 sm:px-8 py-3 sm:py-4 bg-blush-secondary text-white rounded-full font-medium text-base sm:text-lg transition-all duration-300 hover:bg-white hover:text-crimson-primary hover:scale-105 shadow-lg shadow-blush-secondary/25 text-center"
           >
             Explore Services
             <span className="inline-block ml-2 transition-transform group-hover:translate-x-1">→</span>
           </Link>
           <Link
             href="#contact"
-            className="w-full sm:w-auto px-6 sm:px-8 py-3 sm:py-4 border-2 border-white/70 text-white rounded-full font-medium text-base sm:text-lg transition-all duration-300 hover:bg-white hover:text-sage-green backdrop-blur-sm text-center"
+            className="w-full sm:w-auto px-6 sm:px-8 py-3 sm:py-4 border-2 border-white/70 text-white rounded-full font-medium text-base sm:text-lg transition-all duration-300 hover:bg-white hover:text-crimson-primary backdrop-blur-sm text-center"
           >
             Book Appointment
           </Link>

@@ -39,11 +39,11 @@ export default function AdminLoginPage() {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-primary-pink-light via-white to-primary-pink-light flex items-center justify-center p-4">
+    <div className="min-h-screen bg-gradient-to-br from-blush-light via-white to-blush-light flex items-center justify-center p-4">
       <div className="w-full max-w-sm">
         <div className="bg-white rounded-2xl shadow-xl p-6 sm:p-8">
           <div className="flex flex-col items-center mb-8">
-            <div className="w-14 h-14 bg-sage-green rounded-full flex items-center justify-center mb-4">
+            <div className="w-14 h-14 bg-crimson-primary rounded-full flex items-center justify-center mb-4">
               <Lock className="w-6 h-6 text-white" />
             </div>
             <h1 className="text-2xl font-serif text-text-dark">Admin Login</h1>
@@ -59,7 +59,7 @@ export default function AdminLoginPage() {
                 placeholder="Username"
                 required
                 autoFocus
-                className="w-full px-4 py-3 border border-gray-300 rounded-xl text-sm outline-none focus:border-sage-green focus:ring-1 focus:ring-sage-green transition-colors"
+                className="w-full px-4 py-3 border border-gray-300 rounded-xl text-sm outline-none focus:border-crimson-primary focus:ring-1 focus:ring-crimson-primary transition-colors"
               />
             </div>
             <div>
@@ -69,7 +69,7 @@ export default function AdminLoginPage() {
                 onChange={(e) => setPassword(e.target.value)}
                 placeholder="Password"
                 required
-                className="w-full px-4 py-3 border border-gray-300 rounded-xl text-sm outline-none focus:border-sage-green focus:ring-1 focus:ring-sage-green transition-colors"
+                className="w-full px-4 py-3 border border-gray-300 rounded-xl text-sm outline-none focus:border-crimson-primary focus:ring-1 focus:ring-crimson-primary transition-colors"
               />
             </div>
 
@@ -80,7 +80,7 @@ export default function AdminLoginPage() {
             <button
               type="submit"
               disabled={loading || !username || !password}
-              className="w-full py-3 bg-sage-green text-white rounded-xl text-sm font-medium hover:bg-sage-green-dark disabled:opacity-50 transition-colors"
+              className="w-full py-3 bg-crimson-primary text-white rounded-xl text-sm font-medium hover:bg-crimson-dark disabled:opacity-50 transition-colors"
             >
               {loading ? "Signing in..." : "Sign in"}
             </button>

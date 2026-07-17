@@ -96,18 +96,18 @@ export default function Contact() {
   const borderColor = (name: string) =>
     errors[name as keyof FieldErrors]
       ? "border-red-400 focus:border-red-400 focus:ring-2 focus:ring-red-400/20"
-      : "border-gray-200 focus:border-sage-green focus:ring-2 focus:ring-sage-green/20";
+      : "border-gray-200 focus:border-crimson-primary focus:ring-2 focus:ring-crimson-primary/20";
 
   return (
-    <section id="contact" className="py-24 md:py-32 bg-primary-pink-light overflow-hidden">
+    <section id="contact" className="py-24 md:py-32 bg-blush-light overflow-hidden">
       <div className="max-w-7xl mx-auto px-4 sm:px-6">
         <AnimatedSection direction="up" className="text-center max-w-3xl mx-auto mb-16">
-          <span className="inline-block px-4 py-2 bg-white text-sage-green rounded-full text-sm font-medium mb-6">
+          <span className="inline-block px-4 py-2 bg-white text-crimson-primary rounded-full text-sm font-medium mb-6">
             Contact Us
           </span>
           <h2 className="text-3xl sm:text-4xl md:text-5xl font-serif font-bold text-text-dark mb-6">
             Book Your{" "}
-            <span className="text-sage-green">Appointment</span> Today
+            <span className="text-crimson-primary">Appointment</span> Today
           </h2>
           <p className="text-text-light text-base sm:text-lg leading-relaxed">
             Ready to experience the {company.name.split(" ")[0]} difference? Reach out to us and let&apos;s create your perfect beauty moment.
@@ -202,7 +202,7 @@ export default function Contact() {
                             htmlFor={field.name}
                             className={`absolute left-4 transition-all duration-200 pointer-events-none ${
                               isFloating(field.name)
-                                ? "top-2 text-xs text-sage-green font-medium"
+                                ? "top-2 text-xs text-crimson-primary font-medium"
                                 : "top-1/2 -translate-y-1/2 text-gray-400 text-base"
                             }`}
                           >
@@ -229,7 +229,7 @@ export default function Contact() {
                     <button
                       type="submit"
                       disabled={status === "loading"}
-                      className="w-full py-4 bg-sage-green text-white rounded-lg font-medium flex items-center justify-center gap-2 hover:bg-sage-green-dark active:bg-sage-green-dark/80 transition-colors disabled:opacity-70 disabled:cursor-not-allowed group relative overflow-hidden focus-visible:ring-3 focus-visible:ring-ring/50 outline-none"
+                      className="w-full py-4 bg-crimson-primary text-white rounded-lg font-medium flex items-center justify-center gap-2 hover:bg-crimson-dark active:bg-crimson-dark/80 transition-colors disabled:opacity-70 disabled:cursor-not-allowed group relative overflow-hidden focus-visible:ring-3 focus-visible:ring-ring/50 outline-none"
                     >
                       {status === "loading" ? (
                         <>
@@ -292,8 +292,8 @@ export default function Contact() {
                   { icon: Clock, title: "Opening Hours", children: company.hours ? company.hours.split("\n").map((line, i) => <span key={i}>{line}{i < company.hours!.split("\n").length - 1 && <br />}</span>) : <>Monday - Friday: 9:00 AM - 8:00 PM<br />Saturday: 9:00 AM - 6:00 PM<br />Sunday: 10:00 AM - 4:00 PM</> },
                 ].map((item) => (
                   <div key={item.title} className="flex items-start gap-4">
-                    <div className="w-12 h-12 rounded-full bg-primary-pink flex items-center justify-center flex-shrink-0">
-                      <item.icon className="w-5 h-5 text-sage-green" />
+                    <div className="w-12 h-12 rounded-full bg-blush-secondary flex items-center justify-center flex-shrink-0">
+                      <item.icon className="w-5 h-5 text-crimson-primary" />
                     </div>
                     <div>
                       <h4 className="font-semibold text-text-dark mb-1">{item.title}</h4>

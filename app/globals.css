@@ -7,27 +7,27 @@
 
 @theme inline {
   /* -- Color palette -- */
-  --color-sage-50: var(--color-sage-50);
-  --color-sage-100: var(--color-sage-100);
-  --color-sage-200: var(--color-sage-200);
-  --color-sage-300: var(--color-sage-300);
-  --color-sage-400: var(--color-sage-400);
-  --color-sage-500: var(--color-sage-500);
-  --color-sage-600: var(--color-sage-600);
-  --color-sage-700: var(--color-sage-700);
-  --color-sage-800: var(--color-sage-800);
-  --color-sage-900: var(--color-sage-900);
+  --color-crimson-50: var(--color-crimson-50);
+  --color-crimson-100: var(--color-crimson-100);
+  --color-crimson-200: var(--color-crimson-200);
+  --color-crimson-300: var(--color-crimson-300);
+  --color-crimson-400: var(--color-crimson-400);
+  --color-crimson-500: var(--color-crimson-500);
+  --color-crimson-600: var(--color-crimson-600);
+  --color-crimson-700: var(--color-crimson-700);
+  --color-crimson-800: var(--color-crimson-800);
+  --color-crimson-900: var(--color-crimson-900);
 
-  --color-pink-50: var(--color-pink-50);
-  --color-pink-100: var(--color-pink-100);
-  --color-pink-200: var(--color-pink-200);
-  --color-pink-300: var(--color-pink-300);
-  --color-pink-400: var(--color-pink-400);
-  --color-pink-500: var(--color-pink-500);
-  --color-pink-600: var(--color-pink-600);
-  --color-pink-700: var(--color-pink-700);
-  --color-pink-800: var(--color-pink-800);
-  --color-pink-900: var(--color-pink-900);
+  --color-blush-50: var(--color-blush-50);
+  --color-blush-100: var(--color-blush-100);
+  --color-blush-200: var(--color-blush-200);
+  --color-blush-300: var(--color-blush-300);
+  --color-blush-400: var(--color-blush-400);
+  --color-blush-500: var(--color-blush-500);
+  --color-blush-600: var(--color-blush-600);
+  --color-blush-700: var(--color-blush-700);
+  --color-blush-800: var(--color-blush-800);
+  --color-blush-900: var(--color-blush-900);
 
   --color-neutral-50: var(--color-neutral-50);
   --color-neutral-100: var(--color-neutral-100);
@@ -44,10 +44,10 @@
   --color-black: var(--color-black);
 
   /* -- Semantic color name aliases -- */
-  --color-sage-green: var(--color-sage-green);
-  --color-sage-green-dark: var(--color-sage-green-dark);
-  --color-primary-pink: var(--color-primary-pink);
-  --color-primary-pink-light: var(--color-primary-pink-light);
+  --color-crimson-primary: var(--color-crimson-primary);
+  --color-crimson-dark: var(--color-crimson-dark);
+  --color-blush-secondary: var(--color-blush-secondary);
+  --color-blush-light: var(--color-blush-light);
   --color-text-dark: var(--text-dark);
   --color-text-light: var(--text-light);
 
@@ -214,14 +214,14 @@ html {
 }
 
 ::-webkit-scrollbar-track {
-  background: var(--color-pink-100, #fdf2f5);
+  background: var(--color-blush-100, #fbeef4);
 }
 
 ::-webkit-scrollbar-thumb {
-  background: var(--color-pink-400, #f2c4ce);
+  background: var(--color-blush-400, #e9a7be);
   border-radius: var(--radius-full);
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: var(--color-sage-400, #9caf88);
+  background: var(--color-crimson-500, #c63f7a);
 }

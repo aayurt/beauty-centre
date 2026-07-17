@@ -68,7 +68,7 @@ export default function FloatingParticles({
           aria-hidden="true"
         >
           <SparkleIcon
-            className="text-sage-green animate-float-rotate"
+            className="text-crimson-primary animate-float-rotate"
             style={{
               width: p.size + 4,
               height: p.size + 4,
@@ -94,7 +94,7 @@ export default function FloatingParticles({
           aria-hidden="true"
         >
           <div
-            className="rounded-full border border-primary-pink animate-float-rotate"
+            className="rounded-full border border-blush-secondary animate-float-rotate"
             style={{
               width: p.size + 8,
               height: p.size + 8,
@@ -119,7 +119,7 @@ export default function FloatingParticles({
         aria-hidden="true"
       >
         <div
-          className="rounded-full bg-primary-pink"
+          className="rounded-full bg-blush-secondary"
           style={{
             width: p.size,
             height: p.size,

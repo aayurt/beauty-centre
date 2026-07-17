@@ -9,29 +9,29 @@
    1. Color Palette
    -------------------------------------------------------------------------- */
 :root {
-  /* -- Sage Green (Primary) -- */
-  --color-sage-50: #f4f7f1;
-  --color-sage-100: #e5ede0;
-  --color-sage-200: #ccdbc2;
-  --color-sage-300: #aec89e;
-  --color-sage-400: #9caf88;
-  --color-sage-500: #859b74;
-  --color-sage-600: #6e8260;
-  --color-sage-700: #57694c;
-  --color-sage-800: #404f38;
-  --color-sage-900: #2a3524;
+  /* -- Crimson (Primary) — Deep Rose Pink / Dark Magenta -- */
+  --color-crimson-50: #fef1f6;
+  --color-crimson-100: #fde3ed;
+  --color-crimson-200: #fbc7db;
+  --color-crimson-300: #f79dbd;
+  --color-crimson-400: #ed699b;
+  --color-crimson-500: #c63f7a;
+  --color-crimson-600: #b02e66;
+  --color-crimson-700: #962353;
+  --color-crimson-800: #7a1d41;
+  --color-crimson-900: #5d1531;
 
-  /* -- Pink (Secondary) -- */
-  --color-pink-50: #fef7f8;
-  --color-pink-100: #fdf0f3;
-  --color-pink-200: #fbe4ea;
-  --color-pink-300: #f7d0da;
-  --color-pink-400: #f2c4ce;
-  --color-pink-500: #e8a0b4;
-  --color-pink-600: #d47a95;
-  --color-pink-700: #b85e7b;
-  --color-pink-800: #9a4d66;
-  --color-pink-900: #804357;
+  /* -- Blush (Secondary) — Soft Blush Pink / Light Pink -- */
+  --color-blush-50: #fef7f9;
+  --color-blush-100: #fbeef4;
+  --color-blush-200: #f6c9d6;
+  --color-blush-300: #efb6c6;
+  --color-blush-400: #e9a7be;
+  --color-blush-500: #d48ca3;
+  --color-blush-600: #bf7188;
+  --color-blush-700: #a3566c;
+  --color-blush-800: #864054;
+  --color-blush-900: #692f3f;
 
   /* -- Neutral / Gray -- */
   --color-neutral-50: #fafafa;
@@ -50,10 +50,10 @@
   --color-black: #000000;
 
   /* -- Semantic Color Aliases (used across components) -- */
-  --color-sage-green: var(--color-sage-400);
-  --color-sage-green-dark: var(--color-sage-600);
-  --color-primary-pink: var(--color-pink-400);
-  --color-primary-pink-light: var(--color-pink-100);
+  --color-crimson-primary: var(--color-crimson-500);
+  --color-crimson-dark: var(--color-crimson-700);
+  --color-blush-secondary: var(--color-blush-400);
+  --color-blush-light: var(--color-blush-200);
 
   /* --------------------------------------------------------------------------
      2. Light Mode — Semantic Tokens
@@ -67,13 +67,13 @@
   --card-foreground: #2d2d2d;
   --popover: var(--color-white);
   --popover-foreground: #2d2d2d;
-  --primary: var(--color-sage-400);
+  --primary: var(--color-crimson-500);
   --primary-foreground: var(--color-white);
-  --secondary: var(--color-pink-400);
+  --secondary: var(--color-blush-400);
   --secondary-foreground: #2d2d2d;
   --muted: var(--color-neutral-100);
   --muted-foreground: var(--color-neutral-500);
-  --accent: var(--color-pink-100);
+  --accent: var(--color-blush-200);
   --accent-foreground: #2d2d2d;
   --destructive: #ef4444;
   --destructive-foreground: var(--color-white);
@@ -85,7 +85,7 @@
   --info-foreground: var(--color-white);
   --border: var(--color-neutral-200);
   --input: var(--color-neutral-200);
-  --ring: var(--color-sage-400);
+  --ring: var(--color-crimson-500);
 
   /* --------------------------------------------------------------------------
      3. Border Radius Scale
@@ -113,10 +113,10 @@
   --shadow-none: 0 0 #0000;
 
   /* -- Brand-colored shadows -- */
-  --shadow-primary: 0 4px 14px 0 rgb(156 175 136 / 0.3);
-  --shadow-primary-lg: 0 10px 30px -5px rgb(156 175 136 / 0.35);
-  --shadow-secondary: 0 4px 14px 0 rgb(242 196 206 / 0.3);
-  --shadow-secondary-lg: 0 10px 30px -5px rgb(242 196 206 / 0.35);
+  --shadow-primary: 0 4px 14px 0 rgb(198 63 122 / 0.3);
+  --shadow-primary-lg: 0 10px 30px -5px rgb(198 63 122 / 0.35);
+  --shadow-secondary: 0 4px 14px 0 rgb(233 167 190 / 0.3);
+  --shadow-secondary-lg: 0 10px 30px -5px rgb(233 167 190 / 0.35);
 
   /* --------------------------------------------------------------------------
      5. Font Configuration
@@ -258,7 +258,7 @@
    11. Dark Mode — Semantic Token Overrides
    -------------------------------------------------------------------------- */
 .dark {
-  --background: #1a1a1a;
+  --background: #1c1b1d;
   --foreground: #f0f0f0;
   --text-dark: #2d2d2d;
   --text-light: #a3a3a3;
@@ -267,10 +267,10 @@
   --card-foreground: #f0f0f0;
   --popover: #262626;
   --popover-foreground: #f0f0f0;
-  --primary: var(--color-sage-400);
-  --primary-foreground: #1a1a1a;
-  --secondary: var(--color-pink-500);
-  --secondary-foreground: #1a1a1a;
+  --primary: var(--color-crimson-500);
+  --primary-foreground: #1c1b1d;
+  --secondary: var(--color-blush-500);
+  --secondary-foreground: #1c1b1d;
   --muted: #333333;
   --muted-foreground: #a3a3a3;
   --accent: #333333;
@@ -285,5 +285,5 @@
   --info-foreground: #f0f0f0;
   --border: #404040;
   --input: #404040;
-  --ring: var(--color-sage-400);
+  --ring: var(--color-crimson-500);
 }
