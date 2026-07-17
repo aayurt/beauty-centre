@@ -1,7 +1,6 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { Plus, Edit, Trash2, Clock, MapPin } from "lucide-react";
 import { Button } from "@/components/ui/button";

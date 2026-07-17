@@ -1,8 +1,10 @@
 "use client"
 
 import { useState, useEffect, useCallback } from "react"
-import { motion, AnimatePresence } from "framer-motion"
+import Image from "next/image"
+import { motion } from "framer-motion"
 import { Menu, X } from "lucide-react"
+import ThemeToggle from "@/components/ThemeToggle"
 import { useActiveSection } from "@/lib/hooks/useSmoothScroll"
 import { useCompany } from "@/lib/company-context"
 import { cn } from "@/lib/utils"
@@ -72,14 +74,19 @@ export default function Navbar() {
         <a
           href="#home"
           onClick={(e) => handleNavClick(e, "#home")}
-          className={cn(
-            "font-serif text-2xl font-bold tracking-wide transition-colors duration-300",
-            isScrolled
-              ? "text-primary"
-              : "text-white drop-shadow-lg",
-          )}
+          className="shrink-0"
         >
-          {company.name}
+          <Image
+            src="/logo.png"
+            alt={company.name}
+            width={90}
+            height={60}
+            priority
+            className={cn(
+              "h-auto w-auto transition-opacity duration-300",
+              isScrolled ? "opacity-100" : "opacity-90 brightness-110 drop-shadow-lg",
+            )}
+          />
         </a>
 
         <div className="hidden items-center gap-1 md:flex">
@@ -110,7 +117,14 @@ export default function Navbar() {
               )}
             </a>
           ))}
-          <div className="ml-4">
+          <div className="ml-2 flex items-center gap-1">
+            <ThemeToggle
+              className={cn(
+                isScrolled
+                  ? "text-foreground hover:bg-muted"
+                  : "text-white/80 hover:bg-white/10",
+              )}
+            />
             <a
               href="#contact"
               onClick={(e) => handleNavClick(e, "#contact")}
@@ -140,9 +154,13 @@ export default function Navbar() {
 
           <DrawerPopup side="left">
             <DrawerHeader>
-              <span className="font-serif text-lg font-bold text-primary">
-                {company.name}
-              </span>
+              <Image
+                src="/logo.png"
+                alt={company.name}
+                width={72}
+                height={48}
+                className="h-auto w-auto"
+              />
               <DrawerClose
                 data-slot="drawer-close"
                 className="inline-flex items-center justify-center rounded-md p-1 text-muted-foreground transition-colors hover:bg-muted hover:text-foreground active:bg-muted/80 focus:outline-none focus-visible:ring-2 focus-visible:ring-ring"
@@ -185,13 +203,16 @@ export default function Navbar() {
                   </a>
                 ))}
                 <div className="my-2" />
-                <a
-                  href="#contact"
-                  onClick={(e) => handleNavClick(e, "#contact")}
-                  className={buttonVariants({ variant: "default", size: "default" })}
-                >
-                  Book Now
-                </a>
+                <div className="flex items-center gap-2">
+                  <ThemeToggle className="text-foreground hover:bg-muted" />
+                  <a
+                    href="#contact"
+                    onClick={(e) => handleNavClick(e, "#contact")}
+                    className={buttonVariants({ variant: "default", size: "default" })}
+                  >
+                    Book Now
+                  </a>
+                </div>
               </nav>
             </DrawerContent>
           </DrawerPopup>

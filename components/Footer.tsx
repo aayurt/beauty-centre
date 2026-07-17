@@ -2,7 +2,6 @@
 
 import Link from "next/link"
 import { useCompany } from "@/lib/company-context"
-import { cn } from "@/lib/utils"
 import { Separator } from "@/components/ui/separator"
 
 export default function Footer() {

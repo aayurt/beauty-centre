@@ -57,10 +57,10 @@ export default function InstagramFeed() {
     <section className="py-16 sm:py-20 bg-white overflow-hidden">
       <div className="max-w-7xl mx-auto px-4 sm:px-6">
         <div className="text-center mb-12">
-          <h2 className="text-2xl sm:text-3xl md:text-4xl font-serif text-text-dark mb-3">
+          <h2 className="text-2xl sm:text-3xl md:text-4xl font-serif text-foreground mb-3">
             Follow Us on Instagram
           </h2>
-          <p className="text-sm sm:text-base text-text-light max-w-xl mx-auto">
+          <p className="text-sm sm:text-base text-muted-foreground max-w-xl mx-auto">
             Tag us in your photos for a chance to be featured.
           </p>
         </div>

@@ -96,20 +96,20 @@ export default function Contact() {
   const borderColor = (name: string) =>
     errors[name as keyof FieldErrors]
       ? "border-red-400 focus:border-red-400 focus:ring-2 focus:ring-red-400/20"
-      : "border-gray-200 focus:border-crimson-primary focus:ring-2 focus:ring-crimson-primary/20";
+      : "border-gray-200 dark:border-neutral-600 dark:focus:border-crimson-primary focus:border-crimson-primary focus:ring-2 focus:ring-crimson-primary/20";
 
   return (
-    <section id="contact" className="py-24 md:py-32 bg-blush-light overflow-hidden">
+    <section id="contact" className="py-24 md:py-32 bg-blush-light dark:bg-neutral-900 overflow-hidden">
       <div className="max-w-7xl mx-auto px-4 sm:px-6">
         <AnimatedSection direction="up" className="text-center max-w-3xl mx-auto mb-16">
-          <span className="inline-block px-4 py-2 bg-white text-crimson-primary rounded-full text-sm font-medium mb-6">
+          <span className="inline-block px-4 py-2 bg-white dark:bg-neutral-800 text-crimson-primary rounded-full text-sm font-medium mb-6">
             Contact Us
           </span>
-          <h2 className="text-3xl sm:text-4xl md:text-5xl font-serif font-bold text-text-dark mb-6">
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-serif font-bold text-foreground mb-6">
             Book Your{" "}
             <span className="text-crimson-primary">Appointment</span> Today
           </h2>
-          <p className="text-text-light text-base sm:text-lg leading-relaxed">
+          <p className="text-muted-foreground text-base sm:text-lg leading-relaxed">
             Ready to experience the {company.name.split(" ")[0]} difference? Reach out to us and let&apos;s create your perfect beauty moment.
           </p>
         </AnimatedSection>
@@ -119,7 +119,7 @@ export default function Contact() {
             <form
               onSubmit={handleSubmit}
               noValidate
-              className="bg-white rounded-2xl p-4 sm:p-6 md:p-8 shadow-xl"
+              className="bg-white dark:bg-neutral-900 rounded-2xl p-4 sm:p-6 md:p-8 shadow-xl"
             >
               <AnimatePresence mode="wait">
                 {status === "success" ? (
@@ -139,13 +139,13 @@ export default function Contact() {
                           cy="26"
                           r="25"
                           fill="none"
-                          stroke="#9caf88"
+                          stroke="#c63f7a"
                           strokeWidth="2"
                         />
                         <path
                           className="checkmark-check"
                           fill="none"
-                          stroke="#9caf88"
+                          stroke="#c63f7a"
                           strokeWidth="4"
                           strokeLinecap="round"
                           strokeLinejoin="round"
@@ -153,10 +153,10 @@ export default function Contact() {
                         />
                       </svg>
                     </div>
-                    <h3 className="text-2xl font-serif font-bold text-text-dark mb-2">
+                    <h3 className="text-2xl font-serif font-bold text-foreground mb-2">
                       Message Sent!
                     </h3>
-                    <p className="text-text-light text-center">
+                    <p className="text-muted-foreground text-center">
                       Thank you for reaching out. We&apos;ll be in touch within 24 hours.
                     </p>
                   </motion.div>
@@ -194,7 +194,7 @@ export default function Contact() {
                               onChange={handleChange}
                               onFocus={() => handleFocus(field.name)}
                               onBlur={() => handleBlur(field.name)}
-                              className={`w-full px-4 pt-6 pb-2 rounded-lg border outline-none transition-all bg-white ${borderColor(field.name)} ${shakeFields.has(field.name) ? "animate-shake" : ""}`}
+                              className={`w-full px-4 pt-6 pb-2 rounded-lg border outline-none transition-all bg-white dark:bg-neutral-800 dark:text-foreground ${borderColor(field.name)} ${shakeFields.has(field.name) ? "animate-shake" : ""}`}
                               placeholder=" "
                             />
                           )}
@@ -203,7 +203,7 @@ export default function Contact() {
                             className={`absolute left-4 transition-all duration-200 pointer-events-none ${
                               isFloating(field.name)
                                 ? "top-2 text-xs text-crimson-primary font-medium"
-                                : "top-1/2 -translate-y-1/2 text-gray-400 text-base"
+                                : "top-1/2 -translate-y-1/2 text-gray-400 dark:text-neutral-500 text-base"
                             }`}
                           >
                             {field.label}
@@ -279,8 +279,8 @@ export default function Contact() {
           </AnimatedSection>
 
           <AnimatedSection direction="right" className="space-y-8">
-            <div className="bg-white rounded-2xl p-4 sm:p-6 md:p-8 shadow-xl">
-              <h3 className="text-xl sm:text-2xl font-serif font-bold text-text-dark mb-4 sm:mb-6">
+            <div className="bg-white dark:bg-neutral-900 rounded-2xl p-4 sm:p-6 md:p-8 shadow-xl">
+              <h3 className="text-xl sm:text-2xl font-serif font-bold text-foreground mb-4 sm:mb-6">
                 Get in Touch
               </h3>
 
@@ -292,19 +292,19 @@ export default function Contact() {
                   { icon: Clock, title: "Opening Hours", children: company.hours ? company.hours.split("\n").map((line, i) => <span key={i}>{line}{i < company.hours!.split("\n").length - 1 && <br />}</span>) : <>Monday - Friday: 9:00 AM - 8:00 PM<br />Saturday: 9:00 AM - 6:00 PM<br />Sunday: 10:00 AM - 4:00 PM</> },
                 ].map((item) => (
                   <div key={item.title} className="flex items-start gap-4">
-                    <div className="w-12 h-12 rounded-full bg-blush-secondary flex items-center justify-center flex-shrink-0">
+                    <div className="w-12 h-12 rounded-full bg-blush-secondary dark:bg-neutral-700 flex items-center justify-center flex-shrink-0">
                       <item.icon className="w-5 h-5 text-crimson-primary" />
                     </div>
                     <div>
-                      <h4 className="font-semibold text-text-dark mb-1">{item.title}</h4>
-                      <p className="text-text-light">{item.children}</p>
+                      <h4 className="font-semibold text-foreground mb-1">{item.title}</h4>
+                      <p className="text-muted-foreground">{item.children}</p>
                     </div>
                   </div>
                 ))}
               </div>
             </div>
 
-            <div className="bg-white rounded-2xl overflow-hidden shadow-xl h-56 sm:h-72">
+            <div className="bg-white dark:bg-neutral-900 rounded-2xl overflow-hidden shadow-xl h-56 sm:h-72">
               <iframe
                 src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3532.5!2d85.3240!3d27.7172!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x39eb1905d7e7c5d5%3A0x0!2sJamal%2C+Kathmandu%2C+Nepal!5e0!3m2!1sen!2snp!4v1"
                 width="100%"

@@ -35,20 +35,20 @@ const teamMembers = [
 
 export default function Team() {
   return (
-    <section id="team" className="py-24 md:py-32 bg-blush-light overflow-hidden">
+    <section id="team" className="py-24 md:py-32 bg-blush-light dark:bg-neutral-900 overflow-hidden">
       <div className="max-w-7xl mx-auto px-4 sm:px-6">
         <AnimatedSection
           direction="up"
           className="text-center max-w-3xl mx-auto mb-16"
         >
-          <span className="inline-block px-4 py-2 bg-white text-crimson-primary rounded-full text-sm font-medium mb-6">
+          <span className="inline-block px-4 py-2 bg-white dark:bg-neutral-800 text-crimson-primary rounded-full text-sm font-medium mb-6">
             Our Team
           </span>
-          <h2 className="text-3xl sm:text-4xl md:text-5xl font-serif font-bold text-text-dark mb-6">
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-serif font-bold text-foreground mb-6">
             Meet the{" "}
             <span className="text-crimson-primary">Artists</span> Behind Your Beauty
           </h2>
-          <p className="text-text-light text-base sm:text-lg leading-relaxed">
+          <p className="text-muted-foreground text-base sm:text-lg leading-relaxed">
             Our talented team of certified professionals is dedicated to making
             you look and feel your absolute best.
           </p>
@@ -61,7 +61,7 @@ export default function Team() {
               direction="up"
               delay={index * 0.15}
             >
-              <div className="team-card bg-white rounded-2xl overflow-hidden shadow-xl hover:shadow-2xl transition-all duration-500 group">
+              <div className="team-card bg-white dark:bg-neutral-900 rounded-2xl overflow-hidden shadow-xl hover:shadow-2xl transition-all duration-500 group">
                 <div className="relative h-56 sm:h-64 md:h-72 overflow-hidden">
                   <Image
                     src={member.image}
@@ -103,13 +103,13 @@ export default function Team() {
                 </div>
 
                 <div className="p-4 sm:p-5 md:p-6 text-center">
-                  <h3 className="text-xl font-serif font-bold text-text-dark mb-1">
+                  <h3 className="text-xl font-serif font-bold text-foreground mb-1">
                     {member.name}
                   </h3>
                   <p className="text-crimson-primary font-medium text-sm mb-4">
                     {member.role}
                   </p>
-                  <p className="text-text-light text-sm leading-relaxed">
+                  <p className="text-muted-foreground text-sm leading-relaxed">
                     {member.bio}
                   </p>
                 </div>

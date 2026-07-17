@@ -91,7 +91,7 @@ export default function BookingInquiry() {
   const borderColor = (name: keyof FormData) =>
     errors[name]
       ? "border-red-400 focus:border-red-400 focus:ring-2 focus:ring-red-400/20"
-      : "border-gray-200 focus:border-crimson-primary focus:ring-2 focus:ring-crimson-primary/20";
+      : "border-gray-200 dark:border-neutral-600 dark:focus:border-crimson-primary focus:border-crimson-primary focus:ring-2 focus:ring-crimson-primary/20";
 
   const validateStep = useCallback((stepIndex: number): boolean => {
     const newErrors: FieldErrors = {};
@@ -176,7 +176,7 @@ export default function BookingInquiry() {
       onChange: handleChange,
       onFocus: () => handleFocus(field.name),
       onBlur: () => handleBlur(field.name),
-      className: `w-full px-4 pt-6 pb-2 rounded-lg border outline-none transition-all bg-white ${borderColor(field.name)} ${shakeFields.has(field.name) ? "animate-shake" : ""}`,
+      className: `w-full px-4 pt-6 pb-2 rounded-lg border outline-none transition-all bg-white dark:bg-neutral-800 dark:text-foreground ${borderColor(field.name)} ${shakeFields.has(field.name) ? "animate-shake" : ""}`,
       placeholder: " ",
     };
 
@@ -200,7 +200,7 @@ export default function BookingInquiry() {
             className={`absolute left-4 transition-all duration-200 pointer-events-none ${
               isFloating(field.name)
                 ? "top-2 text-xs text-crimson-primary font-medium"
-                : "top-1/2 -translate-y-1/2 text-gray-400 text-base"
+                : "top-1/2 -translate-y-1/2 text-gray-400 dark:text-neutral-500 text-base"
             }`}
           >
             {field.label}
@@ -247,11 +247,11 @@ export default function BookingInquiry() {
 
       return (
         <div className="space-y-5">
-          <div className="bg-blush-light rounded-xl p-5 space-y-3">
+          <div className="bg-blush-light dark:bg-neutral-800 rounded-xl p-5 space-y-3">
             {summaryItems.map((item) => (
               <div key={item.label} className="flex justify-between items-center">
-                <span className="text-text-light text-sm">{item.label}</span>
-                <span className="text-text-dark font-medium text-sm">{item.value}</span>
+                <span className="text-muted-foreground text-sm">{item.label}</span>
+                <span className="text-foreground font-medium text-sm">{item.value}</span>
               </div>
             ))}
           </div>
@@ -268,24 +268,24 @@ export default function BookingInquiry() {
   };
 
   return (
-    <section id="booking" className="py-24 md:py-32 bg-blush-light overflow-hidden">
+    <section id="booking" className="py-24 md:py-32 bg-blush-light dark:bg-neutral-900 overflow-hidden">
       <div className="max-w-7xl mx-auto px-4 sm:px-6">
         <AnimatedSection direction="up" className="text-center max-w-3xl mx-auto mb-16">
-          <span className="inline-block px-4 py-2 bg-white text-crimson-primary rounded-full text-sm font-medium mb-6">
+          <span className="inline-block px-4 py-2 bg-white dark:bg-neutral-800 text-crimson-primary rounded-full text-sm font-medium mb-6">
             Book an Appointment
           </span>
-          <h2 className="text-3xl sm:text-4xl md:text-5xl font-serif font-bold text-text-dark mb-6">
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-serif font-bold text-foreground mb-6">
             Request a{" "}
             <span className="text-crimson-primary">Booking</span>
           </h2>
-          <p className="text-text-light text-base sm:text-lg leading-relaxed">
+          <p className="text-muted-foreground text-base sm:text-lg leading-relaxed">
             Fill in your details below and we&apos;ll get back to you to confirm your appointment.
           </p>
         </AnimatedSection>
 
         <div className="max-w-2xl mx-auto">
           <AnimatedSection direction="up">
-            <div className="bg-white rounded-2xl p-4 sm:p-6 md:p-8 shadow-xl border border-gray-100">
+            <div className="bg-white dark:bg-neutral-900 rounded-2xl p-4 sm:p-6 md:p-8 shadow-xl border border-gray-100 dark:border-neutral-700">
               <AnimatePresence mode="wait">
                 {status === "success" ? (
                   <motion.div
@@ -304,13 +304,13 @@ export default function BookingInquiry() {
                           cy="26"
                           r="25"
                           fill="none"
-                          stroke="#9caf88"
+                          stroke="#c63f7a"
                           strokeWidth="2"
                         />
                         <path
                           className="checkmark-check"
                           fill="none"
-                          stroke="#9caf88"
+                          stroke="#c63f7a"
                           strokeWidth="4"
                           strokeLinecap="round"
                           strokeLinejoin="round"
@@ -318,10 +318,10 @@ export default function BookingInquiry() {
                         />
                       </svg>
                     </div>
-                    <h3 className="text-2xl font-serif font-bold text-text-dark mb-2">
+                    <h3 className="text-2xl font-serif font-bold text-foreground mb-2">
                       Booking Request Sent!
                     </h3>
-                    <p className="text-text-light text-center">
+                    <p className="text-muted-foreground text-center">
                       We&apos;ve received your request and will contact you within 24 hours to confirm your appointment.
                     </p>
                   </motion.div>
@@ -347,7 +347,7 @@ export default function BookingInquiry() {
                                     ? "bg-crimson-primary text-white"
                                     : i === step
                                     ? "bg-crimson-primary text-white step-dot-active"
-                                    : "bg-gray-100 text-gray-400"
+                                    : "bg-gray-100 dark:bg-neutral-700 dark:text-neutral-400 text-gray-400"
                                 }`}
                               >
                                 {i < step ? (
@@ -360,7 +360,7 @@ export default function BookingInquiry() {
                               </div>
                               <span
                                 className={`text-xs mt-2 font-medium hidden sm:block ${
-                                  i <= step ? "text-text-dark" : "text-gray-400"
+                                  i <= step ? "text-foreground" : "text-gray-400"
                                 }`}
                               >
                                 {label}
@@ -368,7 +368,7 @@ export default function BookingInquiry() {
                             </div>
                             {i < TOTAL_STEPS - 1 && (
                               <div className="flex-1 h-0.5 mx-3 relative mt-[-1.25rem]">
-                                <div className="absolute inset-0 bg-gray-200 rounded" />
+                                <div className="absolute inset-0 bg-gray-200 dark:bg-neutral-700 rounded" />
                                 <div
                                   className={`absolute inset-0 bg-crimson-primary rounded transition-all duration-500 ${
                                     i < step ? "w-full" : "w-0"
@@ -384,13 +384,13 @@ export default function BookingInquiry() {
                     <form onSubmit={handleSubmit} noValidate>
                       {renderStepContent(step)}
 
-                      <div className="flex items-center justify-between mt-8 pt-6 border-t border-gray-100">
+                      <div className="flex items-center justify-between mt-8 pt-6 border-t border-gray-100 dark:border-neutral-700">
                         {step > 0 ? (
                           <button
                             type="button"
                             onClick={goBack}
                             disabled={status === "loading"}
-                             className="flex items-center gap-2 px-5 py-3 text-text-dark font-medium rounded-lg hover:bg-gray-50 active:bg-gray-100 transition-colors disabled:opacity-50 focus-visible:ring-3 focus-visible:ring-ring/50 outline-none"
+                             className="flex items-center gap-2 px-5 py-3 text-foreground font-medium rounded-lg hover:bg-gray-50 dark:hover:bg-neutral-800 dark:active:bg-neutral-700 active:bg-gray-100 transition-colors disabled:opacity-50 focus-visible:ring-3 focus-visible:ring-ring/50 outline-none"
                           >
                             <ChevronLeft className="w-4 h-4" />
                             Back

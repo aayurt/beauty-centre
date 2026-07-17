@@ -1173,8 +1173,8 @@
 }
 
 .timeline-content:hover {
-  box-shadow: 0 8px 30px color-mix(in srgb, var(--color-crimson-primary));
-  border-color: color-mix(in srgb, var(--color-crimson-primary));
+  box-shadow: 0 8px 30px color-mix(in srgb, var(--color-crimson-primary) 30%, transparent);
+  border-color: color-mix(in srgb, var(--color-crimson-primary) 30%, transparent);
 }
 
 .timeline-year {

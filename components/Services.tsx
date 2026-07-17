@@ -62,7 +62,7 @@ export default function Services() {
   return (
     <section
       id="services"
-      className="py-24 md:py-32 bg-blush-light relative overflow-hidden"
+      className="py-24 md:py-32 bg-blush-light dark:bg-neutral-900 relative overflow-hidden"
     >
       {/* Decorative background blobs */}
       <div className="absolute inset-0 pointer-events-none" aria-hidden>
@@ -76,14 +76,14 @@ export default function Services() {
           direction="up"
           className="text-center max-w-3xl mx-auto mb-16"
         >
-          <span className="inline-block px-4 py-2 bg-white text-crimson-primary rounded-full text-sm font-medium mb-6">
+          <span className="inline-block px-4 py-2 bg-white dark:bg-neutral-800 text-crimson-primary rounded-full text-sm font-medium mb-6">
             Our Services
           </span>
-          <h2 className="text-3xl sm:text-4xl md:text-5xl font-serif font-bold text-text-dark mb-6">
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-serif font-bold text-foreground mb-6">
             Pamper Yourself with{" "}
             <span className="text-crimson-primary">Luxury Treatments</span>
           </h2>
-          <p className="text-text-light text-base sm:text-lg leading-relaxed">
+          <p className="text-muted-foreground text-base sm:text-lg leading-relaxed">
             Discover our comprehensive range of beauty and wellness services,
             designed to help you look and feel your absolute best.
           </p>
@@ -126,7 +126,7 @@ function ServiceCard({
           : "0 4px 20px rgba(0,0,0,0.06)",
       }}
       transition={{ type: "spring", stiffness: 300, damping: 24 }}
-      className="bg-white rounded-2xl overflow-hidden shadow-xl h-full flex flex-col will-change-transform will-change-box-shadow cursor-pointer"
+      className="bg-white dark:bg-neutral-900 rounded-2xl overflow-hidden shadow-xl h-full flex flex-col will-change-transform will-change-box-shadow cursor-pointer"
     >
       {/* Image */}
           <div className="relative h-48 sm:h-56 overflow-hidden">
@@ -168,11 +168,11 @@ function ServiceCard({
             <motion.div
               className="relative w-14 h-14 rounded-full flex items-center justify-center"
               animate={{
-                backgroundColor: hovered ? "#9caf88" : "#f2c4ce",
+                backgroundColor: hovered ? "#c63f7a" : "#e9a7be",
                 scale: hovered ? 1.1 : 1,
               }}
               transition={{ type: "spring", stiffness: 300, damping: 20 }}
-              style={{ backgroundColor: "#f2c4ce" }}
+              style={{ backgroundColor: "#e9a7be" }}
             >
               <motion.div
                 animate={{
@@ -198,11 +198,11 @@ function ServiceCard({
           />
         </div>
 
-        <h3 className="text-2xl font-serif font-bold text-text-dark mb-4">
+        <h3 className="text-2xl font-serif font-bold text-foreground mb-4">
           {service.title}
         </h3>
 
-        <p className="text-text-light leading-relaxed mb-6 flex-1">
+        <p className="text-muted-foreground leading-relaxed mb-6 flex-1">
           {service.description}
         </p>
 
@@ -211,7 +211,7 @@ function ServiceCard({
           {service.features.map((feature, i) => (
             <li
               key={feature}
-              className="flex items-center gap-2 text-sm text-text-dark"
+              className="flex items-center gap-2 text-sm text-foreground"
             >
               <motion.span
                 className="w-1.5 h-1.5 rounded-full bg-crimson-primary block shrink-0"
@@ -231,7 +231,7 @@ function ServiceCard({
 
         {/* Learn More link */}
         <motion.div
-          className="mt-6 pt-6 border-t border-gray-100"
+          className="mt-6 pt-6 border-t border-gray-100 dark:border-neutral-700"
           animate={{ opacity: hovered ? 1 : 0.6 }}
           transition={{ duration: 0.2 }}
         >
