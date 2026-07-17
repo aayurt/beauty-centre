@@ -194,7 +194,7 @@ export default function About() {
               variants={itemVariants}
             >
               <div className="timeline-dot" />
-              <div className="timeline-content group hover:border-crimson-primary/40 hover:shadow-xl transition-all duration-500">
+              <div className="timeline-content group hover:border-primary/40 hover:shadow-xl transition-all duration-500">
                 <div className="flex items-start gap-4">
                   <motion.div
                     className="w-12 h-12 rounded-full bg-blush-light dark:bg-neutral-700 flex items-center justify-center shrink-0"

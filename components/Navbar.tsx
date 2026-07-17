@@ -129,7 +129,7 @@ export default function Navbar() {
               href="#contact"
               onClick={(e) => handleNavClick(e, "#contact")}
               className={buttonVariants({
-                variant: isScrolled ? "default" : "secondary",
+                variant: "default",
                 size: "sm",
               })}
             >

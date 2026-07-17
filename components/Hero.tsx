@@ -146,10 +146,9 @@ export default function Hero() {
           initial={{ opacity: 0, y: 40 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.8 }}
-          className="text-4xl sm:text-5xl md:text-7xl lg:text-8xl font-serif font-bold text-white mb-6 leading-tight"
+          className="text-4xl sm:text-5xl md:text-7xl lg:text-8xl font-serif font-bold text-primary mb-6 leading-tight"
         >
-          <span className="text-blush-200">K &amp; S</span>{" "}
-          <span className="text-white">Beauty Centre</span>
+          K &amp; S Beauty Centre
         </motion.h1>
 
         {/* Typewriter Tagline */}
@@ -174,14 +173,14 @@ export default function Hero() {
         >
           <Link
             href="#services"
-            className="group w-full sm:w-auto px-6 sm:px-8 py-3 sm:py-4 bg-blush-secondary text-white rounded-full font-medium text-base sm:text-lg transition-all duration-300 hover:bg-white hover:text-crimson-primary hover:scale-105 shadow-lg shadow-blush-secondary/25 text-center"
+            className="group w-full sm:w-auto px-6 sm:px-8 py-3 sm:py-4 bg-primary text-white rounded-full font-medium text-base sm:text-lg transition-all duration-300 hover:bg-primary/80 hover:scale-105 shadow-lg shadow-primary/25 text-center"
           >
             Explore Services
             <span className="inline-block ml-2 transition-transform group-hover:translate-x-1">→</span>
           </Link>
           <Link
             href="#contact"
-            className="w-full sm:w-auto px-6 sm:px-8 py-3 sm:py-4 border-2 border-white/70 text-white rounded-full font-medium text-base sm:text-lg transition-all duration-300 hover:bg-white hover:text-crimson-primary backdrop-blur-sm text-center"
+            className="w-full sm:w-auto px-6 sm:px-8 py-3 sm:py-4 border-2 border-white/70 text-white rounded-full font-medium text-base sm:text-lg transition-all duration-300 hover:bg-white hover:text-primary backdrop-blur-sm text-center"
           >
             Book Appointment
           </Link>
