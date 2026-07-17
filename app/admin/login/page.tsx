@@ -92,7 +92,7 @@ export default function AdminLoginPage() {
         </div>
 
         <p className="text-center text-xs text-text-light mt-6">
-          K &amp; S Beauty Centre Admin
+          <span className="text-crimson-primary">K &amp; S Beauty Centre</span> Admin
         </p>
       </div>
     </div>

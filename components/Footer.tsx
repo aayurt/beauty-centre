@@ -13,7 +13,7 @@ export default function Footer() {
       <div className="mx-auto max-w-7xl px-4 sm:px-6 py-12 sm:py-16">
         <div className="grid gap-12 sm:grid-cols-2 lg:grid-cols-4">
           <div className="sm:col-span-2 lg:col-span-2">
-            <h3 className="font-serif text-3xl font-bold text-white">
+            <h3 className="font-serif text-3xl font-bold text-primary">
               {company.name}
             </h3>
             <p className="mt-4 max-w-md leading-relaxed text-neutral-400">

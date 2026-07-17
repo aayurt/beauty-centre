@@ -93,8 +93,8 @@ function ParallaxImage() {
           </div>
         </div>
       </motion.div>
-      <div className="absolute top-6 left-6 bg-white/90 backdrop-blur-sm px-4 py-2 rounded-full shadow-lg">
-        <span className="text-crimson-primary font-bold text-sm flex items-center gap-2">
+      <div className="absolute top-6 left-6 bg-background/80 backdrop-blur-sm px-4 py-2 rounded-full shadow-lg dark:bg-neutral-900/80">
+        <span className="text-primary font-bold text-sm flex items-center gap-2">
           <MapPin className="w-3.5 h-3.5" />
           Jamal, Kathmandu
         </span>

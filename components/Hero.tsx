@@ -148,7 +148,8 @@ export default function Hero() {
           transition={{ duration: 0.8, delay: 0.8 }}
           className="text-4xl sm:text-5xl md:text-7xl lg:text-8xl font-serif font-bold text-white mb-6 leading-tight"
         >
-          {company.name}
+          <span className="text-blush-200">K &amp; S</span>{" "}
+          <span className="text-white">Beauty Centre</span>
         </motion.h1>
 
         {/* Typewriter Tagline */}
