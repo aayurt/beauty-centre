@@ -393,6 +393,38 @@ async function main() {
   });
   console.log("  ✓ Terms of service seeded");
 
+  // Reset auto-increment sequences so the app can create new records without
+  // colliding with the fixed IDs seeded above (P2002 unique constraint failure).
+  const serialTables = [
+    "AdminUser",
+    "Booking",
+    "BookingInquiry",
+    "BusinessInfo",
+    "ClientReview",
+    "CompanyProfile",
+    "Contact",
+    "Event",
+    "GalleryItem",
+    "InstagramPost",
+    "Media",
+    "PrivacyPolicy",
+    "Review",
+    "Service",
+    "Staff",
+    "TermsOfService",
+  ];
+
+  for (const table of serialTables) {
+    try {
+      await prisma.$executeRawUnsafe(
+        `SELECT setval(pg_get_serial_sequence('"${table}"', 'id'), (SELECT COALESCE(MAX(id), 1) FROM "${table}"))`,
+      );
+    } catch {
+      // Table has no id column or sequence — skip.
+    }
+  }
+  console.log("  ✓ Auto-increment sequences reset");
+
   console.log("\nSeeding complete!");
 }
 

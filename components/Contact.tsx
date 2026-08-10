@@ -181,7 +181,7 @@ export default function Contact() {
                               onChange={handleChange}
                               onFocus={() => handleFocus(field.name)}
                               onBlur={() => handleBlur(field.name)}
-                              className={`w-full px-4 pt-6 pb-2 rounded-lg border outline-none transition-all resize-none bg-white ${borderColor(field.name)} ${shakeFields.has(field.name) ? "animate-shake" : ""}`}
+                              className={`w-full px-4 pt-6 pb-2 rounded-lg border outline-none transition-all resize-none bg-white dark:bg-neutral-800 dark:text-foreground ${borderColor(field.name)} ${shakeFields.has(field.name) ? "animate-shake" : ""}`}
                               placeholder=" "
                             />
                           ) : (

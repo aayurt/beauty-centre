@@ -61,7 +61,7 @@ export default function AdminLoginPage() {
                 placeholder="Username"
                 required
                 autoFocus
-                className="w-full px-4 py-3 border border-gray-300 rounded-xl text-sm outline-none focus:border-crimson-primary focus:ring-1 focus:ring-crimson-primary transition-colors"
+                className="w-full px-4 py-3 border border-gray-300 rounded-xl text-sm text-gray-900 placeholder:text-neutral-500 outline-none focus:border-crimson-primary focus:ring-1 focus:ring-crimson-primary transition-colors"
               />
             </div>
             <div>
@@ -73,7 +73,7 @@ export default function AdminLoginPage() {
                 onChange={(e) => setPassword(e.target.value)}
                 placeholder="Password"
                 required
-                className="w-full px-4 py-3 border border-gray-300 rounded-xl text-sm outline-none focus:border-crimson-primary focus:ring-1 focus:ring-crimson-primary transition-colors"
+                className="w-full px-4 py-3 border border-gray-300 rounded-xl text-sm text-gray-900 placeholder:text-neutral-500 outline-none focus:border-crimson-primary focus:ring-1 focus:ring-crimson-primary transition-colors"
               />
             </div>
 

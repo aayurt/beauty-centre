@@ -18,6 +18,7 @@ rsync -avz --delete \
   --exclude '.git' \
   --exclude '.env*' \
   --exclude '*.tsbuildinfo' \
+  --exclude 'public/uploads' \
   "$LOCAL_DIR/.next" \
   "$LOCAL_DIR/public" \
   "$LOCAL_DIR/package.json" \
@@ -41,7 +42,8 @@ ssh "$REMOTE_HOST" bash -s <<-REMOTESCRIPT
   echo "    Dependencies installed."
 
   npx prisma generate 2>&1
-  npx prisma migrate deploy 2>&1 || echo "    [SKIP] DB already has schema."
+  npx prisma db push --skip-generate --accept-data-loss 2>&1
+  echo "    Database sync complete."
 
   if pm2 describe beauty-centre &>/dev/null; then
     pm2 restart beauty-centre 2>&1
