@@ -2,13 +2,13 @@
 
 import { useEffect, useState } from "react"
 import { useTheme } from "next-themes"
-import { Sun, Moon, Monitor } from "lucide-react"
+import { Sun, Moon } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { cn } from "@/lib/utils"
 
-const themes = ["light", "dark", "system"] as const
-const icons = { light: Sun, dark: Moon, system: Monitor }
-const labels = { light: "Light mode", dark: "Dark mode", system: "System theme" }
+const themes = ["light", "dark"] as const
+const icons = { light: Sun, dark: Moon }
+const labels = { light: "Light mode", dark: "Dark mode" }
 
 export default function ThemeToggle({ className }: { className?: string }) {
   const [mounted, setMounted] = useState(false)
@@ -30,7 +30,7 @@ export default function ThemeToggle({ className }: { className?: string }) {
     )
   }
 
-  const current = theme === "system" ? "system" : (theme as "light" | "dark")
+  const current = theme === "dark" ? "dark" : "light"
   const Icon = icons[current]
 
   const cycle = () => {
