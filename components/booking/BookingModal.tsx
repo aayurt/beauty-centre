@@ -13,19 +13,11 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
-import {
   ChevronLeft,
   ChevronRight,
   CalendarDays,
   Clock,
   Sparkles,
-  User,
   Check,
   Loader2,
 } from "lucide-react";
@@ -38,12 +30,6 @@ interface Service {
   duration: string;
   price: string;
   description: string;
-}
-
-interface Staff {
-  id: number;
-  name: string;
-  role: string | null;
 }
 
 const CATEGORY_LABELS: Record<string, string> = {
@@ -67,7 +53,7 @@ const TIME_SLOTS = [
   "7:00 PM",
 ];
 
-const STEPS = ["Service", "Date & Time", "Specialist", "Details"];
+const STEPS = ["Service", "Date & Time", "Details"];
 
 const stepVariants = {
   enter: (dir: number) => ({ x: dir > 0 ? 320 : -320, opacity: 0 }),
@@ -85,13 +71,11 @@ export function BookingModal({
   preselectedService?: string;
 }) {
   const [services, setServices] = useState<Service[]>([]);
-  const [staff, setStaff] = useState<Staff[]>([]);
   const [step, setStep] = useState(preselectedService ? 1 : 0);
   const [direction, setDirection] = useState(1);
   const [selectedService, setSelectedService] = useState<string>(preselectedService ?? "");
   const [selectedDate, setSelectedDate] = useState<string>("");
   const [selectedTime, setSelectedTime] = useState<string>("");
-  const [specialist, setSpecialist] = useState<string>("any");
   const [name, setName] = useState("");
   const [phone, setPhone] = useState("");
   const [email, setEmail] = useState("");
@@ -110,15 +94,10 @@ export function BookingModal({
     let cancelled = false;
     (async () => {
       try {
-        const [svcRes, staffRes] = await Promise.all([
-          fetch("/api/services"),
-          fetch("/api/staff?activeOnly=true"),
-        ]);
-        const svc = await svcRes.json();
-        const staff = await staffRes.json();
+        const res = await fetch("/api/services");
+        const json = await res.json();
         if (!cancelled) {
-          setServices(svc.data || []);
-          setStaff(staff.data || []);
+          setServices(json.data || []);
         }
       } catch {
         // non-fatal
@@ -147,7 +126,9 @@ export function BookingModal({
       ? selectedService.length > 0
       : step === 1
         ? selectedDate.length > 0 && selectedTime.length > 0
-        : true;
+        : step === 2
+          ? name.trim().length > 0 && phone.trim().length > 0
+          : true;
 
   const goNext = () => {
     if (!canNext) return;
@@ -178,9 +159,6 @@ export function BookingModal({
           preferredDate: selectedDate,
           preferredTime: selectedTime,
           message: [
-            specialist && specialist !== "any"
-              ? `Specialist: ${specialist}`
-              : null,
             email ? `Email: ${email}` : null,
             notes ? `Notes: ${notes}` : null,
           ]
@@ -329,9 +307,6 @@ export function BookingModal({
                               </span>
                             </span>
                             <span className="flex items-center gap-2">
-                              <span className="text-sm font-semibold text-amber-primary">
-                                {svc.price}
-                              </span>
                               {selectedService === svc.title && (
                                 <Check className="size-4 text-amber-primary" />
                               )}
@@ -414,67 +389,33 @@ export function BookingModal({
                 </div>
               )}
 
-              {/* Step 3: Specialist */}
+              {/* Step 3: Details */}
               {step === 2 && (
-                <div className="space-y-3">
-                  <Label className="flex items-center gap-1.5">
-                    <User className="size-4" />
-                    Choose a Specialist (optional)
-                  </Label>
-                  <Select
-                    value={specialist}
-                    onValueChange={(value) => setSpecialist(value ?? "any")}
-                  >
-                    <SelectTrigger className="w-full">
-                      <SelectValue placeholder="Any Available Specialist" />
-                    </SelectTrigger>
-                    <SelectContent>
-                      <SelectItem value="any">Any Available Specialist</SelectItem>
-                      {staff.map((member) => (
-                        <SelectItem key={member.id} value={member.name}>
-                          {member.name}
-                          {member.role ? ` — ${member.role}` : ""}
-                        </SelectItem>
-                      ))}
-                    </SelectContent>
-                  </Select>
-                  {specialist === "any" ? (
-                    <p className="text-sm text-muted-foreground">
-                      We&apos;ll assign the best available expert for your treatment.
-                    </p>
-                  ) : (
-                    <p className="text-sm text-muted-foreground">
-                      Requesting{" "}
-                      <span className="font-medium text-amber-primary">
-                        {specialist}
-                      </span>
-                      .
-                    </p>
-                  )}
-                </div>
-              )}
-
-              {/* Step 4: Details */}
-              {step === 3 && (
                 <div className="space-y-4">
                   <div className="grid gap-4">
                     <div className="grid gap-2">
-                      <Label htmlFor="bk-name">Full Name</Label>
+                      <Label htmlFor="bk-name">
+                        Full Name <span className="text-destructive">*</span>
+                      </Label>
                       <Input
                         id="bk-name"
                         value={name}
                         onChange={(e) => setName(e.target.value)}
                         placeholder="Jane Doe"
+                        required
                       />
                     </div>
                     <div className="grid gap-2">
-                      <Label htmlFor="bk-phone">Phone Number</Label>
+                      <Label htmlFor="bk-phone">
+                        Phone Number <span className="text-destructive">*</span>
+                      </Label>
                       <Input
                         id="bk-phone"
                         type="tel"
                         value={phone}
                         onChange={(e) => setPhone(e.target.value)}
                         placeholder="98XXXXXXXX"
+                        required
                       />
                     </div>
                     <div className="grid gap-2">
@@ -504,14 +445,10 @@ export function BookingModal({
                     <div className="rounded-lg bg-neutral-50 dark:bg-neutral-800 p-3 text-sm">
                       <p className="font-medium">Summary</p>
                       <p className="mt-1 text-muted-foreground">
-                        {selectedServiceData.title} · {selectedServiceData.duration} ·{" "}
-                        <span className="font-semibold text-amber-primary">
-                          {selectedServiceData.price}
-                        </span>
+                        {selectedServiceData.title} · {selectedServiceData.duration}
                       </p>
                       <p className="mt-1 text-muted-foreground">
                         {formatDate(selectedDate)} at {selectedTime}
-                        {specialist !== "any" ? ` with ${specialist}` : ""}
                       </p>
                     </div>
                   )}
@@ -559,7 +496,7 @@ export function BookingModal({
               <ChevronRight className="size-4" />
             </Button>
           ) : (
-            <Button onClick={handleSubmit} disabled={submitting}>
+            <Button onClick={handleSubmit} disabled={!canNext || submitting}>
               {submitting ? (
                 <>
                   <Loader2 className="size-4 animate-spin" />

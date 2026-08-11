@@ -11,6 +11,7 @@ import {
   LayoutDashboard,
   LogOut,
   Scissors,
+  Sparkles,
   Users,
 } from "lucide-react"
 import { cn } from "@/lib/utils"
@@ -19,6 +20,7 @@ import { Button } from "@/components/ui/button"
 const navItems = [
   { href: "/admin", label: "Dashboard", icon: LayoutDashboard },
   { href: "/admin/events", label: "Events", icon: Calendar },
+  { href: "/admin/services", label: "Services", icon: Sparkles },
   { href: "/admin/staff", label: "Staff", icon: Users },
   { href: "/admin/bookings", label: "Inquiries", icon: Inbox },
   { href: "/admin/instagram", label: "Instagram", icon: Camera },
