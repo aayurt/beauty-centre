@@ -134,11 +134,6 @@ export default function Services() {
                         <span className="flex size-11 items-center justify-center rounded-full bg-amber-primary/10 text-amber-primary">
                           <Sparkles className="size-5" />
                         </span>
-                        {svc.price && (
-                          <span className="rounded-full bg-amber-primary/10 px-3 py-1 text-sm font-semibold text-amber-primary">
-                            {svc.price}
-                          </span>
-                        )}
                       </div>
 
                       <h3 className="text-lg font-serif font-bold text-foreground mb-1">
