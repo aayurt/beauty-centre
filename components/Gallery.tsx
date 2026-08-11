@@ -131,6 +131,7 @@ export default function Gallery() {
                     src={image.src}
                     alt={image.alt}
                     fill
+                    unoptimized={image.src.startsWith("/uploads/")}
                     className="object-cover transition-transform duration-700 group-hover:scale-110"
                   />
                   <div className="absolute inset-0 bg-black/0 group-hover:bg-black/30 transition-all duration-300 flex items-center justify-center">
@@ -201,8 +202,8 @@ export default function Gallery() {
                 alt={filtered[lightbox].alt}
                 width={1200}
                 height={800}
+                unoptimized={filtered[lightbox].src.startsWith("/uploads/")}
                 className="max-h-[85vh] w-auto rounded-xl object-contain"
-                unoptimized
               />
               <figcaption className="mt-3 text-center text-sm text-white/70">
                 {filtered[lightbox].alt} — {lightbox + 1} / {filtered.length}

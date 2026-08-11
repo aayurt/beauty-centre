@@ -61,6 +61,7 @@ export default function Team() {
                       src={member.imageUrl || FALLBACK_IMAGE}
                       alt={member.name}
                       fill
+                      unoptimized={member.imageUrl?.startsWith("/uploads/")}
                       className="object-cover object-top transition-transform duration-700 group-hover:scale-105"
                     />
 
