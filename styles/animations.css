@@ -451,8 +451,8 @@
 .scroll-progress-bar {
   background: linear-gradient(
     90deg,
-    var(--color-crimson-primary, #c63f7a),
-    var(--color-blush-secondary, #e9a7be)
+    var(--color-amber-primary, #f59e0b),
+    var(--color-rose-secondary, #fb7185)
   );
 }
 
@@ -507,7 +507,7 @@
   width: 4px;
   height: 4px;
   border-radius: 50%;
-  background: var(--color-blush-secondary, #e9a7be);
+  background: var(--color-rose-secondary, #fb7185);
 }
 
 /* --- Page Load Sequence --- */
@@ -673,6 +673,40 @@
 
 .animate-gradient-pulse {
   animation: gradientPulse 4s ease-in-out infinite;
+}
+
+/* --- Marquee (hand-rolled ticker) --- */
+@keyframes marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(calc(-100% - var(--gap)));
+  }
+}
+
+@keyframes marquee-reverse {
+  from {
+    transform: translateX(calc(-100% - var(--gap)));
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+
+.animate-marquee {
+  animation: marquee var(--duration, 40s) linear infinite;
+}
+
+.animate-marquee-reverse {
+  animation: marquee-reverse var(--duration, 40s) linear infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-marquee,
+  .animate-marquee-reverse {
+    animation: none;
+  }
 }
 
 /* Staggered delays for floating elements */
@@ -939,12 +973,12 @@
 }
 
 .lightbox-close:hover {
-  color: var(--color-blush-secondary);
+  color: var(--color-rose-secondary);
   background: rgba(255, 255, 255, 0.2);
 }
 
 .lightbox-close:focus-visible {
-  outline: 2px solid var(--color-crimson-primary, #c63f7a);
+  outline: 2px solid var(--color-amber-primary, #f59e0b);
   outline-offset: 2px;
 }
 
@@ -966,12 +1000,12 @@
 }
 
 .lightbox-nav:hover {
-  color: var(--color-blush-secondary);
+  color: var(--color-rose-secondary);
   background: rgba(255, 255, 255, 0.2);
 }
 
 .lightbox-nav:focus-visible {
-  outline: 2px solid var(--color-crimson-primary, #c63f7a);
+  outline: 2px solid var(--color-amber-primary, #f59e0b);
   outline-offset: 2px;
 }
 
@@ -1080,7 +1114,7 @@
 }
 
 .team-overlay-role {
-  color: var(--color-blush-secondary);
+  color: var(--color-rose-secondary);
   font-size: 0.8125rem;
   font-weight: 500;
   margin-bottom: 0.75rem;
@@ -1100,7 +1134,7 @@
 }
 
 .team-social-icon:hover {
-  background: var(--color-blush-secondary);
+  background: var(--color-rose-secondary);
   color: var(--text-dark);
   transform: translateY(-2px);
 }
@@ -1122,8 +1156,8 @@
   background: linear-gradient(
     to bottom,
     transparent 0%,
-    var(--color-crimson-primary) 5%,
-    var(--color-crimson-primary) 95%,
+    var(--color-amber-primary) 5%,
+    var(--color-amber-primary) 95%,
     transparent 100%
   );
   transform: translateX(-50%);
@@ -1155,9 +1189,9 @@
   width: 1rem;
   height: 1rem;
   border-radius: 50%;
-  background: var(--color-crimson-primary);
+  background: var(--color-amber-primary);
   border: 3px solid white;
-  box-shadow: 0 0 0 3px var(--color-crimson-primary);
+  box-shadow: 0 0 0 3px var(--color-amber-primary);
   transform: translateX(-50%);
   z-index: 2;
 }
@@ -1173,8 +1207,8 @@
 }
 
 .timeline-content:hover {
-  box-shadow: 0 8px 30px color-mix(in srgb, var(--color-crimson-primary) 30%, transparent);
-  border-color: color-mix(in srgb, var(--color-crimson-primary) 30%, transparent);
+  box-shadow: 0 8px 30px color-mix(in srgb, var(--color-amber-primary) 30%, transparent);
+  border-color: color-mix(in srgb, var(--color-amber-primary) 30%, transparent);
 }
 
 .timeline-year {
@@ -1182,7 +1216,7 @@
   font-family: var(--font-serif), Georgia, serif;
   font-weight: 700;
   font-size: 1.25rem;
-  color: var(--color-crimson-primary);
+  color: var(--color-amber-primary);
   margin-bottom: 0.25rem;
 }
 
@@ -1226,7 +1260,7 @@
   inset: 0;
   z-index: 9999;
   pointer-events: none;
-  background: var(--color-blush-light, #f6c9d6);
+  background: var(--color-rose-light, #ffe4e6);
   transform: translateX(100%);
 }
 
@@ -1337,7 +1371,7 @@
   }
   50% {
     transform: scale(1.15);
-    color: var(--color-crimson-primary);
+    color: var(--color-amber-primary);
   }
   100% {
     transform: scale(1);
@@ -1405,6 +1439,6 @@
   left: 0;
   width: 100%;
   height: 2px;
-  background: var(--color-crimson-primary);
+  background: var(--color-amber-primary);
   animation: expandUnderline 0.4s var(--motion-ease-out) forwards;
 }

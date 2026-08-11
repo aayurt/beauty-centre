@@ -1,5 +1,6 @@
 import Navbar from "@/components/Navbar"
 import Footer from "@/components/Footer"
+import { BookingProvider } from "@/components/booking/BookingProvider"
 
 export default function PublicSiteShell({
   children,
@@ -8,9 +9,11 @@ export default function PublicSiteShell({
 }) {
   return (
     <div className="flex min-h-screen flex-col bg-white dark:bg-neutral-950">
-      <Navbar />
-      <main className="flex-1">{children}</main>
-      <Footer />
+      <BookingProvider>
+        <Navbar />
+        <main className="flex-1">{children}</main>
+        <Footer />
+      </BookingProvider>
     </div>
   )
 }

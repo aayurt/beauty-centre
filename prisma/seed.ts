@@ -69,43 +69,227 @@ async function main() {
 
   // Seed Services
   const services = [
+    // ── Hair Care ──────────────────────────────────────────────────────────
     {
-      title: "Hair Styling",
+      title: "Haircut & Blowout",
       description:
-        "From precision cuts to vibrant colour transformations, our expert stylists craft looks that reflect your unique personality and style.",
+        "Precision cutting tailored to your face shape, finished with a smooth, glossy blowout. The foundation of a great look.",
       iconName: "Scissors",
+      category: "hair",
+      duration: "45 mins",
+      price: "NPR 1,200",
       imageUrl:
         "https://images.unsplash.com/photo-1562322140-8baeececf3df?w=600&q=80",
-      features: ["Cut & Style", "Colour & Highlights", "Treatments", "Bridal Hair"],
+      features: ["Consultation", "Precision Cut", "Blowout Finish"],
       displayOrder: 0,
     },
     {
-      title: "Facials",
+      title: "Colour & Highlights",
       description:
-        "Rejuvenate your skin with our customized facial treatments. Using premium products, we help you achieve a radiant, youthful glow.",
-      iconName: "Sparkles",
+        "Full colour, balayage, or dimensional highlights crafted by our colourists to flatter your skin tone.",
+      iconName: "Palette",
+      category: "hair",
+      duration: "120 mins",
+      price: "NPR 4,500",
       imageUrl:
-        "https://images.unsplash.com/photo-1570172619644-dfd03ed5d881?w=600&q=80",
-      features: ["Deep Cleansing", "Anti-Aging", "Hydration", "LED Therapy"],
+        "https://images.unsplash.com/photo-1521590832167-7bcbfaa6381f?w=600&q=80",
+      features: ["Balayage", "Foils", "Toner", "Gloss"],
       displayOrder: 1,
     },
     {
-      title: "Massage",
+      title: "Hair Spa & Treatment",
       description:
-        "Unwind and rejuvenate with our therapeutic massage services. From relaxation to deep tissue, find your perfect escape.",
+        "Deep-conditioning rituals that restore shine and vitality to dry, damaged, or colour-treated hair.",
+      iconName: "Sparkles",
+      category: "hair",
+      duration: "45 mins",
+      price: "NPR 1,800",
+      imageUrl:
+        "https://images.unsplash.com/photo-1560066984-138dadb4c035?w=600&q=80",
+      features: ["Scalp Therapy", "Keratin Mask", "Steam", "Serum Finish"],
+      displayOrder: 2,
+    },
+    {
+      title: "Bridal Hair Styling",
+      description:
+        "Red-carpet-worthy updos and waves for your big day, with a trial session to perfect every detail.",
+      iconName: "Heart",
+      category: "hair",
+      duration: "90 mins",
+      price: "NPR 6,000",
+      imageUrl:
+        "https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?w=600&q=80",
+      features: ["Trial Session", "Updo/Waves", "Crystal Pins", "Setting Spray"],
+      displayOrder: 3,
+    },
+    // ── Facials & Skin ─────────────────────────────────────────────────────
+    {
+      title: "Deep Cleansing Facial",
+      description:
+        "A thorough cleanse with extractions, steam, and a soothing mask to purify pores and reveal fresh skin.",
+      iconName: "Droplets",
+      category: "facials",
+      duration: "60 mins",
+      price: "NPR 2,500",
+      imageUrl:
+        "https://images.unsplash.com/photo-1570172619644-dfd03ed5d881?w=600&q=80",
+      features: ["Double Cleanse", "Exfoliation", "Extractions", "Calming Mask"],
+      displayOrder: 4,
+    },
+    {
+      title: "Anti-Aging Facial",
+      description:
+        "Target fine lines and loss of elasticity with firming masks, collagen infusion, and facial massage.",
+      iconName: "Flower2",
+      category: "facials",
+      duration: "75 mins",
+      price: "NPR 4,000",
+      imageUrl:
+        "https://images.unsplash.com/photo-1616394584738-fc6e612e71b9?w=600&q=80",
+      features: ["Collagen Boost", "Lifting Massage", "Firming Mask"],
+      displayOrder: 5,
+    },
+    {
+      title: "Hydra Glow Facial",
+      description:
+        "A hydration powerhouse that plumps, brightens, and leaves skin dewy with a luminous glass-skin finish.",
+      iconName: "Sparkle",
+      category: "facials",
+      duration: "60 mins",
+      price: "NPR 3,500",
+      imageUrl:
+        "https://images.unsplash.com/photo-1598440947619-2c35fc9aa908?w=600&q=80",
+      features: ["Hydra Cleansing", "Serum Infusion", "Glow Mask", "ICE Roll"],
+      displayOrder: 6,
+    },
+    // ── Nails & Lash ───────────────────────────────────────────────────────
+    {
+      title: "Luxury Manicure",
+      description:
+        "Nail shaping, cuticle care, and a choice of polish or gel — finished with a relaxing hand massage.",
+      iconName: "Hand",
+      category: "nails",
+      duration: "45 mins",
+      price: "NPR 1,000",
+      imageUrl:
+        "https://images.unsplash.com/photo-1604654894610-df63bc536371?w=600&q=80",
+      features: ["Shape & File", "Cuticle Care", "Polish/Gel", "Hand Massage"],
+      displayOrder: 7,
+    },
+    {
+      title: "Spa Pedicure",
+      description:
+        "Soak, exfoliate, and soften tired feet before a perfect polish — the ultimate relaxation ritual.",
+      iconName: "Footprints",
+      category: "nails",
+      duration: "50 mins",
+      price: "NPR 1,500",
+      imageUrl:
+        "https://images.unsplash.com/photo-1519416013650-1e4f0a3b5e98?w=600&q=80",
+      features: ["Warm Soak", "Exfoliation", "Cuticle Care", "Massage"],
+      displayOrder: 8,
+    },
+    {
+      title: "Gel Extensions",
+      description:
+        "Long-lasting sculpted gel extensions and nail art, handcrafted to your preferred length and shape.",
+      iconName: "Sparkle",
+      category: "nails",
+      duration: "90 mins",
+      price: "NPR 3,200",
+      imageUrl:
+        "https://images.unsplash.com/photo-1632345031435-8727f6897d53?w=600&q=80",
+      features: ["Gel Sculpting", "Design/Art", "Reinforcement"],
+      displayOrder: 9,
+    },
+    {
+      title: "Lash Extensions",
+      description:
+        "Featherlight classic or volume lashes applied to open up your eyes and simplify your daily routine.",
+      iconName: "Eye",
+      category: "nails",
+      duration: "90 mins",
+      price: "NPR 3,500",
+      imageUrl:
+        "https://images.unsplash.com/photo-1583001931096-959e9a1a6223?w=600&q=80",
+      features: ["Classic/Volume", "Safe Adhesive", "Aftercare Kit"],
+      displayOrder: 10,
+    },
+    // ── Massage & Spa ──────────────────────────────────────────────────────
+    {
+      title: "Swedish Massage",
+      description:
+        "Long, gliding strokes that melt away tension and promote deep relaxation and improved circulation.",
       iconName: "HandHeart",
+      category: "massage",
+      duration: "60 mins",
+      price: "NPR 3,000",
       imageUrl:
         "https://images.unsplash.com/photo-1544161515-4ab6ce6db874?w=600&q=80",
-      features: ["Swedish Massage", "Deep Tissue", "Aromatherapy", "Hot Stone"],
-      displayOrder: 2,
+      features: ["Full Body", "Aromatherapy Oils", "Relaxation Focus"],
+      displayOrder: 11,
+    },
+    {
+      title: "Aromatherapy Massage",
+      description:
+        "Essential-oil blends tailored to your mood for a deeply calming, sensory massage experience.",
+      iconName: "Flower",
+      category: "massage",
+      duration: "75 mins",
+      price: "NPR 3,800",
+      imageUrl:
+        "https://images.unsplash.com/photo-1600334089648-b0d9d3028eb2?w=600&q=80",
+      features: ["Custom Oil Blend", "Full Body", "Warm Stones Option"],
+      displayOrder: 12,
+    },
+    {
+      title: "Head & Neck Spa",
+      description:
+        "A focused massage of the scalp, neck, and shoulders to release stress and tension headaches.",
+      iconName: "Brain",
+      category: "massage",
+      duration: "30 mins",
+      price: "NPR 1,500",
+      imageUrl:
+        "https://images.unsplash.com/photo-1616394584738-fc6e612e71b9?w=600&q=80",
+      features: ["Scalp Massage", "Neck & Shoulders", "Warm Oil"],
+      displayOrder: 13,
+    },
+    // ── Bridal Packages ────────────────────────────────────────────────────
+    {
+      title: "Bridal Makeup & Hair",
+      description:
+        "Your complete bridal look — flawless makeup and hairstyling — with trial and on-the-day service.",
+      iconName: "Gem",
+      category: "bridal",
+      duration: "3 hours",
+      price: "NPR 12,000",
+      imageUrl:
+        "https://images.unsplash.com/photo-1519014816548-bf5fe059798b?w=600&q=80",
+      features: ["Trial Session", "Airbrush Makeup", "Hair Styling", "Touch-up Kit"],
+      displayOrder: 14,
+    },
+    {
+      title: "Bridal Party Package",
+      description:
+        "Glam for the whole squad — hair, makeup, and nails for bridesmaids and the mother of the bride.",
+      iconName: "Users",
+      category: "bridal",
+      duration: "4 hours",
+      price: "NPR 25,000",
+      imageUrl:
+        "https://images.unsplash.com/photo-1522673607200-164d1b6ce486?w=600&q=80",
+      features: ["Group Booking", "On-site Service", "Custom Looks"],
+      displayOrder: 15,
     },
   ];
 
   for (const service of services) {
+    const id = services.indexOf(service) + 1;
     await prisma.service.upsert({
-      where: { id: services.indexOf(service) + 1 },
-      update: {},
-      create: { ...service, id: services.indexOf(service) + 1 },
+      where: { id },
+      update: { ...service },
+      create: { ...service, id },
     });
   }
   console.log("  ✓ Services seeded");

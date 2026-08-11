@@ -1,131 +1,152 @@
 "use client";
 
-import { useState } from "react";
-import AnimatedSection from "./AnimatedSection";
-import { ChevronLeft, ChevronRight, Star } from "lucide-react";
+import { useEffect, useState } from "react";
+import AnimatedSection from "./animations/AnimatedSection";
+import { Star } from "lucide-react";
+import { Marquee, MarqueeItem } from "@/components/effects/Marquee";
+import { cn } from "@/lib/utils";
 
-const testimonials = [
+interface Review {
+  id: number;
+  name: string;
+  rating: number;
+  text: string;
+  service: string | null;
+}
+
+const FALLBACK_REVIEWS: Review[] = [
   {
+    id: 1,
     name: "Sarah Mitchell",
     rating: 5,
     text: "The most relaxing facial I've ever had! My skin has never looked better. The team at K & S truly knows how to pamper their clients.",
     service: "Facial Treatment",
   },
   {
+    id: 2,
     name: "Emily Carter",
     rating: 5,
-    text: "I've been coming here for my hair for over a year now. Katherine always understands exactly what I want and delivers beyond my expectations.",
+    text: "I've been coming here for my hair for over a year now. They always understand exactly what I want and deliver beyond my expectations.",
     service: "Hair Styling",
   },
   {
+    id: 3,
     name: "Jessica Brown",
     rating: 5,
-    text: "Maya's massage therapy is incredible. I left feeling completely renewed. This place is my sanctuary from the stress of daily life.",
+    text: "The massage therapy is incredible. I left feeling completely renewed. This place is my sanctuary from the stress of daily life.",
     service: "Deep Tissue Massage",
   },
   {
+    id: 4,
     name: "Amanda Lee",
     rating: 5,
-    text: "Emma transformed my hair with the most beautiful balayage. I get compliments everywhere I go. Thank you, K & S Beauty Centre!",
+    text: "They transformed my hair with the most beautiful balayage. I get compliments everywhere I go. Thank you, K & S Beauty Centre!",
     service: "Hair Colour",
   },
 ];
 
+function Stars({ rating }: { rating: number }) {
+  return (
+    <div className="flex gap-0.5" aria-label={`${rating} out of 5 stars`}>
+      {Array.from({ length: 5 }).map((_, i) => (
+        <Star
+          key={i}
+          className={cn(
+            "size-4",
+            i < rating
+              ? "text-amber-primary fill-amber-primary"
+              : "text-neutral-300 dark:text-neutral-600",
+          )}
+        />
+      ))}
+    </div>
+  );
+}
+
+function ReviewCard({ review }: { review: Review }) {
+  return (
+    <div className="w-[85vw] max-w-md rounded-2xl border border-amber-primary/15 bg-white p-6 shadow-sm dark:bg-neutral-800">
+      <Stars rating={review.rating} />
+      <blockquote className="mt-4 font-serif text-sm leading-relaxed text-foreground">
+        &ldquo;{review.text}&rdquo;
+      </blockquote>
+      <footer className="mt-4 flex items-center justify-between">
+        <div>
+          <p className="text-sm font-semibold text-foreground">{review.name}</p>
+          {review.service && (
+            <p className="text-xs text-amber-primary">{review.service}</p>
+          )}
+        </div>
+      </footer>
+    </div>
+  );
+}
+
 export default function Testimonials() {
-  const [activeIndex, setActiveIndex] = useState(0);
+  const [reviews, setReviews] = useState<Review[]>(FALLBACK_REVIEWS);
 
-  const next = () => {
-    setActiveIndex((prev) => (prev + 1) % testimonials.length);
-  };
+  useEffect(() => {
+    fetch("/api/reviews?activeOnly=true")
+      .then((res) => res.json())
+      .then((json) => {
+        if (json?.data?.length) setReviews(json.data);
+      })
+      .catch(() => {});
+  }, []);
 
-  const prev = () => {
-    setActiveIndex((prev) =>
-      prev === 0 ? testimonials.length - 1 : prev - 1
-    );
-  };
+  const average =
+    reviews.length > 0
+      ? reviews.reduce((sum, r) => sum + r.rating, 0) / reviews.length
+      : 0;
 
   return (
-    <section id="testimonials" className="py-24 md:py-32 bg-white dark:bg-neutral-950">
+    <section id="testimonials" className="py-24 md:py-32 bg-white dark:bg-neutral-950 overflow-hidden">
       <div className="max-w-7xl mx-auto px-4 sm:px-6">
-        {/* Header */}
         <AnimatedSection direction="up" className="text-center max-w-3xl mx-auto mb-16">
-          <span className="inline-block px-4 py-2 bg-blush-light dark:bg-neutral-700 text-crimson-primary rounded-full text-sm font-medium mb-6">
+          <span className="inline-block px-4 py-2 bg-rose-light dark:bg-neutral-700 text-amber-primary rounded-full text-sm font-medium mb-6">
             Testimonials
           </span>
           <h2 className="text-3xl sm:text-4xl md:text-5xl font-serif font-bold text-foreground mb-6">
             What Our Clients{" "}
-            <span className="text-crimson-primary">Say About Us</span>
+            <span className="text-amber-primary">Say About Us</span>
           </h2>
-        </AnimatedSection>
 
-        {/* Testimonials Carousel */}
-        <div className="relative max-w-4xl mx-auto">
-          <AnimatedSection direction="scale">
-            <div className="bg-blush-light dark:bg-neutral-800 rounded-3xl p-6 sm:p-8 md:p-12 shadow-xl">
-              {/* Stars */}
-              <div className="flex gap-1 mb-6">
-                {[...Array(testimonials[activeIndex].rating)].map((_, i) => (
-                  <Star
-                    key={i}
-                    className="w-6 h-6 text-crimson-primary fill-crimson-primary"
-                  />
-                ))}
-              </div>
-
-              {/* Quote */}
-              <blockquote className="text-lg sm:text-xl md:text-2xl text-foreground leading-relaxed font-serif italic mb-6 sm:mb-8">
-                &ldquo;{testimonials[activeIndex].text}&rdquo;
-              </blockquote>
-
-              {/* Author */}
-              <div className="flex items-center justify-between">
-                <div>
-                  <p className="font-bold text-foreground text-lg">
-                    {testimonials[activeIndex].name}
-                  </p>
-                  <p className="text-crimson-primary text-sm">
-                    {testimonials[activeIndex].service}
-                  </p>
-                </div>
-
-                {/* Navigation */}
-                <div className="flex gap-3">
-                  <button
-                    onClick={prev}
-                    className="w-12 h-12 rounded-full bg-white dark:bg-neutral-700 dark:hover:bg-crimson-primary flex items-center justify-center hover:bg-crimson-primary hover:text-white active:bg-crimson-primary/80 transition-colors shadow-md focus-visible:ring-3 focus-visible:ring-ring/50 outline-none"
-                    aria-label="Previous testimonial"
-                  >
-                    <ChevronLeft className="w-5 h-5" />
-                  </button>
-                  <button
-                    onClick={next}
-                    className="w-12 h-12 rounded-full bg-white dark:bg-neutral-700 dark:hover:bg-crimson-primary flex items-center justify-center hover:bg-crimson-primary hover:text-white active:bg-crimson-primary/80 transition-colors shadow-md focus-visible:ring-3 focus-visible:ring-ring/50 outline-none"
-                    aria-label="Next testimonial"
-                  >
-                    <ChevronRight className="w-5 h-5" />
-                  </button>
-                </div>
-              </div>
+          {average > 0 && (
+            <div className="mt-4 inline-flex items-center gap-3 rounded-full border border-amber-primary/20 bg-amber-primary/5 px-5 py-2">
+              <Stars rating={Math.round(average)} />
+              <span className="text-sm font-medium text-foreground">
+                {average.toFixed(1)} average rating
+              </span>
             </div>
-          </AnimatedSection>
-
-          {/* Dots */}
-          <div className="flex justify-center gap-3 mt-8">
-            {testimonials.map((_, index) => (
-              <button
-                key={index}
-                onClick={() => setActiveIndex(index)}
-                className={`w-3 h-3 rounded-full transition-all duration-300 outline-none ${
-                  index === activeIndex
-                    ? "bg-crimson-primary w-8"
-                    : "bg-gray-300 dark:bg-neutral-600 dark:hover:bg-neutral-500 hover:bg-gray-400 active:bg-gray-500"
-                } focus-visible:ring-3 focus-visible:ring-ring/50`}
-                aria-label={`Go to testimonial ${index + 1}`}
-              />
-            ))}
-          </div>
-        </div>
+          )}
+        </AnimatedSection>
       </div>
+
+      {reviews.length > 0 ? (
+        <div className="relative">
+          <div className="pointer-events-none absolute inset-y-0 left-0 z-10 w-16 bg-gradient-to-r from-white to-transparent dark:from-neutral-950" />
+          <div className="pointer-events-none absolute inset-y-0 right-0 z-10 w-16 bg-gradient-to-l from-white to-transparent dark:from-neutral-950" />
+
+          <Marquee speed={45} pauseOnHover className="py-2">
+            {reviews.map((review) => (
+              <MarqueeItem key={review.id}>
+                <ReviewCard review={review} />
+              </MarqueeItem>
+            ))}
+          </Marquee>
+          <Marquee speed={45} pauseOnHover reverse className="mt-6 py-2">
+            {reviews.slice().reverse().map((review) => (
+              <MarqueeItem key={review.id}>
+                <ReviewCard review={review} />
+              </MarqueeItem>
+            ))}
+          </Marquee>
+        </div>
+      ) : (
+        <p className="text-center text-muted-foreground py-12">
+          Reviews coming soon.
+        </p>
+      )}
     </section>
   );
 }

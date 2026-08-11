@@ -3,12 +3,13 @@
 import { useState, useEffect, useCallback } from "react"
 import Image from "next/image"
 import { motion } from "framer-motion"
-import { Menu, X } from "lucide-react"
+import { Menu, X, Sparkles } from "lucide-react"
 import ThemeToggle from "@/components/ThemeToggle"
 import { useActiveSection } from "@/lib/hooks/useSmoothScroll"
 import { useCompany } from "@/lib/company-context"
+import { useBooking } from "@/components/booking/BookingProvider"
 import { cn } from "@/lib/utils"
-import { buttonVariants } from "@/components/ui/button"
+import { Button } from "@/components/ui/button"
 import {
   Drawer,
   DrawerTrigger,
@@ -25,7 +26,7 @@ const navLinks = [
   { name: "Gallery", href: "#gallery", id: "gallery" },
   { name: "Location", href: "#location", id: "location" },
   { name: "Team", href: "#team", id: "team" },
-  { name: "Testimonials", href: "#testimonials", id: "testimonials" },
+  { name: "Reviews", href: "#testimonials", id: "testimonials" },
   { name: "Contact", href: "#contact", id: "contact" },
 ]
 
@@ -35,6 +36,7 @@ export default function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false)
   const activeSection = useActiveSection(sectionIds)
   const company = useCompany()
+  const { openBooking } = useBooking()
 
   useEffect(() => {
     const handleScroll = () => {
@@ -66,7 +68,7 @@ export default function Navbar() {
       className={cn(
         "fixed top-0 left-0 right-0 z-50 transition-all duration-500",
         isScrolled
-          ? "bg-background/95 backdrop-blur-md shadow-lg py-3 dark:bg-neutral-900/95"
+          ? "bg-white/80 backdrop-blur-md shadow-lg shadow-black/5 py-3 dark:bg-neutral-900/80"
           : "bg-transparent py-5",
       )}
     >
@@ -98,9 +100,9 @@ export default function Navbar() {
               className={cn(
                 "relative px-3 py-2 text-sm font-medium tracking-wide transition-colors duration-300",
                 activeSection === link.id
-                  ? "text-primary"
+                  ? "text-amber-primary"
                   : isScrolled
-                    ? "text-foreground hover:text-primary active:text-primary/80"
+                    ? "text-foreground hover:text-amber-primary active:text-amber-primary/80"
                     : "text-white/90 drop-shadow-md hover:text-white active:text-white/70",
               )}
             >
@@ -110,7 +112,7 @@ export default function Navbar() {
                   layoutId="nav-active"
                   className={cn(
                     "absolute bottom-0 left-3 right-3 h-0.5 rounded-full",
-                    isScrolled ? "bg-primary" : "bg-white",
+                    isScrolled ? "bg-amber-primary" : "bg-white",
                   )}
                   transition={{ type: "spring", stiffness: 380, damping: 30 }}
                 />
@@ -125,16 +127,19 @@ export default function Navbar() {
                   : "text-white/80 hover:bg-white/10",
               )}
             />
-            <a
-              href="#contact"
-              onClick={(e) => handleNavClick(e, "#contact")}
-              className={buttonVariants({
-                variant: "default",
-                size: "sm",
-              })}
+            <Button
+              variant="default"
+              size="sm"
+              onClick={() => openBooking()}
+              className={cn(
+                "rounded-full px-4",
+                !isScrolled &&
+                  "border-white/20 bg-white/10 text-white backdrop-blur-sm hover:bg-white/20",
+              )}
             >
-              Book Now
-            </a>
+              <Sparkles />
+              Book Appointment
+            </Button>
           </div>
         </div>
 
@@ -195,7 +200,7 @@ export default function Navbar() {
                     className={cn(
                       "rounded-lg px-3 py-2.5 text-sm font-medium transition-colors",
                       activeSection === link.id
-                        ? "bg-primary/10 text-primary"
+                        ? "bg-amber-primary/10 text-amber-primary"
                         : "text-foreground hover:bg-muted active:bg-muted/80",
                     )}
                   >
@@ -205,13 +210,24 @@ export default function Navbar() {
                 <div className="my-2" />
                 <div className="flex items-center gap-2">
                   <ThemeToggle className="text-foreground hover:bg-muted" />
-                  <a
-                    href="#contact"
-                    onClick={(e) => handleNavClick(e, "#contact")}
-                    className={buttonVariants({ variant: "default", size: "default" })}
+                  <Button
+                    variant="default"
+                    className="flex-1 rounded-full"
+                    onClick={() => {
+                      openBooking()
+                      const popup = document.querySelector(
+                        '[data-slot="drawer-popup"]',
+                      ) as HTMLElement | null
+                      const closeBtn =
+                        popup?.querySelector<HTMLButtonElement>(
+                          '[data-slot="drawer-close"]',
+                        )
+                      closeBtn?.click()
+                    }}
                   >
-                    Book Now
-                  </a>
+                    <Sparkles />
+                    Book Appointment
+                  </Button>
                 </div>
               </nav>
             </DrawerContent>

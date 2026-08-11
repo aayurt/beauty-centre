@@ -51,6 +51,9 @@ model Service {
   iconName     String
   imageUrl     String?
   features     String[]
+  category     String   @default("hair")
+  duration     String   @default("")
+  price        String   @default("")
   displayOrder Int      @default(0)
   isActive     Boolean  @default(true)
   createdAt    DateTime @default(now())

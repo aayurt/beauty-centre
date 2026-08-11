@@ -1,87 +1,96 @@
 "use client";
 
-import { motion, AnimatePresence } from "framer-motion";
-import { Scissors, Sparkles, HandHeart } from "lucide-react";
-import Image from "next/image";
-import { useState } from "react";
+import { useEffect, useMemo, useState } from "react";
+import { motion } from "framer-motion";
+import { Sparkles, ArrowRight } from "lucide-react";
 import AnimatedSection from "./animations/AnimatedSection";
+import { useBooking } from "@/components/booking/BookingProvider";
+import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
+import { Button } from "@/components/ui/button";
+import { cn } from "@/lib/utils";
 
-const services = [
-  {
-    icon: Scissors,
-    title: "Hair Styling",
-    description:
-      "From precision cuts to vibrant colour transformations, our expert stylists craft looks that reflect your unique personality and style.",
-    features: ["Cut & Style", "Colour & Highlights", "Treatments", "Bridal Hair"],
-    image:
-      "https://images.unsplash.com/photo-1562322140-8baeececf3df?w=600&q=80",
-  },
-  {
-    icon: Sparkles,
-    title: "Facials",
-    description:
-      "Rejuvenate your skin with our customized facial treatments. Using premium products, we help you achieve a radiant, youthful glow.",
-    features: ["Deep Cleansing", "Anti-Aging", "Hydration", "LED Therapy"],
-    image:
-      "https://images.unsplash.com/photo-1570172619644-dfd03ed5d881?w=600&q=80",
-  },
-  {
-    icon: HandHeart,
-    title: "Massage",
-    description:
-      "Unwind and rejuvenate with our therapeutic massage services. From relaxation to deep tissue, find your perfect escape.",
-    features: ["Swedish Massage", "Deep Tissue", "Aromatherapy", "Hot Stone"],
-    image:
-      "https://images.unsplash.com/photo-1544161515-4ab6ce6db874?w=600&q=80",
-  },
-];
+interface Service {
+  id: number;
+  title: string;
+  description: string;
+  iconName: string;
+  imageUrl: string | null;
+  features: string[];
+  category: string;
+  duration: string;
+  price: string;
+}
 
-const containerVariants = {
-  hidden: {},
-  visible: {
-    transition: {
-      staggerChildren: 0.15,
-      delayChildren: 0.1,
-    },
-  },
+const CATEGORY_LABELS: Record<string, string> = {
+  hair: "Hair Care",
+  facials: "Facials & Skin",
+  nails: "Nails & Lash",
+  massage: "Massage & Spa",
+  bridal: "Bridal Packages",
 };
 
+const CATEGORY_ORDER = ["hair", "facials", "nails", "massage", "bridal"];
+
 const cardVariants = {
-  hidden: { opacity: 0, y: 60, scale: 0.95 },
+  hidden: { opacity: 0, y: 40 },
   visible: {
     opacity: 1,
     y: 0,
-    scale: 1,
-    transition: { duration: 0.7, ease: [0.25, 0.1, 0.25, 1] as const },
+    transition: { duration: 0.5, ease: [0.25, 0.1, 0.25, 1] as const },
   },
 };
 
-const defaultEasing = [0.25, 0.1, 0.25, 1] as const;
-
 export default function Services() {
+  const [services, setServices] = useState<Service[]>([]);
+  const { openBooking } = useBooking();
+
+  useEffect(() => {
+    fetch("/api/services")
+      .then((res) => res.json())
+      .then((json) => {
+        if (json?.data) setServices(json.data);
+      })
+      .catch(() => {});
+  }, []);
+
+  const grouped = useMemo(() => {
+    const map = new Map<string, Service[]>();
+    for (const svc of services) {
+      const list = map.get(svc.category) ?? [];
+      list.push(svc);
+      map.set(svc.category, list);
+    }
+    const entries = Array.from(map.entries());
+    entries.sort(
+      (a, b) =>
+        CATEGORY_ORDER.indexOf(a[0]) - CATEGORY_ORDER.indexOf(b[0]),
+    );
+    return entries;
+  }, [services]);
+
+  const firstCategory = grouped[0]?.[0] ?? "hair";
+
   return (
     <section
       id="services"
-      className="py-24 md:py-32 bg-blush-light dark:bg-neutral-900 relative overflow-hidden"
+      className="py-24 md:py-32 bg-rose-light dark:bg-neutral-900 relative overflow-hidden"
     >
-      {/* Decorative background blobs */}
       <div className="absolute inset-0 pointer-events-none" aria-hidden>
-        <div className="absolute top-1/4 -left-32 w-96 h-96 bg-crimson-primary/5 rounded-full blur-3xl" />
-        <div className="absolute bottom-1/4 -right-32 w-96 h-96 bg-blush-secondary/20 rounded-full blur-3xl" />
+        <div className="absolute top-1/4 -left-32 w-96 h-96 bg-amber-primary/5 rounded-full blur-3xl" />
+        <div className="absolute bottom-1/4 -right-32 w-96 h-96 bg-rose-secondary/20 rounded-full blur-3xl" />
       </div>
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 relative">
-        {/* Header */}
         <AnimatedSection
           direction="up"
-          className="text-center max-w-3xl mx-auto mb-16"
+          className="text-center max-w-3xl mx-auto mb-12"
         >
-          <span className="inline-block px-4 py-2 bg-white dark:bg-neutral-800 text-crimson-primary rounded-full text-sm font-medium mb-6">
+          <span className="inline-block px-4 py-2 bg-white dark:bg-neutral-800 text-amber-primary rounded-full text-sm font-medium mb-6">
             Our Services
           </span>
           <h2 className="text-3xl sm:text-4xl md:text-5xl font-serif font-bold text-foreground mb-6">
             Pamper Yourself with{" "}
-            <span className="text-crimson-primary">Luxury Treatments</span>
+            <span className="text-amber-primary">Luxury Treatments</span>
           </h2>
           <p className="text-muted-foreground text-base sm:text-lg leading-relaxed">
             Discover our comprehensive range of beauty and wellness services,
@@ -89,163 +98,94 @@ export default function Services() {
           </p>
         </AnimatedSection>
 
-        {/* Staggered Cards Grid */}
-        <motion.div
-          className="grid sm:grid-cols-2 md:grid-cols-3 gap-6 md:gap-8"
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, amount: 0.1 }}
-          variants={containerVariants}
-        >
-          {services.map((service) => (
-            <ServiceCard key={service.title} service={service} />
-          ))}
-        </motion.div>
+        {grouped.length === 0 ? (
+          <p className="text-center text-muted-foreground py-12">
+            Loading services…
+          </p>
+        ) : (
+          <Tabs defaultValue={firstCategory}>
+            <TabsList className="mx-auto mb-10 flex flex-wrap h-auto w-auto gap-1 bg-white/70 dark:bg-neutral-800/70 p-1.5 rounded-full backdrop-blur-sm">
+              {grouped.map(([category]) => (
+                <TabsTrigger
+                  key={category}
+                  value={category}
+                  className="rounded-full px-4 py-1.5 capitalize"
+                >
+                  {CATEGORY_LABELS[category] ?? category}
+                </TabsTrigger>
+              ))}
+            </TabsList>
+
+            {grouped.map(([category, items]) => (
+              <TabsContent key={category} value={category}>
+                <motion.div
+                  initial="hidden"
+                  animate="visible"
+                  variants={{ visible: { transition: { staggerChildren: 0.08 } } }}
+                  className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6"
+                >
+                  {items.map((svc) => (
+                    <motion.div
+                      key={svc.id}
+                      variants={cardVariants}
+                      className="group relative flex flex-col overflow-hidden rounded-2xl bg-white dark:bg-neutral-800 p-6 shadow-sm ring-1 ring-black/5 dark:ring-white/10 transition-all duration-300 hover:-translate-y-1 hover:shadow-xl"
+                    >
+                      <div className="mb-4 flex items-start justify-between gap-2">
+                        <span className="flex size-11 items-center justify-center rounded-full bg-amber-primary/10 text-amber-primary">
+                          <Sparkles className="size-5" />
+                        </span>
+                        {svc.price && (
+                          <span className="rounded-full bg-amber-primary/10 px-3 py-1 text-sm font-semibold text-amber-primary">
+                            {svc.price}
+                          </span>
+                        )}
+                      </div>
+
+                      <h3 className="text-lg font-serif font-bold text-foreground mb-1">
+                        {svc.title}
+                      </h3>
+                      {svc.duration && (
+                        <p className="text-xs font-medium uppercase tracking-wider text-muted-foreground mb-3">
+                          {svc.duration}
+                        </p>
+                      )}
+                      <p className="text-sm text-muted-foreground leading-relaxed mb-4 flex-1">
+                        {svc.description}
+                      </p>
+
+                      {svc.features.length > 0 && (
+                        <ul className="mb-5 space-y-1.5">
+                          {svc.features.slice(0, 3).map((f) => (
+                            <li
+                              key={f}
+                              className="flex items-center gap-2 text-xs text-foreground"
+                            >
+                              <span className="size-1.5 shrink-0 rounded-full bg-amber-primary" />
+                              {f}
+                            </li>
+                          ))}
+                        </ul>
+                      )}
+
+                      <Button
+                        variant="ghost"
+                        size="sm"
+                        onClick={() => openBooking(svc.title)}
+                        className={cn(
+                          "justify-start self-start rounded-full px-3 text-amber-primary hover:bg-amber-primary/10 hover:text-amber-primary",
+                        )}
+                      >
+                        Book This Service
+                        <ArrowRight className="size-3.5 transition-transform group-hover:translate-x-0.5" />
+                      </Button>
+                    </motion.div>
+                  ))}
+                </motion.div>
+              </TabsContent>
+            ))}
+          </Tabs>
+        )}
       </div>
     </section>
-  );
-}
-
-function ServiceCard({
-  service,
-}: {
-  service: (typeof services)[number];
-}) {
-  const [hovered, setHovered] = useState(false);
-  const Icon = service.icon;
-
-  return (
-    <motion.div
-      variants={cardVariants}
-      onMouseEnter={() => setHovered(true)}
-      onMouseLeave={() => setHovered(false)}
-      animate={{
-        y: hovered ? -8 : 0,
-        boxShadow: hovered
-          ? "0 20px 60px rgba(0,0,0,0.12)"
-          : "0 4px 20px rgba(0,0,0,0.06)",
-      }}
-      transition={{ type: "spring", stiffness: 300, damping: 24 }}
-      className="bg-white dark:bg-neutral-900 rounded-2xl overflow-hidden shadow-xl h-full flex flex-col will-change-transform will-change-box-shadow cursor-pointer"
-    >
-      {/* Image */}
-          <div className="relative h-48 sm:h-56 overflow-hidden">
-        <motion.div
-          className="relative w-full h-full"
-          animate={{ scale: hovered ? 1.1 : 1 }}
-          transition={{ duration: 0.7, ease: defaultEasing }}
-        >
-          <Image
-            src={service.image}
-            alt={service.title}
-            fill
-            className="object-cover"
-          />
-        </motion.div>
-        <div className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent" />
-      </div>
-
-      {/* Content */}
-      <div className="p-6 sm:p-8 flex-1 flex flex-col">
-        {/* Icon with Morphing */}
-        <div className="mb-6">
-          <div className="relative w-14 h-14">
-            {/* Morph ring */}
-            <AnimatePresence>
-              {hovered && (
-                <motion.div
-                  key="morph-ring"
-                  className="absolute inset-0 rounded-full border-2 border-crimson-primary"
-                  initial={{ scale: 0.8, opacity: 0.6 }}
-                  animate={{ scale: 1.8, opacity: 0 }}
-                  exit={{ opacity: 0, scale: 0.8 }}
-                  transition={{ duration: 0.5, ease: "easeOut" }}
-                />
-              )}
-            </AnimatePresence>
-
-            {/* Icon circle */}
-            <motion.div
-              className="relative w-14 h-14 rounded-full flex items-center justify-center"
-              animate={{
-                backgroundColor: hovered ? "#c63f7a" : "#e9a7be",
-                scale: hovered ? 1.1 : 1,
-              }}
-              transition={{ type: "spring", stiffness: 300, damping: 20 }}
-              style={{ backgroundColor: "#e9a7be" }}
-            >
-              <motion.div
-                animate={{
-                  scale: hovered ? 1.15 : 1,
-                  rotate: hovered ? [0, -8, 8, 0] : 0,
-                }}
-                transition={{ duration: 0.4, ease: "easeOut" }}
-              >
-                <Icon className="w-7 h-7 text-white" />
-              </motion.div>
-            </motion.div>
-          </div>
-
-          {/* Accent underline */}
-          <motion.div
-            className="h-0.5 bg-crimson-primary rounded-full mt-4"
-            animate={{
-              width: hovered ? "100%" : "0%",
-              opacity: hovered ? 1 : 0,
-            }}
-            transition={{ duration: 0.3, ease: "easeOut" }}
-            style={{ maxWidth: "3rem" }}
-          />
-        </div>
-
-        <h3 className="text-2xl font-serif font-bold text-foreground mb-4">
-          {service.title}
-        </h3>
-
-        <p className="text-muted-foreground leading-relaxed mb-6 flex-1">
-          {service.description}
-        </p>
-
-        {/* Features */}
-        <ul className="space-y-2">
-          {service.features.map((feature, i) => (
-            <li
-              key={feature}
-              className="flex items-center gap-2 text-sm text-foreground"
-            >
-              <motion.span
-                className="w-1.5 h-1.5 rounded-full bg-crimson-primary block shrink-0"
-                animate={{
-                  scale: hovered ? [1, 1.5, 1] : 1,
-                }}
-                transition={{
-                  duration: 0.4,
-                  delay: i * 0.05,
-                  ease: "easeOut",
-                }}
-              />
-              {feature}
-            </li>
-          ))}
-        </ul>
-
-        {/* Learn More link */}
-        <motion.div
-          className="mt-6 pt-6 border-t border-gray-100 dark:border-neutral-700"
-          animate={{ opacity: hovered ? 1 : 0.6 }}
-          transition={{ duration: 0.2 }}
-        >
-          <span className="text-crimson-primary font-medium text-sm flex items-center gap-2">
-            Learn More
-            <motion.span
-              animate={{ x: hovered ? 4 : 0 }}
-              transition={{ duration: 0.2 }}
-            >
-              &rarr;
-            </motion.span>
-          </span>
-        </motion.div>
-      </div>
-    </motion.div>
   );
 }

@@ -14,6 +14,9 @@ export default function ThemeToggle({ className }: { className?: string }) {
   const [mounted, setMounted] = useState(false)
   const { theme, setTheme } = useTheme()
 
+  // Standard next-themes hydration guard: render is identical on server + first
+  // client pass, then flips once mounted. Not a cascading-render concern.
+  // eslint-disable-next-line react-hooks/set-state-in-effect
   useEffect(() => setMounted(true), [])
 
   if (!mounted) {

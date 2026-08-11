@@ -6,7 +6,6 @@ import Gallery from "@/components/Gallery";
 import LocationHours from "@/components/LocationHours";
 import Team from "@/components/Team";
 import Testimonials from "@/components/Testimonials";
-import BookingInquiry from "@/components/BookingInquiry";
 import Contact from "@/components/Contact";
 import InstagramFeed from "@/components/InstagramFeed";
 
@@ -20,7 +19,6 @@ export default function Home() {
       <LocationHours />
       <Team />
       <Testimonials />
-      <BookingInquiry />
       <Contact />
       <InstagramFeed />
     </PublicSiteShell>

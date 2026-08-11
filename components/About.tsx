@@ -75,7 +75,7 @@ function ParallaxImage() {
   return (
     <div ref={ref} className="relative aspect-[4/5] rounded-2xl overflow-hidden shadow-2xl">
       <motion.div style={{ y, scale }} className="absolute inset-0">
-        <div className="absolute inset-0 bg-gradient-to-br from-crimson-primary to-crimson-dark" />
+        <div className="absolute inset-0 bg-gradient-to-br from-amber-primary to-amber-dark" />
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_70%,rgba(255,255,255,0.15)_0%,transparent_70%)]" />
         <div className="absolute inset-0 flex items-center justify-center">
           <div className="text-center text-white/90 px-8">
@@ -108,26 +108,26 @@ export default function About() {
     <section id="about" className="py-24 md:py-32 bg-white dark:bg-neutral-950 relative overflow-hidden">
       {/* Decorative background */}
       <div className="absolute inset-0 pointer-events-none" aria-hidden>
-        <div className="absolute top-1/3 -left-48 w-96 h-96 bg-blush-light/60 rounded-full blur-3xl" />
-        <div className="absolute bottom-1/3 -right-48 w-96 h-96 bg-crimson-primary/5 rounded-full blur-3xl" />
+        <div className="absolute top-1/3 -left-48 w-96 h-96 bg-rose-light/60 rounded-full blur-3xl" />
+        <div className="absolute bottom-1/3 -right-48 w-96 h-96 bg-amber-primary/5 rounded-full blur-3xl" />
       </div>
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 relative">
         <div className="grid md:grid-cols-2 gap-8 md:gap-16 items-center mb-16 md:mb-32">
           <AnimatedSection direction="left" className="relative">
             <ParallaxImage />
-              <div className="absolute -bottom-6 -right-6 w-32 sm:w-48 h-32 sm:h-48 bg-blush-light dark:bg-neutral-800 rounded-2xl -z-10" />
-              <div className="absolute -top-6 -left-6 w-24 sm:w-32 h-24 sm:h-32 border-2 border-crimson-primary/30 rounded-2xl -z-10" />
+              <div className="absolute -bottom-6 -right-6 w-32 sm:w-48 h-32 sm:h-48 bg-rose-light dark:bg-neutral-800 rounded-2xl -z-10" />
+              <div className="absolute -top-6 -left-6 w-24 sm:w-32 h-24 sm:h-32 border-2 border-amber-primary/30 rounded-2xl -z-10" />
           </AnimatedSection>
 
           <AnimatedSection direction="right">
             <div className="max-w-lg">
-              <span className="inline-block px-4 py-2 bg-blush-light dark:bg-neutral-700 text-crimson-primary rounded-full text-sm font-medium mb-6">
+              <span className="inline-block px-4 py-2 bg-rose-light dark:bg-neutral-700 text-amber-primary rounded-full text-sm font-medium mb-6">
                 Our Story
               </span>
               <h2 className="text-3xl sm:text-4xl md:text-5xl font-serif font-bold text-foreground mb-6 leading-tight">
                 A Pioneer of{" "}
-                <span className="text-crimson-primary">Beauty in Kathmandu</span>
+                <span className="text-amber-primary">Beauty in Kathmandu</span>
               </h2>
               <TextReveal
                 text="K & S Beauty Centre, nestled in the historic Jamal district of Kathmandu, stands as a testament to vision and resilience. At a time when fewer than ten professional hair salons operated across the entire Kathmandu Valley, founder Mr. Keshav dared to pioneer — securing a first-mover advantage that would define the salon's trajectory for generations."
@@ -140,19 +140,19 @@ export default function About() {
 
               <div className="grid grid-cols-3 gap-4 sm:gap-6">
                 <div>
-                  <div className="text-2xl sm:text-3xl font-serif font-bold text-crimson-primary">
+                  <div className="text-2xl sm:text-3xl font-serif font-bold text-amber-primary">
                     <CountUp from={0} to={4} suffix="+" duration={2} />
                   </div>
                   <div className="text-xs sm:text-sm text-muted-foreground">Decades of Beauty</div>
                 </div>
                 <div>
-                  <div className="text-2xl sm:text-3xl font-serif font-bold text-crimson-primary">
+                  <div className="text-2xl sm:text-3xl font-serif font-bold text-amber-primary">
                     <CountUp from={0} to={10} suffix="+" duration={2} />
                   </div>
                   <div className="text-xs sm:text-sm text-muted-foreground">Pioneer #{""} Establishment</div>
                 </div>
                 <div>
-                  <div className="text-2xl sm:text-3xl font-serif font-bold text-crimson-primary">
+                  <div className="text-2xl sm:text-3xl font-serif font-bold text-amber-primary">
                     <CountUp from={0} to={1} suffix="K+" duration={2} />
                   </div>
                   <div className="text-xs sm:text-sm text-muted-foreground">Happy Clients</div>
@@ -165,12 +165,12 @@ export default function About() {
         {/* Timeline Section */}
         <AnimatedSection direction="up">
           <div className="text-center max-w-3xl mx-auto mb-16">
-            <span className="inline-block px-4 py-2 bg-blush-light dark:bg-neutral-700 text-crimson-primary rounded-full text-sm font-medium mb-6">
+            <span className="inline-block px-4 py-2 bg-rose-light dark:bg-neutral-700 text-amber-primary rounded-full text-sm font-medium mb-6">
               Our Journey
             </span>
             <h2 className="text-3xl sm:text-4xl md:text-5xl font-serif font-bold text-foreground mb-6">
               The Story of{" "}
-              <span className="text-crimson-primary">A Beauty Institution</span>
+              <span className="text-amber-primary">A Beauty Institution</span>
             </h2>
             <p className="text-muted-foreground text-base sm:text-lg leading-relaxed">
               From the commercial landscape of a transforming Kathmandu Valley to a
@@ -197,11 +197,11 @@ export default function About() {
               <div className="timeline-content group hover:border-primary/40 hover:shadow-xl transition-all duration-500">
                 <div className="flex items-start gap-4">
                   <motion.div
-                    className="w-12 h-12 rounded-full bg-blush-light dark:bg-neutral-700 flex items-center justify-center shrink-0"
-                    whileHover={{ scale: 1.1, backgroundColor: "#c63f7a" }}
+                    className="w-12 h-12 rounded-full bg-rose-light dark:bg-neutral-700 flex items-center justify-center shrink-0"
+                    whileHover={{ scale: 1.1, backgroundColor: "#d97706" }}
                     transition={{ type: "spring", stiffness: 300, damping: 20 }}
                   >
-                    <milestone.icon className="w-5 h-5 text-crimson-primary group-hover:text-white transition-colors" />
+                    <milestone.icon className="w-5 h-5 text-amber-primary group-hover:text-white transition-colors" />
                   </motion.div>
                   <div className="flex-1">
                     <span className="timeline-year">{milestone.year}</span>
@@ -219,7 +219,7 @@ export default function About() {
           <div className="max-w-4xl mx-auto text-center">
             <div className="relative">
               <svg
-                className="absolute -top-8 -left-8 w-16 h-16 text-blush-secondary/30 -z-10"
+                className="absolute -top-8 -left-8 w-16 h-16 text-rose-secondary/30 -z-10"
                 viewBox="0 0 24 24"
                 fill="currentColor"
               >

@@ -1,147 +1,60 @@
 "use client";
 
 import { motion, useScroll, useTransform } from "framer-motion";
-import { useRef, useState, useEffect, useCallback } from "react";
-import Link from "next/link";
-import { MapPin, Sparkles, Flower2, ScrollText } from "lucide-react";
+import { useRef } from "react";
+import { MapPin, Sparkles as SparklesIcon } from "lucide-react";
 import { useCompany } from "@/lib/company-context";
-
-const taglines = [
-  "Where elegance meets expertise",
-  "Experience transformative beauty",
-  "Your sanctuary of serenity",
-  "Luxury redefined, naturally",
-];
-
-function useTypewriter(words: string[], typingSpeed = 60, deletingSpeed = 30, pauseDuration = 2500) {
-  const [displayText, setDisplayText] = useState("");
-  const [wordIndex, setWordIndex] = useState(0);
-  const [isDeleting, setIsDeleting] = useState(false);
-
-  const tick = useCallback(() => {
-    const currentWord = words[wordIndex];
-    if (!isDeleting) {
-      setDisplayText(currentWord.slice(0, displayText.length + 1));
-      if (displayText.length === currentWord.length) {
-        setTimeout(() => setIsDeleting(true), pauseDuration);
-        return;
-      }
-    } else {
-      setDisplayText(currentWord.slice(0, displayText.length - 1));
-      if (displayText.length === 0) {
-        setIsDeleting(false);
-        setWordIndex((prev) => (prev + 1) % words.length);
-        return;
-      }
-    }
-  }, [words, wordIndex, isDeleting, displayText, pauseDuration]);
-
-  useEffect(() => {
-    const timeout = setTimeout(tick, isDeleting ? deletingSpeed : typingSpeed);
-    return () => clearTimeout(timeout);
-  }, [tick, isDeleting, typingSpeed, deletingSpeed]);
-
-  return displayText;
-}
-
-function FloatingDecorations() {
-  return (
-    <>
-      {/* Top-left sparkle cluster */}
-      <div className="absolute top-[15%] left-[8%] z-0 animate-float-drift float-delay-1">
-        <div className="relative">
-          <Sparkles className="w-8 h-8 text-blush-secondary/30" />
-          <div className="absolute -top-2 -right-2 w-3 h-3 rounded-full bg-blush-secondary/20 animate-gradient-pulse" />
-        </div>
-      </div>
-
-      {/* Top-right decorative circle */}
-      <div className="absolute top-[20%] right-[12%] z-0 animate-float-sway float-delay-2">
-        <div className="w-20 h-20 rounded-full border-2 border-blush-secondary/20 animate-float-rotate">
-          <div className="absolute inset-3 rounded-full bg-crimson-primary/10" />
-        </div>
-      </div>
-
-      {/* Middle-left flower petal */}
-      <div className="absolute top-[45%] left-[5%] z-0 animate-float-bob float-delay-3">
-        <Flower2 className="w-10 h-10 text-crimson-primary/20" />
-      </div>
-
-      {/* Middle-right ring */}
-      <div className="absolute top-[55%] right-[6%] z-0 animate-float-drift float-delay-4">
-        <div className="w-16 h-16 rounded-full border border-white/10 backdrop-blur-sm bg-white/5" />
-      </div>
-
-      {/* Bottom-left decorative dot */}
-      <div className="absolute bottom-[25%] left-[12%] z-0 animate-float-sway float-delay-5">
-        <div className="w-4 h-4 rounded-full bg-blush-secondary/20" />
-      </div>
-
-      {/* Bottom-right sparkle */}
-      <div className="absolute bottom-[30%] right-[10%] z-0 animate-float-bob float-delay-1">
-        <ScrollText className="w-9 h-9 text-crimson-primary/15" />
-      </div>
-
-      {/* Additional accent dots */}
-      <div className="absolute top-[35%] left-[50%] z-0 animate-float-drift float-delay-2">
-        <div className="w-2 h-2 rounded-full bg-white/10" />
-      </div>
-      <div className="absolute top-[70%] right-[20%] z-0 animate-float-sway float-delay-3">
-        <div className="w-3 h-3 rounded-full bg-blush-secondary/15" />
-      </div>
-    </>
-  );
-}
+import { useBooking } from "@/components/booking/BookingProvider";
+import { Button } from "@/components/ui/button";
+import { Beams } from "@/components/effects/Beams";
+import { Sparkles } from "@/components/effects/Sparkles";
 
 export default function Hero() {
   const containerRef = useRef<HTMLElement>(null);
   const { scrollY } = useScroll();
   const company = useCompany();
+  const { openBooking } = useBooking();
   const y = useTransform(scrollY, [0, 500], [0, 150]);
   const opacity = useTransform(scrollY, [0, 300], [1, 0.8]);
   const scale = useTransform(scrollY, [0, 300], [1, 0.98]);
-
-  const tagline = useTypewriter(taglines);
 
   return (
     <section
       id="home"
       ref={containerRef}
-      className="relative h-screen w-full overflow-hidden flex items-center justify-center"
+      className="relative min-h-screen w-full overflow-hidden flex items-center justify-center"
     >
       {/* Animated Gradient Background */}
       <motion.div
         style={{ y, opacity, scale }}
         className="absolute inset-0 z-0 will-change-transform"
       >
-        <div className="absolute inset-0 bg-gradient-to-br from-crimson-primary/90 via-blush-secondary/80 to-crimson-dark/90 animate-gradient" />
-        <div className="absolute inset-0 bg-gradient-to-tr from-crimson-dark/40 via-transparent to-blush-secondary/40 animate-gradient" style={{ animationDirection: "reverse", animationDuration: "20s" }} />
-        {/* Subtle overlay pattern */}
+        <div className="absolute inset-0 bg-gradient-to-br from-amber-primary/90 via-rose-secondary/80 to-amber-dark/90 animate-gradient" />
+        <div className="absolute inset-0 bg-gradient-to-tr from-amber-dark/40 via-transparent to-rose-secondary/40 animate-gradient" style={{ animationDirection: "reverse", animationDuration: "20s" }} />
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(255,255,255,0.05)_0%,transparent_70%)]" />
       </motion.div>
 
-      {/* Floating Decorative Elements */}
-      <FloatingDecorations />
+      {/* Hand-rolled Aceternity-style effects */}
+      <Beams className="z-0" count={5} />
+      <Sparkles className="z-0" count={28} />
 
       {/* Content */}
       <motion.div
         initial={{ opacity: 0, y: 80 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 1, delay: 0.3, ease: [0.25, 0.1, 0.25, 1] }}
-          className="relative z-10 text-center px-4 sm:px-6 max-w-5xl mx-auto"
+        className="relative z-10 text-center px-4 sm:px-6 max-w-5xl mx-auto pt-28 pb-20"
       >
-        {/* Welcome badge */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.6 }}
           className="inline-flex items-center gap-2 px-5 py-2 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 text-white/90 text-sm uppercase tracking-[0.25em] mb-8 font-medium"
         >
-          <Sparkles className="w-3.5 h-3.5" />
+          <SparklesIcon className="w-3.5 h-3.5" />
           Welcome to
         </motion.div>
 
-        {/* Title */}
         <motion.h1
           initial={{ opacity: 0, y: 40 }}
           animate={{ opacity: 1, y: 0 }}
@@ -151,42 +64,44 @@ export default function Hero() {
           K &amp; S Beauty Centre
         </motion.h1>
 
-        {/* Typewriter Tagline */}
-        <motion.div
+        <motion.p
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 1 }}
-          className="h-10 sm:h-12 md:h-14 flex items-center justify-center mb-8 sm:mb-10"
+          className="text-base sm:text-lg md:text-2xl text-white/95 max-w-2xl mx-auto mb-10 font-light leading-relaxed"
         >
-          <p className="text-base sm:text-lg md:text-2xl text-white/95 max-w-2xl mx-auto font-light leading-relaxed">
-            <span>{tagline}</span>
-            <span className="inline-block w-[3px] h-[1.1em] ml-0.5 bg-white/80 rounded-sm animate-cursor-blink align-middle" />
-          </p>
-        </motion.div>
+          Elevate your everyday radiance with hair, skin &amp; wellness artistry
+          crafted around you.
+        </motion.p>
 
-        {/* CTA Buttons */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 1.2 }}
           className="flex flex-col sm:flex-row gap-4 justify-center items-center"
         >
-          <Link
-            href="#services"
-            className="group w-full sm:w-auto px-6 sm:px-8 py-3 sm:py-4 bg-primary text-white rounded-full font-medium text-base sm:text-lg transition-all duration-300 hover:bg-primary/80 hover:scale-105 shadow-lg shadow-primary/25 text-center"
-          >
-            Explore Services
-            <span className="inline-block ml-2 transition-transform group-hover:translate-x-1">→</span>
-          </Link>
-          <Link
-            href="#contact"
-            className="w-full sm:w-auto px-6 sm:px-8 py-3 sm:py-4 border-2 border-white/70 text-white rounded-full font-medium text-base sm:text-lg transition-all duration-300 hover:bg-white hover:text-primary backdrop-blur-sm text-center"
+          <Button
+            variant="default"
+            size="lg"
+            onClick={() => openBooking()}
+            className="rounded-full px-8 py-4 h-auto text-base sm:text-lg shadow-lg shadow-primary/25"
           >
             Book Appointment
-          </Link>
+            <SparklesIcon className="size-5" />
+          </Button>
+          <Button
+            variant="ghost"
+            size="lg"
+            onClick={() => {
+              document.getElementById("services")?.scrollIntoView({ behavior: "smooth" })
+            }}
+            className="rounded-full px-8 py-4 h-auto text-base sm:text-lg border-2 border-white/70 text-white hover:bg-white hover:text-primary backdrop-blur-sm"
+          >
+            Explore Services
+            <span aria-hidden>→</span>
+          </Button>
         </motion.div>
 
-        {/* Location */}
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
@@ -198,7 +113,6 @@ export default function Hero() {
         </motion.div>
       </motion.div>
 
-      {/* Scroll Indicator */}
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
