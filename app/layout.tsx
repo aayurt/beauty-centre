@@ -6,6 +6,7 @@ import ScrollProgressBar from "@/components/animations/ScrollProgressBar";
 import { CompanyProvider } from "@/lib/company-context";
 import { Toaster } from "@/components/ui/sonner";
 import { ThemeProvider } from "@/components/theme-provider";
+import ServiceWorkerUpdatePrompt from "@/components/ServiceWorkerUpdatePrompt";
 
 const playfairDisplay = Playfair_Display({
   subsets: ["latin"],
@@ -48,6 +49,7 @@ export default function RootLayout({
             <CompanyProvider>
               <ScrollProgressBar />
               {children}
+              <ServiceWorkerUpdatePrompt />
               <Toaster />
             </CompanyProvider>
           </AnimationProvider>

@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState, useRef } from "react";
-import { Plus, Image, Trash2, Upload, X } from "lucide-react";
+import { Plus, Image, Trash2, Upload, X, Pencil, Save, Eye, EyeOff } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Card } from "@/components/ui/card";
@@ -24,6 +24,7 @@ export default function AdminGalleryPage() {
   const [showUrlForm, setShowUrlForm] = useState(false);
   const [urlInput, setUrlInput] = useState("");
   const [editingAlt, setEditingAlt] = useState<Record<number, string>>({});
+  const [editMode, setEditMode] = useState<Record<number, boolean>>({});
 
   async function loadItems() {
     const res = await fetch("/api/gallery?activeOnly=false");
@@ -274,14 +275,6 @@ export default function AdminGalleryPage() {
                 <div className="absolute inset-0 flex items-center justify-center gap-2 bg-black/0 opacity-0 transition-all group-hover:bg-black/40 group-hover:opacity-100">
                   <Button
                     type="button"
-                    size="xs"
-                    variant={item.isActive ? "default" : "secondary"}
-                    onClick={() => handleToggleActive(item)}
-                  >
-                    {item.isActive ? "Active" : "Inactive"}
-                  </Button>
-                  <Button
-                    type="button"
                     size="icon-xs"
                     variant="destructive"
                     onClick={() => handleDelete(item.id)}
@@ -292,25 +285,70 @@ export default function AdminGalleryPage() {
                 </div>
               </div>
               <div className="p-2">
-                <Input
-                  type="text"
-                  value={editingAlt[item.id] ?? ""}
-                  onChange={(e) =>
-                    setEditingAlt((prev) => ({
-                      ...prev,
-                      [item.id]: e.target.value,
-                    }))
-                  }
-                  onBlur={() => handleAltSave(item.id)}
-                  placeholder="Alt text"
-                  className="h-6 px-1.5 py-0.5 text-xs"
-                />
-                <p
-                  className="mt-0.5 truncate text-[10px] text-muted-foreground"
-                  title={item.src}
-                >
-                  {item.src.split("/").pop()}
-                </p>
+                <div className="flex items-center gap-1">
+                  <Input
+                    type="text"
+                    value={editingAlt[item.id] ?? ""}
+                    readOnly={!editMode[item.id]}
+                    onChange={(e) =>
+                      setEditingAlt((prev) => ({
+                        ...prev,
+                        [item.id]: e.target.value,
+                      }))
+                    }
+                    title="Alt text"
+                    className="h-6 flex-1 px-1.5 py-0.5 text-xs"
+                  />
+                  <Button
+                    type="button"
+                    size="icon-xs"
+                    variant={editMode[item.id] ? "secondary" : "ghost"}
+                    onClick={() =>
+                      setEditMode((prev) => ({
+                        ...prev,
+                        [item.id]: !prev[item.id],
+                      }))
+                    }
+                    title={editMode[item.id] ? "Stop editing" : "Edit alt text"}
+                  >
+                    <Pencil className="size-3" />
+                  </Button>
+                  <Button
+                    type="button"
+                    size="icon-xs"
+                    variant="ghost"
+                    onClick={() => {
+                      handleAltSave(item.id);
+                      setEditMode((prev) => ({ ...prev, [item.id]: false }));
+                    }}
+                    disabled={!editMode[item.id] || !(editingAlt[item.id] ?? "").trim()}
+                    title="Save alt text"
+                  >
+                    <Save className="size-3" />
+                  </Button>
+                </div>
+                <div className="mt-1.5 flex items-center justify-between">
+                  <p
+                    className="truncate text-[10px] text-muted-foreground"
+                    title={item.src}
+                  >
+                    {item.src.split("/").pop()}
+                  </p>
+                  <Button
+                    type="button"
+                    size="xs"
+                    variant={item.isActive ? "secondary" : "outline"}
+                    onClick={() => handleToggleActive(item)}
+                    className="gap-1 px-2 text-[10px]"
+                  >
+                    {item.isActive ? (
+                      <Eye className="size-3" />
+                    ) : (
+                      <EyeOff className="size-3" />
+                    )}
+                    {item.isActive ? "Active" : "Inactive"}
+                  </Button>
+                </div>
               </div>
             </div>
           ))}
