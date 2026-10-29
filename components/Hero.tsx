@@ -29,8 +29,8 @@ export default function Hero() {
         style={{ y, opacity, scale }}
         className="absolute inset-0 z-0 will-change-transform"
       >
-        <div className="absolute inset-0 bg-gradient-to-br from-amber-primary/90 via-rose-secondary/80 to-amber-dark/90 animate-gradient" />
-        <div className="absolute inset-0 bg-gradient-to-tr from-amber-dark/40 via-transparent to-rose-secondary/40 animate-gradient" style={{ animationDirection: "reverse", animationDuration: "20s" }} />
+        <div className="absolute inset-0 bg-gradient-to-br from-amber-primary/90 via-rose-secondary/80 to-amber-dark/90 dark:from-amber-800/95 dark:via-rose-800/90 dark:to-amber-950/95 animate-gradient" />
+        <div className="absolute inset-0 bg-gradient-to-tr from-amber-dark/40 via-transparent to-rose-secondary/40 dark:from-amber-950/60 dark:to-rose-950/60 animate-gradient" style={{ animationDirection: "reverse", animationDuration: "20s" }} />
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(255,255,255,0.05)_0%,transparent_70%)]" />
       </motion.div>
 
@@ -59,7 +59,7 @@ export default function Hero() {
           initial={{ opacity: 0, y: 40 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.8 }}
-          className="text-4xl sm:text-5xl md:text-7xl lg:text-8xl font-serif font-bold text-primary mb-6 leading-tight"
+          className="text-4xl sm:text-5xl md:text-7xl lg:text-8xl font-serif font-bold text-amber-900 dark:text-white mb-6 leading-tight"
         >
           K &amp; S Beauty Centre
         </motion.h1>
@@ -95,7 +95,7 @@ export default function Hero() {
             onClick={() => {
               document.getElementById("services")?.scrollIntoView({ behavior: "smooth" })
             }}
-            className="rounded-full px-8 py-4 h-auto text-base sm:text-lg border-2 border-amber-900/70 text-amber-900 dark:border-white/70 dark:text-white dark:hover:bg-white dark:hover:text-primary backdrop-blur-sm"
+            className="rounded-full px-8 py-4 h-auto text-base sm:text-lg border-2 border-amber-900/70 text-amber-900 hover:bg-amber-900/10 dark:border-white/70 dark:text-white dark:hover:bg-white dark:hover:text-primary backdrop-blur-sm"
           >
             Explore Services
             <span aria-hidden>→</span>

@@ -44,7 +44,7 @@ export default function AdminLoginPage() {
         <div className="bg-white rounded-2xl shadow-xl p-6 sm:p-8">
           <div className="flex flex-col items-center mb-8">
             <div className="w-14 h-14 bg-amber-primary rounded-full flex items-center justify-center mb-4">
-              <Lock className="w-6 h-6 text-white" />
+              <Lock className="w-6 h-6 text-primary-foreground" />
             </div>
             <h1 className="text-2xl font-serif text-text-dark">Admin Login</h1>
             <p className="text-sm text-text-light mt-1">Enter your credentials to continue</p>
@@ -84,7 +84,7 @@ export default function AdminLoginPage() {
             <button
               type="submit"
               disabled={loading || !username || !password}
-              className="w-full py-3 bg-amber-primary text-white rounded-xl text-sm font-medium hover:bg-amber-dark disabled:opacity-50 transition-colors"
+              className="w-full py-3 bg-primary text-primary-foreground rounded-xl text-sm font-medium hover:bg-primary/90 disabled:opacity-50 transition-colors"
             >
               {loading ? "Signing in..." : "Sign in"}
             </button>
@@ -92,7 +92,7 @@ export default function AdminLoginPage() {
         </div>
 
         <p className="text-center text-xs text-text-light mt-6">
-          <span className="text-amber-primary">K &amp; S Beauty Centre</span> Admin
+          <span className="text-amber-text">K &amp; S Beauty Centre</span> Admin
         </p>
       </div>
     </div>

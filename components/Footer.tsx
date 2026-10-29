@@ -26,7 +26,7 @@ export default function Footer() {
                     href={`https://instagram.com/${company.instagram.replace("@", "")}`}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="flex size-10 items-center justify-center rounded-full bg-neutral-800 text-neutral-400 transition-colors hover:bg-primary hover:text-white active:bg-primary/80 focus-visible:ring-3 focus-visible:ring-ring/50 outline-none"
+                    className="flex size-10 items-center justify-center rounded-full bg-neutral-800 text-neutral-400 transition-colors hover:bg-primary hover:text-primary-foreground active:bg-primary/90 focus-visible:ring-3 focus-visible:ring-ring/50 outline-none"
                     aria-label="Instagram"
                   >
                     <svg className="size-5" fill="currentColor" viewBox="0 0 24 24">
@@ -39,7 +39,7 @@ export default function Footer() {
                     href={`https://facebook.com/${company.facebook}`}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="flex size-10 items-center justify-center rounded-full bg-neutral-800 text-neutral-400 transition-colors hover:bg-primary hover:text-white active:bg-primary/80 focus-visible:ring-3 focus-visible:ring-ring/50 outline-none"
+                    className="flex size-10 items-center justify-center rounded-full bg-neutral-800 text-neutral-400 transition-colors hover:bg-primary hover:text-primary-foreground active:bg-primary/90 focus-visible:ring-3 focus-visible:ring-ring/50 outline-none"
                     aria-label="Facebook"
                   >
                     <svg className="size-5" fill="currentColor" viewBox="0 0 24 24">
@@ -52,7 +52,7 @@ export default function Footer() {
                     href={`https://x.com/${company.x.replace("@", "")}`}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="flex size-10 items-center justify-center rounded-full bg-neutral-800 text-neutral-400 transition-colors hover:bg-primary hover:text-white active:bg-primary/80 focus-visible:ring-3 focus-visible:ring-ring/50 outline-none"
+                    className="flex size-10 items-center justify-center rounded-full bg-neutral-800 text-neutral-400 transition-colors hover:bg-primary hover:text-primary-foreground active:bg-primary/90 focus-visible:ring-3 focus-visible:ring-ring/50 outline-none"
                     aria-label="X"
                   >
                     <svg className="size-5" fill="currentColor" viewBox="0 0 24 24">

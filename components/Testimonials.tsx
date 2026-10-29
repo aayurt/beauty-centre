@@ -54,7 +54,7 @@ function Stars({ rating }: { rating: number }) {
           className={cn(
             "size-4",
             i < rating
-              ? "text-amber-primary fill-amber-primary"
+              ? "text-amber-text fill-amber-primary"
               : "text-neutral-300 dark:text-neutral-600",
           )}
         />
@@ -74,7 +74,7 @@ function ReviewCard({ review }: { review: Review }) {
         <div>
           <p className="text-sm font-semibold text-foreground">{review.name}</p>
           {review.service && (
-            <p className="text-xs text-amber-primary">{review.service}</p>
+            <p className="text-xs text-amber-text">{review.service}</p>
           )}
         </div>
       </footer>
@@ -103,12 +103,12 @@ export default function Testimonials() {
     <section id="testimonials" className="py-24 md:py-32 bg-white dark:bg-neutral-950 overflow-hidden">
       <div className="max-w-7xl mx-auto px-4 sm:px-6">
         <AnimatedSection direction="up" className="text-center max-w-3xl mx-auto mb-16">
-          <span className="inline-block px-4 py-2 bg-rose-light dark:bg-neutral-700 text-amber-primary rounded-full text-sm font-medium mb-6">
+          <span className="inline-block px-4 py-2 bg-rose-light dark:bg-neutral-700 text-amber-text rounded-full text-sm font-medium mb-6">
             Testimonials
           </span>
           <h2 className="text-3xl sm:text-4xl md:text-5xl font-serif font-bold text-foreground mb-6">
             What Our Clients{" "}
-            <span className="text-amber-primary">Say About Us</span>
+            <span className="text-amber-text">Say About Us</span>
           </h2>
 
           {average > 0 && (

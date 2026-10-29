@@ -85,12 +85,12 @@ export default function Services() {
           direction="up"
           className="text-center max-w-3xl mx-auto mb-12"
         >
-          <span className="inline-block px-4 py-2 bg-white dark:bg-neutral-800 text-amber-primary rounded-full text-sm font-medium mb-6">
+          <span className="inline-block px-4 py-2 bg-white dark:bg-neutral-800 text-amber-text rounded-full text-sm font-medium mb-6">
             Our Services
           </span>
           <h2 className="text-3xl sm:text-4xl md:text-5xl font-serif font-bold text-foreground mb-6">
             Pamper Yourself with{" "}
-            <span className="text-amber-primary">Luxury Treatments</span>
+            <span className="text-amber-text">Luxury Treatments</span>
           </h2>
           <p className="text-muted-foreground text-base sm:text-lg leading-relaxed">
             Discover our comprehensive range of beauty and wellness services,
@@ -131,7 +131,7 @@ export default function Services() {
                       className="group relative flex flex-col overflow-hidden rounded-2xl bg-white dark:bg-neutral-800 p-6 shadow-sm ring-1 ring-black/5 dark:ring-white/10 transition-all duration-300 hover:-translate-y-1 hover:shadow-xl"
                     >
                       <div className="mb-4 flex items-start justify-between gap-2">
-                        <span className="flex size-11 items-center justify-center rounded-full bg-amber-primary/10 text-amber-primary">
+                        <span className="flex size-11 items-center justify-center rounded-full bg-amber-primary/10 text-amber-text">
                           <Sparkles className="size-5" />
                         </span>
                       </div>
@@ -167,7 +167,7 @@ export default function Services() {
                         size="sm"
                         onClick={() => openBooking(svc.title)}
                         className={cn(
-                          "justify-start self-start rounded-full px-3 text-amber-primary hover:bg-amber-primary/10 hover:text-amber-primary",
+                          "justify-start self-start rounded-full px-3 text-amber-text hover:bg-amber-primary/10 hover:text-amber-text",
                         )}
                       >
                         Book This Service

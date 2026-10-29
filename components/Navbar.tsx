@@ -68,7 +68,7 @@ export default function Navbar() {
       className={cn(
         "fixed top-0 left-0 right-0 z-50 transition-all duration-500",
         isScrolled
-          ? "bg-white/80 backdrop-blur-md shadow-lg shadow-black/5 py-3 dark:bg-neutral-900/80"
+          ? "bg-background/80 border-b border-border/60 backdrop-blur-md shadow-lg shadow-black/5 py-3"
           : "bg-transparent py-5",
       )}
     >
@@ -100,10 +100,12 @@ export default function Navbar() {
               className={cn(
                 "relative px-3 py-2 text-sm font-medium tracking-wide transition-colors duration-300",
                 activeSection === link.id
-                  ? "text-amber-primary"
+                  ? isScrolled
+                    ? "text-amber-text"
+                    : "text-amber-900 dark:text-amber-300"
                   : isScrolled
-                    ? "text-foreground hover:text-amber-primary active:text-amber-primary/80"
-                    : "text-white/90 drop-shadow-md hover:text-white active:text-white/70",
+                    ? "text-foreground hover:text-amber-text active:text-amber-text/80"
+                    : "text-amber-900/90 hover:text-amber-900 active:text-amber-900/70 dark:text-white/90 dark:hover:text-white dark:active:text-white/70",
               )}
             >
               {link.name}
@@ -112,7 +114,7 @@ export default function Navbar() {
                   layoutId="nav-active"
                   className={cn(
                     "absolute bottom-0 left-3 right-3 h-0.5 rounded-full",
-                    isScrolled ? "bg-amber-primary" : "bg-white",
+                    isScrolled ? "bg-amber-primary" : "bg-amber-900 dark:bg-white",
                   )}
                   transition={{ type: "spring", stiffness: 380, damping: 30 }}
                 />
@@ -124,7 +126,7 @@ export default function Navbar() {
               className={cn(
                 isScrolled
                   ? "text-foreground hover:bg-muted"
-                  : "text-white/80 hover:bg-white/10",
+                  : "text-amber-900 hover:bg-amber-900/10 dark:text-white/80 dark:hover:bg-white/10",
               )}
             />
             <Button
@@ -134,7 +136,7 @@ export default function Navbar() {
               className={cn(
                 "rounded-full px-4",
                 !isScrolled &&
-                  "border-white/20 bg-white/10 text-white backdrop-blur-sm hover:bg-white/20",
+                  "border-amber-900/20 bg-amber-900/10 text-amber-900 backdrop-blur-sm hover:bg-amber-900/20 dark:border-white/20 dark:bg-white/10 dark:text-white dark:hover:bg-white/20",
               )}
             >
               <Sparkles />
@@ -150,7 +152,7 @@ export default function Navbar() {
               "inline-flex items-center justify-center rounded-md p-2 focus:outline-none focus-visible:ring-2 focus-visible:ring-ring active:scale-95 md:hidden",
               isScrolled
                 ? "text-foreground hover:bg-muted active:bg-muted/80"
-                : "text-white hover:bg-white/10 active:bg-white/20",
+                : "text-amber-900 hover:bg-amber-900/10 active:bg-amber-900/20 dark:text-white dark:hover:bg-white/10 dark:active:bg-white/20",
             )}
             aria-label="Open navigation menu"
           >
@@ -200,7 +202,7 @@ export default function Navbar() {
                     className={cn(
                       "rounded-lg px-3 py-2.5 text-sm font-medium transition-colors",
                       activeSection === link.id
-                        ? "bg-amber-primary/10 text-amber-primary"
+                        ? "bg-amber-primary/10 text-amber-text"
                         : "text-foreground hover:bg-muted active:bg-muted/80",
                     )}
                   >

@@ -122,12 +122,12 @@ export default function About() {
 
           <AnimatedSection direction="right">
             <div className="max-w-lg">
-              <span className="inline-block px-4 py-2 bg-rose-light dark:bg-neutral-700 text-amber-primary rounded-full text-sm font-medium mb-6">
+              <span className="inline-block px-4 py-2 bg-rose-light dark:bg-neutral-700 text-amber-text rounded-full text-sm font-medium mb-6">
                 Our Story
               </span>
               <h2 className="text-3xl sm:text-4xl md:text-5xl font-serif font-bold text-foreground mb-6 leading-tight">
                 A Pioneer of{" "}
-                <span className="text-amber-primary">Beauty in Kathmandu</span>
+                <span className="text-amber-text">Beauty in Kathmandu</span>
               </h2>
               <TextReveal
                 text="K & S Beauty Centre, nestled in the historic Jamal district of Kathmandu, stands as a testament to vision and resilience. At a time when fewer than ten professional hair salons operated across the entire Kathmandu Valley, founder Mr. Keshav dared to pioneer — securing a first-mover advantage that would define the salon's trajectory for generations."
@@ -140,19 +140,19 @@ export default function About() {
 
               <div className="grid grid-cols-3 gap-4 sm:gap-6">
                 <div>
-                  <div className="text-2xl sm:text-3xl font-serif font-bold text-amber-primary">
+                  <div className="text-2xl sm:text-3xl font-serif font-bold text-amber-text">
                     <CountUp from={0} to={4} suffix="+" duration={2} />
                   </div>
                   <div className="text-xs sm:text-sm text-muted-foreground">Decades of Beauty</div>
                 </div>
                 <div>
-                  <div className="text-2xl sm:text-3xl font-serif font-bold text-amber-primary">
+                  <div className="text-2xl sm:text-3xl font-serif font-bold text-amber-text">
                     <CountUp from={0} to={10} suffix="+" duration={2} />
                   </div>
                   <div className="text-xs sm:text-sm text-muted-foreground">Pioneer #{""} Establishment</div>
                 </div>
                 <div>
-                  <div className="text-2xl sm:text-3xl font-serif font-bold text-amber-primary">
+                  <div className="text-2xl sm:text-3xl font-serif font-bold text-amber-text">
                     <CountUp from={0} to={1} suffix="K+" duration={2} />
                   </div>
                   <div className="text-xs sm:text-sm text-muted-foreground">Happy Clients</div>
@@ -165,12 +165,12 @@ export default function About() {
         {/* Timeline Section */}
         <AnimatedSection direction="up">
           <div className="text-center max-w-3xl mx-auto mb-16">
-            <span className="inline-block px-4 py-2 bg-rose-light dark:bg-neutral-700 text-amber-primary rounded-full text-sm font-medium mb-6">
+            <span className="inline-block px-4 py-2 bg-rose-light dark:bg-neutral-700 text-amber-text rounded-full text-sm font-medium mb-6">
               Our Journey
             </span>
             <h2 className="text-3xl sm:text-4xl md:text-5xl font-serif font-bold text-foreground mb-6">
               The Story of{" "}
-              <span className="text-amber-primary">A Beauty Institution</span>
+              <span className="text-amber-text">A Beauty Institution</span>
             </h2>
             <p className="text-muted-foreground text-base sm:text-lg leading-relaxed">
               From the commercial landscape of a transforming Kathmandu Valley to a
@@ -201,7 +201,7 @@ export default function About() {
                     whileHover={{ scale: 1.1, backgroundColor: "#d97706" }}
                     transition={{ type: "spring", stiffness: 300, damping: 20 }}
                   >
-                    <milestone.icon className="w-5 h-5 text-amber-primary group-hover:text-white transition-colors" />
+                    <milestone.icon className="w-5 h-5 text-amber-text group-hover:text-primary-foreground transition-colors" />
                   </motion.div>
                   <div className="flex-1">
                     <span className="timeline-year">{milestone.year}</span>

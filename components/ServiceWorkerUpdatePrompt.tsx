@@ -79,7 +79,7 @@ export default function ServiceWorkerUpdatePrompt() {
         <DialogHeader>
           <div className="mb-1 flex items-center gap-2">
             <span className="flex size-9 items-center justify-center rounded-full bg-amber-primary/10">
-              <RefreshCw className="size-4 text-amber-primary" />
+              <RefreshCw className="size-4 text-amber-text" />
             </span>
             <DialogTitle className="font-serif text-lg">
               New version available
