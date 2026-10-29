@@ -3,6 +3,8 @@ import { prisma } from "@/lib/prisma";
 import { verifySession } from "@/lib/auth";
 import { z } from "zod";
 
+export const dynamic = "force-dynamic";
+
 const AddMediaSchema = z.object({
   imageUrl: z.string().min(1, "Image URL is required"),
   alt: z.string().optional().default(""),

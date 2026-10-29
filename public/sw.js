@@ -1,51 +1,79 @@
-const CACHE_VERSION = 2
+const CACHE_VERSION = 3
 const CACHE_NAME = `ks-beauty-cache-v${CACHE_VERSION}`
 const ASSETS_TO_CACHE = [
   "/",
 ]
 
+const ASSET_PATTERN =
+  /\.(?:css|js|mjs|png|jpe?g|gif|svg|webp|avif|ico|woff2?|ttf|otf|mp4|webm)$/i
+
+function isApiOrAdmin(pathname) {
+  return pathname.startsWith("/api/") || pathname.startsWith("/admin")
+}
+
+function isCacheableAsset(url) {
+  if (url.origin !== self.location.origin) return false
+  if (isApiOrAdmin(url.pathname)) return false
+  if (url.pathname.startsWith("/_next/static/")) return true
+  return ASSET_PATTERN.test(url.pathname)
+}
+
 self.addEventListener("install", (event) => {
   event.waitUntil(
-    caches
-      .open(CACHE_NAME)
-      .then((cache) => cache.addAll(ASSETS_TO_CACHE))
+    caches.open(CACHE_NAME).then((cache) => cache.addAll(ASSETS_TO_CACHE))
   )
 })
 
 self.addEventListener("fetch", (event) => {
   if (event.request.method !== "GET") return
 
-  const { request } = event
+  const url = new URL(event.request.url)
 
-  if (request.mode === "navigate") {
+  if (url.origin !== self.location.origin) return
+
+  // API responses and the admin panel must never be served from the
+  // service-worker cache: stale JSON/HTML breaks create/update/delete flows.
+  if (isApiOrAdmin(url.pathname)) return
+
+  if (event.request.mode === "navigate") {
     event.respondWith(
-      fetch(request)
+      fetch(event.request)
         .then((networkResponse) => {
-          const copy = networkResponse.clone()
-          caches.open(CACHE_NAME).then((cache) => cache.put(request, copy))
+          if (networkResponse && networkResponse.ok) {
+            const copy = networkResponse.clone()
+            caches
+              .open(CACHE_NAME)
+              .then((cache) => cache.put(event.request, copy))
+              .catch(() => {})
+          }
           return networkResponse
         })
-        .catch(() =>
-          caches.match(request).then((cached) => cached || caches.match("/"))
-        )
+        .catch(async () => {
+          const cached = await caches.match(event.request)
+          return cached || caches.match("/")
+        })
     )
     return
   }
 
+  if (!isCacheableAsset(url)) return
+
   event.respondWith(
-    caches.match(request).then((response) => {
-      if (response) return response
-      return fetch(request).then((networkResponse) => {
-        if (
-          networkResponse &&
-          networkResponse.status === 200 &&
-          networkResponse.type === "basic"
-        ) {
-          const cache = caches.open(CACHE_NAME)
-          cache.then((c) => c.put(request, networkResponse.clone()))
-        }
-        return networkResponse
-      })
+    caches.match(event.request).then((cached) => {
+      const network = fetch(event.request)
+        .then((networkResponse) => {
+          if (networkResponse && networkResponse.status === 200) {
+            const copy = networkResponse.clone()
+            caches
+              .open(CACHE_NAME)
+              .then((cache) => cache.put(event.request, copy))
+              .catch(() => {})
+          }
+          return networkResponse
+        })
+        .catch(() => cached)
+
+      return cached || network
     })
   )
 })
@@ -61,7 +89,11 @@ self.addEventListener("activate", (event) => {
   event.waitUntil(
     caches
       .keys()
-      .then((keys) => Promise.all(keys.filter((key) => !valid(key)).map((key) => caches.delete(key))))
+      .then((keys) =>
+        Promise.all(
+          keys.filter((key) => !valid(key)).map((key) => caches.delete(key))
+        )
+      )
       .then(() => self.clients.claim())
   )
 })

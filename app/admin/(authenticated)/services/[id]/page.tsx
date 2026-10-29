@@ -58,7 +58,9 @@ export default function ServiceFormPage() {
     let cancelled = false;
     (async () => {
       try {
-        const res = await fetch(`/api/services/${serviceId}`);
+        const res = await fetch(`/api/services/${serviceId}`, {
+          cache: "no-store",
+        });
         const json = await res.json();
         if (json.error) throw new Error(json.error);
         if (!cancelled) {

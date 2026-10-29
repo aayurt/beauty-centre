@@ -57,7 +57,9 @@ export default function EventFormPage() {
     if (!eventId) return;
     (async () => {
       try {
-        const res = await fetch(`/api/events/${eventId}`);
+        const res = await fetch(`/api/events/${eventId}`, {
+          cache: "no-store",
+        });
         const json = await res.json();
         if (json.error) throw new Error(json.error);
 
@@ -105,47 +107,50 @@ export default function EventFormPage() {
 
       const savedId = json.data.id;
 
-      if (form.media.length > 0) {
-        const existingMediaIds = new Set(
-          form.media.filter((m) => m.id).map((m) => m.id),
-        );
+      const existingMediaIds = new Set(
+        form.media.filter((m) => m.id).map((m) => m.id),
+      );
 
-        const currentRes = await fetch(`/api/events/${savedId}/media`);
-        const currentJson = await currentRes.json();
-        const currentMedia: MediaItem[] = currentJson.data || [];
+      const currentRes = await fetch(`/api/events/${savedId}/media`, {
+        cache: "no-store",
+      });
+      const currentJson = await currentRes.json();
+      if (!currentRes.ok || currentJson.error) {
+        throw new Error(currentJson.error || "Failed to load event media");
+      }
+      const currentMedia: MediaItem[] = currentJson.data || [];
 
-        for (const item of currentMedia) {
-          if (item.id && !existingMediaIds.has(item.id)) {
-            await fetch(`/api/events/${savedId}/media/${item.id}`, {
-              method: "DELETE",
-            });
-          }
+      for (const item of currentMedia) {
+        if (item.id && !existingMediaIds.has(item.id)) {
+          await fetch(`/api/events/${savedId}/media/${item.id}`, {
+            method: "DELETE",
+          });
         }
+      }
 
-        for (const item of form.media) {
-          if (item.id) {
-            await fetch(`/api/events/${savedId}/media/${item.id}`, {
-              method: "PUT",
-              headers: { "Content-Type": "application/json" },
-              body: JSON.stringify({
-                imageUrl: item.imageUrl,
-                alt: item.alt || null,
-                caption: item.caption || null,
-                displayOrder: item.displayOrder || 0,
-              }),
-            });
-          } else {
-            await fetch(`/api/events/${savedId}/media`, {
-              method: "POST",
-              headers: { "Content-Type": "application/json" },
-              body: JSON.stringify({
-                imageUrl: item.imageUrl,
-                alt: item.alt || null,
-                caption: item.caption || null,
-                displayOrder: item.displayOrder || 0,
-              }),
-            });
-          }
+      for (const item of form.media) {
+        if (item.id) {
+          await fetch(`/api/events/${savedId}/media/${item.id}`, {
+            method: "PUT",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+              imageUrl: item.imageUrl,
+              alt: item.alt || null,
+              caption: item.caption || null,
+              displayOrder: item.displayOrder || 0,
+            }),
+          });
+        } else {
+          await fetch(`/api/events/${savedId}/media`, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+              imageUrl: item.imageUrl,
+              alt: item.alt || null,
+              caption: item.caption || null,
+              displayOrder: item.displayOrder || 0,
+            }),
+          });
         }
       }
 

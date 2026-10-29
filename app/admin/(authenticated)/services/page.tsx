@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { Plus, Edit, Trash2, Scissors } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -31,36 +31,57 @@ export default function AdminServicesPage() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
 
-  useEffect(() => {
-    let cancelled = false;
-    (async () => {
-      try {
-        setLoading(true);
-        const res = await fetch("/api/services?activeOnly=false");
-        const json = await res.json();
-        if (json.error) throw new Error(json.error);
-        if (!cancelled) setServices(json.data);
-      } catch (err) {
-        if (!cancelled)
-          setError(
-            err instanceof Error ? err.message : "Failed to load services",
-          );
-      } finally {
-        if (!cancelled) setLoading(false);
+  const loadServices = useCallback(async () => {
+    try {
+      const res = await fetch("/api/services?activeOnly=false", {
+        cache: "no-store",
+      });
+      const json = await res.json();
+      if (!res.ok || json.error) {
+        throw new Error(json.error || "Failed to load services");
       }
-    })();
-    return () => {
-      cancelled = true;
-    };
+      setServices(json.data ?? []);
+      setError("");
+    } catch (err) {
+      setError(
+        err instanceof Error ? err.message : "Failed to load services",
+      );
+    } finally {
+      setLoading(false);
+    }
   }, []);
+
+  useEffect(() => {
+    (async () => {
+      await loadServices();
+    })();
+
+    const refresh = () => loadServices();
+    const refreshWhenVisible = () => {
+      if (document.visibilityState === "visible") refresh();
+    };
+
+    window.addEventListener("focus", refresh);
+    document.addEventListener("visibilitychange", refreshWhenVisible);
+    return () => {
+      window.removeEventListener("focus", refresh);
+      document.removeEventListener("visibilitychange", refreshWhenVisible);
+    };
+  }, [loadServices]);
 
   async function handleDelete(id: number) {
     if (!confirm("Are you sure you want to delete this service?")) return;
     try {
-      const res = await fetch(`/api/services/${id}`, { method: "DELETE" });
+      const res = await fetch(`/api/services/${id}`, {
+        method: "DELETE",
+        cache: "no-store",
+      });
       const json = await res.json();
-      if (json.error) throw new Error(json.error);
+      if (!res.ok || json.error) {
+        throw new Error(json.error || "Failed to delete service");
+      }
       setServices((prev) => prev.filter((s) => s.id !== id));
+      router.refresh();
     } catch (err) {
       alert(err instanceof Error ? err.message : "Failed to delete service");
     }

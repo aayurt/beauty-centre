@@ -4,6 +4,8 @@ import { createContactEntry } from "@/lib/db";
 import { verifySession } from "@/lib/auth";
 import { z } from "zod";
 
+export const dynamic = "force-dynamic";
+
 export async function GET() {
   try {
     const authed = await verifySession();
