@@ -44,7 +44,9 @@ export default function StaffFormPage() {
     let cancelled = false;
     (async () => {
       try {
-        const res = await fetch(`/api/staff/${staffId}`);
+        const res = await fetch(`/api/staff/${staffId}`, {
+          cache: "no-store",
+        });
         const json = await res.json();
         if (json.error) throw new Error(json.error);
         if (!cancelled) {

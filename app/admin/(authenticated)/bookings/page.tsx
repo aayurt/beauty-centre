@@ -1,9 +1,18 @@
 "use client";
 
-import { useEffect, useState } from "react";
-import { Calendar, Mail, Phone, MessageSquare, User } from "lucide-react";
+import { useCallback, useEffect, useState } from "react";
+import {
+  Calendar,
+  Mail,
+  Phone,
+  MessageSquare,
+  User,
+  RefreshCw,
+} from "lucide-react";
+import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Card } from "@/components/ui/card";
+import { cn } from "@/lib/utils";
 import {
   Tabs,
   TabsList,
@@ -37,36 +46,61 @@ export default function AdminBookingsPage() {
   const [inquiries, setInquiries] = useState<BookingInquiry[]>([]);
   const [contacts, setContacts] = useState<ContactEntry[]>([]);
   const [loading, setLoading] = useState(true);
+  const [refreshing, setRefreshing] = useState(false);
   const [error, setError] = useState("");
 
-  useEffect(() => {
-    let cancelled = false;
-    (async () => {
-      try {
-        setLoading(true);
-        const [bookingsRes, contactsRes] = await Promise.all([
-          fetch("/api/bookings"),
-          fetch("/api/contact"),
-        ]);
-        const bookingsJson = await bookingsRes.json();
-        const contactsJson = await contactsRes.json();
-        if (!cancelled) {
-          if (bookingsJson.error) throw new Error(bookingsJson.error);
-          if (contactsJson.error) throw new Error(contactsJson.error);
-          setInquiries(bookingsJson.data);
-          setContacts(contactsJson.data);
-        }
-      } catch (err) {
-        if (!cancelled)
-          setError(err instanceof Error ? err.message : "Failed to load");
-      } finally {
-        if (!cancelled) setLoading(false);
+  const loadInquiries = useCallback(async () => {
+    try {
+      const [bookingsRes, contactsRes] = await Promise.all([
+        fetch("/api/bookings", { cache: "no-store" }),
+        fetch("/api/contact", { cache: "no-store" }),
+      ]);
+      const bookingsJson = await bookingsRes.json();
+      const contactsJson = await contactsRes.json();
+
+      if (!bookingsRes.ok || bookingsJson.error) {
+        throw new Error(bookingsJson.error || "Failed to load bookings");
       }
-    })();
-    return () => {
-      cancelled = true;
-    };
+      if (!contactsRes.ok || contactsJson.error) {
+        throw new Error(contactsJson.error || "Failed to load messages");
+      }
+
+      setInquiries(bookingsJson.data ?? []);
+      setContacts(contactsJson.data ?? []);
+      setError("");
+    } catch (err) {
+      setError(err instanceof Error ? err.message : "Failed to load");
+    } finally {
+      setLoading(false);
+    }
   }, []);
+
+  const handleRefresh = useCallback(async () => {
+    setRefreshing(true);
+    try {
+      await loadInquiries();
+    } finally {
+      setRefreshing(false);
+    }
+  }, [loadInquiries]);
+
+  useEffect(() => {
+    (async () => {
+      await loadInquiries();
+    })();
+
+    const refresh = () => loadInquiries();
+    const refreshWhenVisible = () => {
+      if (document.visibilityState === "visible") refresh();
+    };
+
+    window.addEventListener("focus", refresh);
+    document.addEventListener("visibilitychange", refreshWhenVisible);
+    return () => {
+      window.removeEventListener("focus", refresh);
+      document.removeEventListener("visibilitychange", refreshWhenVisible);
+    };
+  }, [loadInquiries]);
 
   function formatDate(dateStr: string) {
     return new Date(dateStr).toLocaleDateString("en-US", {
@@ -110,6 +144,15 @@ export default function AdminBookingsPage() {
               : `${contacts.length} message${contacts.length !== 1 && "s"}`}
           </p>
         </div>
+        <Button
+          variant="outline"
+          size="sm"
+          onClick={handleRefresh}
+          disabled={refreshing}
+        >
+          <RefreshCw className={cn("size-4", refreshing && "animate-spin")} />
+          Refresh
+        </Button>
       </div>
 
       <Tabs value={tab} onValueChange={(v) => setTab(v as Tab)}>

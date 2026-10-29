@@ -3,6 +3,8 @@ import { prisma } from "@/lib/prisma";
 import { verifySession } from "@/lib/auth";
 import { z } from "zod";
 
+export const dynamic = "force-dynamic";
+
 const CreatePostSchema = z.object({
   postUrl: z.string().url("Must be a valid URL"),
   caption: z.string().optional(),

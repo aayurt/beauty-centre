@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { Plus, Edit, Trash2, Clock, MapPin } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -32,34 +32,55 @@ export default function AdminEventsPage() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
 
-  useEffect(() => {
-    let cancelled = false;
-    (async () => {
-      try {
-        setLoading(true);
-        const res = await fetch("/api/events?activeOnly=false");
-        const json = await res.json();
-        if (json.error) throw new Error(json.error);
-        if (!cancelled) setEvents(json.data);
-      } catch (err) {
-        if (!cancelled)
-          setError(err instanceof Error ? err.message : "Failed to load events");
-      } finally {
-        if (!cancelled) setLoading(false);
+  const loadEvents = useCallback(async () => {
+    try {
+      const res = await fetch("/api/events?activeOnly=false", {
+        cache: "no-store",
+      });
+      const json = await res.json();
+      if (!res.ok || json.error) {
+        throw new Error(json.error || "Failed to load events");
       }
-    })();
-    return () => {
-      cancelled = true;
-    };
+      setEvents(json.data ?? []);
+      setError("");
+    } catch (err) {
+      setError(err instanceof Error ? err.message : "Failed to load events");
+    } finally {
+      setLoading(false);
+    }
   }, []);
+
+  useEffect(() => {
+    (async () => {
+      await loadEvents();
+    })();
+
+    const refresh = () => loadEvents();
+    const refreshWhenVisible = () => {
+      if (document.visibilityState === "visible") refresh();
+    };
+
+    window.addEventListener("focus", refresh);
+    document.addEventListener("visibilitychange", refreshWhenVisible);
+    return () => {
+      window.removeEventListener("focus", refresh);
+      document.removeEventListener("visibilitychange", refreshWhenVisible);
+    };
+  }, [loadEvents]);
 
   async function handleDelete(id: number) {
     if (!confirm("Are you sure you want to delete this event?")) return;
     try {
-      const res = await fetch(`/api/events/${id}`, { method: "DELETE" });
+      const res = await fetch(`/api/events/${id}`, {
+        method: "DELETE",
+        cache: "no-store",
+      });
       const json = await res.json();
-      if (json.error) throw new Error(json.error);
+      if (!res.ok || json.error) {
+        throw new Error(json.error || "Failed to delete event");
+      }
       setEvents((prev) => prev.filter((e) => e.id !== id));
+      router.refresh();
     } catch (err) {
       alert(err instanceof Error ? err.message : "Failed to delete event");
     }

@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { Plus, Edit, Trash2, Users } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -23,36 +23,55 @@ export default function AdminStaffPage() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
 
-  useEffect(() => {
-    let cancelled = false;
-    (async () => {
-      try {
-        setLoading(true);
-        const res = await fetch("/api/staff?activeOnly=false");
-        const json = await res.json();
-        if (json.error) throw new Error(json.error);
-        if (!cancelled) setStaff(json.data);
-      } catch (err) {
-        if (!cancelled)
-          setError(
-            err instanceof Error ? err.message : "Failed to load staff",
-          );
-      } finally {
-        if (!cancelled) setLoading(false);
+  const loadStaff = useCallback(async () => {
+    try {
+      const res = await fetch("/api/staff?activeOnly=false", {
+        cache: "no-store",
+      });
+      const json = await res.json();
+      if (!res.ok || json.error) {
+        throw new Error(json.error || "Failed to load staff");
       }
-    })();
-    return () => {
-      cancelled = true;
-    };
+      setStaff(json.data ?? []);
+      setError("");
+    } catch (err) {
+      setError(err instanceof Error ? err.message : "Failed to load staff");
+    } finally {
+      setLoading(false);
+    }
   }, []);
+
+  useEffect(() => {
+    (async () => {
+      await loadStaff();
+    })();
+
+    const refresh = () => loadStaff();
+    const refreshWhenVisible = () => {
+      if (document.visibilityState === "visible") refresh();
+    };
+
+    window.addEventListener("focus", refresh);
+    document.addEventListener("visibilitychange", refreshWhenVisible);
+    return () => {
+      window.removeEventListener("focus", refresh);
+      document.removeEventListener("visibilitychange", refreshWhenVisible);
+    };
+  }, [loadStaff]);
 
   async function handleDelete(id: number) {
     if (!confirm("Are you sure you want to delete this staff member?")) return;
     try {
-      const res = await fetch(`/api/staff/${id}`, { method: "DELETE" });
+      const res = await fetch(`/api/staff/${id}`, {
+        method: "DELETE",
+        cache: "no-store",
+      });
       const json = await res.json();
-      if (json.error) throw new Error(json.error);
+      if (!res.ok || json.error) {
+        throw new Error(json.error || "Failed to delete staff");
+      }
       setStaff((prev) => prev.filter((s) => s.id !== id));
+      router.refresh();
     } catch (err) {
       alert(err instanceof Error ? err.message : "Failed to delete staff");
     }

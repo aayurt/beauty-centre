@@ -3,12 +3,15 @@ import { prisma } from "@/lib/prisma";
 import { verifySession } from "@/lib/auth";
 import { z } from "zod";
 
+export const dynamic = "force-dynamic";
+
 const CreateStaffSchema = z.object({
   name: z.string().min(1, "Name is required"),
   role: z.string().optional().default(""),
   bio: z.string().optional().default(""),
   imageUrl: z.string().optional().default(""),
   displayOrder: z.number().optional().default(0),
+  isActive: z.boolean().optional().default(true),
 });
 
 export async function GET(request: NextRequest) {
@@ -54,7 +57,7 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    const { name, role, bio, imageUrl, displayOrder } = parsed.data;
+    const { name, role, bio, imageUrl, displayOrder, isActive } = parsed.data;
 
     const staff = await prisma.staff.create({
       data: {
@@ -63,6 +66,7 @@ export async function POST(request: NextRequest) {
         bio: bio || null,
         imageUrl: imageUrl || null,
         displayOrder,
+        isActive,
       },
     });
 
