@@ -252,6 +252,16 @@
   --transition-property-opacity: opacity;
   --transition-property-shadow: box-shadow;
   --transition-property-transform: transform;
+
+  /* --------------------------------------------------------------------------
+     11. Vibrant & Glassmorphic Tokens
+     -------------------------------------------------------------------------- */
+  --glass-bg: rgba(255, 255, 255, 0.75);
+  --glass-border: rgba(255, 255, 255, 0.5);
+  --glass-shadow: 0 10px 30px -5px rgba(245, 158, 11, 0.15);
+  --glow-primary: 0 0 25px rgba(245, 158, 11, 0.35);
+  --glow-rose: 0 0 25px rgba(251, 113, 133, 0.35);
+  --gradient-vibrant: linear-gradient(135deg, #f59e0b 0%, #fb7185 50%, #e11d48 100%);
 }
 
 /* --------------------------------------------------------------------------
@@ -286,4 +296,11 @@
   --border: #403c35;
   --input: #403c35;
   --ring: var(--color-amber-500);
+
+  /* Glass Dark */
+  --glass-bg: rgba(30, 27, 22, 0.75);
+  --glass-border: rgba(255, 255, 255, 0.08);
+  --glass-shadow: 0 10px 30px -5px rgba(0, 0, 0, 0.5);
+  --glow-primary: 0 0 25px rgba(245, 158, 11, 0.25);
+  --glow-rose: 0 0 25px rgba(251, 113, 133, 0.25);
 }

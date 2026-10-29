@@ -104,12 +104,12 @@ export default function Services() {
           </p>
         ) : (
           <Tabs defaultValue={firstCategory}>
-            <TabsList className="mx-auto mb-10 flex flex-wrap h-auto w-auto gap-1 bg-white/70 dark:bg-neutral-800/70 p-1.5 rounded-full backdrop-blur-sm">
+            <TabsList className="mx-auto mb-10 flex flex-wrap h-auto w-auto gap-2 bg-white/70 dark:bg-neutral-800/60 p-2 rounded-full backdrop-blur-xl border border-white/40 dark:border-white/10 shadow-lg shadow-black/5">
               {grouped.map(([category]) => (
                 <TabsTrigger
                   key={category}
                   value={category}
-                  className="rounded-full px-4 py-1.5 capitalize"
+                  className="rounded-full px-5 py-2 text-sm font-medium transition-all duration-300 data-[state=active]:bg-gradient-to-r data-[state=active]:from-amber-500 data-[state=active]:to-rose-500 data-[state=active]:text-white data-[state=active]:shadow-md data-[state=active]:shadow-amber-500/20 capitalize"
                 >
                   {CATEGORY_LABELS[category] ?? category}
                 </TabsTrigger>
@@ -128,19 +128,19 @@ export default function Services() {
                     <motion.div
                       key={svc.id}
                       variants={cardVariants}
-                      className="group relative flex flex-col overflow-hidden rounded-2xl bg-white dark:bg-neutral-800 p-6 shadow-sm ring-1 ring-black/5 dark:ring-white/10 transition-all duration-300 hover:-translate-y-1 hover:shadow-xl"
+                      className="group relative flex flex-col overflow-hidden rounded-3xl bg-white/80 dark:bg-neutral-800/80 backdrop-blur-lg p-6 shadow-md ring-1 ring-black/5 dark:ring-white/10 hover:ring-amber-500/30 dark:hover:ring-amber-400/30 transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl hover:shadow-amber-500/10"
                     >
                       <div className="mb-4 flex items-start justify-between gap-2">
-                        <span className="flex size-11 items-center justify-center rounded-full bg-amber-primary/10 text-amber-primary">
+                        <span className="flex size-12 items-center justify-center rounded-2xl bg-gradient-to-br from-amber-500/20 to-rose-500/20 text-amber-500 border border-amber-500/20 shadow-inner group-hover:scale-110 transition-transform duration-300">
                           <Sparkles className="size-5" />
                         </span>
                       </div>
 
-                      <h3 className="text-lg font-serif font-bold text-foreground mb-1">
+                      <h3 className="text-xl font-serif font-bold text-foreground mb-1 group-hover:text-amber-600 dark:group-hover:text-amber-400 transition-colors">
                         {svc.title}
                       </h3>
                       {svc.duration && (
-                        <p className="text-xs font-medium uppercase tracking-wider text-muted-foreground mb-3">
+                        <p className="text-xs font-semibold tracking-wider text-muted-foreground uppercase mb-3">
                           {svc.duration}
                         </p>
                       )}
@@ -153,9 +153,9 @@ export default function Services() {
                           {svc.features.slice(0, 3).map((f) => (
                             <li
                               key={f}
-                              className="flex items-center gap-2 text-xs text-foreground"
+                              className="flex items-center gap-2 text-xs text-foreground/90"
                             >
-                              <span className="size-1.5 shrink-0 rounded-full bg-amber-primary" />
+                              <span className="size-1.5 shrink-0 rounded-full bg-gradient-to-r from-amber-500 to-rose-500" />
                               {f}
                             </li>
                           ))}
@@ -167,11 +167,11 @@ export default function Services() {
                         size="sm"
                         onClick={() => openBooking(svc.title)}
                         className={cn(
-                          "justify-start self-start rounded-full px-3 text-amber-primary hover:bg-amber-primary/10 hover:text-amber-primary",
+                          "justify-start self-start rounded-full px-4 py-2 font-medium text-amber-600 dark:text-amber-400 hover:bg-gradient-to-r hover:from-amber-500/10 hover:to-rose-500/10 group-hover:translate-x-1 transition-all",
                         )}
                       >
                         Book This Service
-                        <ArrowRight className="size-3.5 transition-transform group-hover:translate-x-0.5" />
+                        <ArrowRight className="size-3.5 transition-transform group-hover:translate-x-1" />
                       </Button>
                     </motion.div>
                   ))}

@@ -29,9 +29,9 @@ export default function Hero() {
         style={{ y, opacity, scale }}
         className="absolute inset-0 z-0 will-change-transform"
       >
-        <div className="absolute inset-0 bg-gradient-to-br from-amber-primary/90 via-rose-secondary/80 to-amber-dark/90 animate-gradient" />
-        <div className="absolute inset-0 bg-gradient-to-tr from-amber-dark/40 via-transparent to-rose-secondary/40 animate-gradient" style={{ animationDirection: "reverse", animationDuration: "20s" }} />
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(255,255,255,0.05)_0%,transparent_70%)]" />
+        <div className="absolute inset-0 bg-gradient-to-br from-amber-500/90 via-rose-500/80 to-amber-700/90 animate-gradient" />
+        <div className="absolute inset-0 bg-gradient-to-tr from-amber-600/40 via-pink-500/20 to-rose-400/40 animate-gradient" style={{ animationDirection: "reverse", animationDuration: "20s" }} />
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(255,255,255,0.12)_0%,transparent_70%)]" />
       </motion.div>
 
       {/* Hand-rolled Aceternity-style effects */}
@@ -84,10 +84,10 @@ export default function Hero() {
             variant="default"
             size="lg"
             onClick={() => openBooking()}
-            className="rounded-full px-8 py-4 h-auto text-base sm:text-lg shadow-lg shadow-primary/25"
+            className="rounded-full px-9 py-4 h-auto text-base sm:text-lg bg-gradient-to-r from-amber-500 via-rose-500 to-pink-600 hover:opacity-95 text-white shadow-xl shadow-amber-500/25 transition-all duration-300 hover:scale-105 active:scale-95 border-0"
           >
             Book Appointment
-            <SparklesIcon className="size-5" />
+            <SparklesIcon className="size-5 animate-pulse" />
           </Button>
           <Button
             variant="ghost"
@@ -95,7 +95,7 @@ export default function Hero() {
             onClick={() => {
               document.getElementById("services")?.scrollIntoView({ behavior: "smooth" })
             }}
-            className="rounded-full px-8 py-4 h-auto text-base sm:text-lg border-2 border-amber-900/70 text-amber-900 dark:border-white/70 dark:text-white dark:hover:bg-white dark:hover:text-primary backdrop-blur-sm"
+            className="rounded-full px-8 py-4 h-auto text-base sm:text-lg border-2 border-white/60 text-white hover:bg-white/20 backdrop-blur-md transition-all duration-300 hover:scale-105 active:scale-95 shadow-md"
           >
             Explore Services
             <span aria-hidden>→</span>

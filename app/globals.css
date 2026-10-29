@@ -98,6 +98,11 @@
   --shadow-inner: var(--shadow-inner);
   --shadow-none: var(--shadow-none);
 
+  /* -- Vibrant & Glass Tokens -- */
+  --shadow-glass: var(--glass-shadow);
+  --shadow-glow: var(--glow-primary);
+  --shadow-glow-rose: var(--glow-rose);
+
   /* -- Fonts -- */
   --font-sans: var(--font-sans);
   --font-serif: var(--font-serif);
@@ -207,6 +212,24 @@ h1, h2, h3, h4, h5, h6 {
 
 html {
   scroll-behavior: smooth;
+}
+
+/* Glassmorphism utility classes */
+.glass-panel {
+  background: var(--glass-bg);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid var(--glass-border);
+  box-shadow: var(--glass-shadow);
+}
+
+.glow-card {
+  transition: transform 0.3s cubic-bezier(0.25, 0.1, 0.25, 1), box-shadow 0.3s cubic-bezier(0.25, 0.1, 0.25, 1);
+}
+
+.glow-card:hover {
+  box-shadow: 0 14px 28px -4px rgba(245, 158, 11, 0.2), 0 0 20px rgba(251, 113, 133, 0.15);
+  transform: translateY(-4px);
 }
 
 ::-webkit-scrollbar {

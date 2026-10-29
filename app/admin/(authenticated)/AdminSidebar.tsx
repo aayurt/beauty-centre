@@ -39,22 +39,22 @@ export default function AdminSidebar() {
   }
 
   return (
-    <aside className="fixed left-0 top-0 z-50 flex h-screen w-64 flex-col border-r bg-card">
-      <div className="border-b p-6">
-        <Link href="/admin" className="flex items-center gap-3">
-          <div className="flex size-10 items-center justify-center rounded-xl bg-primary">
-            <Scissors className="size-5 text-primary-foreground" />
+    <aside className="fixed left-0 top-0 z-50 flex h-screen w-64 flex-col border-r border-white/20 dark:border-white/5 bg-card/70 backdrop-blur-xl shadow-xl shadow-black/5">
+      <div className="border-b border-border/50 p-6">
+        <Link href="/admin" className="flex items-center gap-3 group">
+          <div className="flex size-11 items-center justify-center rounded-2xl bg-gradient-to-br from-amber-500 to-rose-500 text-white shadow-md shadow-amber-500/25 group-hover:scale-105 transition-transform duration-300">
+            <Scissors className="size-5" />
           </div>
           <div>
-            <h1 className="text-sm font-semibold leading-tight">
+            <h1 className="text-base font-bold font-serif leading-tight text-foreground">
               K &amp; S Beauty
             </h1>
-            <p className="text-xs text-muted-foreground">Admin Panel</p>
+            <p className="text-xs font-medium text-amber-600 dark:text-amber-400">Admin Portal</p>
           </div>
         </Link>
       </div>
 
-      <nav className="flex-1 space-y-1 p-4">
+      <nav className="flex-1 space-y-1.5 p-4">
         {navItems.map((item) => {
           const isActive =
             item.href === "/admin"
@@ -67,23 +67,23 @@ export default function AdminSidebar() {
               key={item.href}
               href={item.href}
               className={cn(
-                "flex items-center gap-3 rounded-xl px-3 py-2.5 text-sm font-medium transition-colors outline-none focus-visible:ring-3 focus-visible:ring-ring/50",
+                "flex items-center gap-3 rounded-2xl px-3.5 py-3 text-sm font-medium transition-all duration-300 outline-none",
                 isActive
-                  ? "bg-primary/10 text-primary active:bg-primary/15"
-                  : "text-muted-foreground hover:bg-muted hover:text-foreground active:bg-muted/80",
+                  ? "bg-gradient-to-r from-amber-500 to-rose-500 text-white shadow-lg shadow-amber-500/20"
+                  : "text-muted-foreground hover:bg-white/60 dark:hover:bg-white/5 hover:text-foreground hover:translate-x-1",
               )}
             >
-              <Icon className="size-4 shrink-0" />
+              <Icon className={cn("size-4 shrink-0", isActive ? "text-white" : "text-amber-500")} />
               {item.label}
             </Link>
           )
         })}
       </nav>
 
-      <div className="border-t p-4">
+      <div className="border-t border-border/50 p-4">
         <Button
           variant="ghost"
-          className="w-full justify-start gap-3 px-3 text-muted-foreground hover:bg-destructive/10 hover:text-destructive"
+          className="w-full justify-start gap-3 rounded-2xl px-3.5 py-3 text-muted-foreground hover:bg-destructive/10 hover:text-destructive transition-colors"
           onClick={handleLogout}
         >
           <LogOut className="size-4 shrink-0" />

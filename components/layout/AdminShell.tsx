@@ -65,10 +65,10 @@ function MobileAdminDrawer() {
       <DrawerPopup side="left">
         <DrawerHeader>
           <div className="flex items-center gap-3">
-            <div className="flex size-8 items-center justify-center rounded-lg bg-primary">
-              <Scissors className="size-4 text-primary-foreground" />
+            <div className="flex size-9 items-center justify-center rounded-xl bg-gradient-to-br from-amber-500 to-rose-500 text-white shadow-md shadow-amber-500/25">
+              <Scissors className="size-4" />
             </div>
-            <span className="text-sm font-semibold">K &amp; S Beauty</span>
+            <span className="text-sm font-bold font-serif">K &amp; S Beauty</span>
           </div>
           <DrawerClose
             data-slot="drawer-close"
@@ -107,13 +107,13 @@ function MobileAdminDrawer() {
                     closeBtn?.click()
                   }}
                   className={cn(
-                    "flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-medium transition-colors",
+                    "flex items-center gap-3 rounded-2xl px-3.5 py-3 text-sm font-medium transition-all duration-300",
                     isActive
-                      ? "bg-primary/10 text-primary"
-                      : "text-muted-foreground hover:bg-muted",
+                      ? "bg-gradient-to-r from-amber-500 to-rose-500 text-white shadow-lg shadow-amber-500/20"
+                      : "text-muted-foreground hover:bg-muted/60 hover:text-foreground",
                   )}
                 >
-                  {Icon && <Icon className="size-4 shrink-0" />}
+                  {Icon && <Icon className={cn("size-4 shrink-0", isActive ? "text-white" : "text-amber-500")} />}
                   {item.label}
                 </Link>
               )
