@@ -54,7 +54,7 @@ export default function InstagramFeed() {
   if (!loaded || posts.length === 0) return null;
 
   return (
-    <section className="py-16 sm:py-20 bg-white overflow-hidden">
+    <section className="py-16 sm:py-20 bg-background overflow-hidden">
       <div className="max-w-7xl mx-auto px-4 sm:px-6">
         <div className="text-center mb-12">
           <h2 className="text-2xl sm:text-3xl md:text-4xl font-serif text-foreground mb-3">

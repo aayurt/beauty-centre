@@ -34,12 +34,12 @@ export default function Team() {
           direction="up"
           className="text-center max-w-3xl mx-auto mb-16"
         >
-          <span className="inline-block px-4 py-2 bg-white dark:bg-neutral-800 text-amber-primary rounded-full text-sm font-medium mb-6">
+          <span className="inline-block px-4 py-2 bg-white dark:bg-neutral-800 text-amber-text rounded-full text-sm font-medium mb-6">
             Our Team
           </span>
           <h2 className="text-3xl sm:text-4xl md:text-5xl font-serif font-bold text-foreground mb-6">
             Meet the{" "}
-            <span className="text-amber-primary">Artists</span> Behind Your Beauty
+            <span className="text-amber-text">Artists</span> Behind Your Beauty
           </h2>
           <p className="text-muted-foreground text-base sm:text-lg leading-relaxed">
             Our talented team of certified professionals is dedicated to making
@@ -85,7 +85,7 @@ export default function Team() {
                     <h3 className="text-xl font-serif font-bold text-foreground mb-1">
                       {member.name}
                     </h3>
-                    <p className="text-amber-primary font-medium text-sm mb-4">
+                    <p className="text-amber-text font-medium text-sm mb-4">
                       {member.role}
                     </p>
                     {member.bio && (

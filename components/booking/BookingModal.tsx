@@ -221,7 +221,7 @@ export function BookingModal({
               transition={{ type: "spring", stiffness: 260, damping: 20 }}
               className="flex size-16 items-center justify-center rounded-full bg-amber-primary/10"
             >
-              <Check className="size-8 text-amber-primary" />
+              <Check className="size-8 text-amber-text" />
             </motion.div>
             <div>
               <h3 className="font-serif text-xl font-bold text-foreground">
@@ -246,7 +246,7 @@ export function BookingModal({
                   <div
                     className={cn(
                       "h-1.5 w-full rounded-full transition-all duration-300",
-                      i <= step ? "bg-gradient-to-r from-amber-500 to-rose-500 shadow-sm shadow-amber-500/30" : "bg-neutral-200 dark:bg-neutral-800",
+                      i <= step ? "bg-gradient-to-r from-amber-500 to-rose-500 shadow-sm shadow-amber-500/30" : "bg-border",
                     )}
                   />
                   <span
@@ -296,8 +296,8 @@ export function BookingModal({
                             className={cn(
                               "flex items-center justify-between gap-3 rounded-lg border px-3 py-2.5 text-left transition-all",
                               selectedService === svc.title
-                                ? "border-amber-primary bg-amber-50 dark:bg-amber-500/10 ring-1 ring-amber-primary"
-                                : "border-neutral-200 hover:border-neutral-300 dark:border-neutral-700 dark:hover:border-neutral-600",
+                                ? "border-primary bg-primary/10 ring-1 ring-primary"
+                                : "border-border hover:border-ring/60",
                             )}
                           >
                             <span className="flex flex-col">
@@ -308,7 +308,7 @@ export function BookingModal({
                             </span>
                             <span className="flex items-center gap-2">
                               {selectedService === svc.title && (
-                                <Check className="size-4 text-amber-primary" />
+                                <Check className="size-4 text-amber-text" />
                               )}
                             </span>
                           </button>
@@ -347,8 +347,8 @@ export function BookingModal({
                             className={cn(
                               "rounded-lg py-2 text-sm transition-all",
                               isSelected
-                                ? "bg-amber-primary text-white font-semibold"
-                                : "text-foreground hover:bg-neutral-100 dark:hover:bg-neutral-800",
+                                ? "bg-primary text-primary-foreground font-semibold"
+                                : "text-foreground hover:bg-muted",
                             )}
                           >
                             {day.getDate()}
@@ -357,7 +357,7 @@ export function BookingModal({
                       })}
                     </div>
                     {selectedDate && (
-                      <p className="mt-2 text-sm font-medium text-amber-primary">
+                      <p className="mt-2 text-sm font-medium text-amber-text">
                         {formatDate(selectedDate)}
                       </p>
                     )}
@@ -377,8 +377,8 @@ export function BookingModal({
                           className={cn(
                             "rounded-lg border px-2 py-2 text-xs font-medium transition-all",
                             selectedTime === slot
-                              ? "border-amber-primary bg-amber-primary text-white"
-                              : "border-neutral-200 text-foreground hover:border-amber-primary/50 dark:border-neutral-700",
+                              ? "border-primary bg-primary text-primary-foreground"
+                              : "border-border text-foreground hover:border-ring/60",
                           )}
                         >
                           {slot}
@@ -442,7 +442,7 @@ export function BookingModal({
                   </div>
 
                   {selectedServiceData && (
-                    <div className="rounded-lg bg-neutral-50 dark:bg-neutral-800 p-3 text-sm">
+                    <div className="rounded-lg bg-muted p-3 text-sm">
                       <p className="font-medium">Summary</p>
                       <p className="mt-1 text-muted-foreground">
                         {selectedServiceData.title} · {selectedServiceData.duration}

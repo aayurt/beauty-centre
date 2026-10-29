@@ -29,8 +29,8 @@ export default function Hero() {
         style={{ y, opacity, scale }}
         className="absolute inset-0 z-0 will-change-transform"
       >
-        <div className="absolute inset-0 bg-gradient-to-br from-amber-500/90 via-rose-500/80 to-amber-700/90 animate-gradient" />
-        <div className="absolute inset-0 bg-gradient-to-tr from-amber-600/40 via-pink-500/20 to-rose-400/40 animate-gradient" style={{ animationDirection: "reverse", animationDuration: "20s" }} />
+        <div className="absolute inset-0 bg-gradient-to-br from-amber-500/90 via-rose-500/80 to-amber-700/90 dark:from-amber-900/95 dark:via-rose-900/90 dark:to-neutral-950 animate-gradient" />
+        <div className="absolute inset-0 bg-gradient-to-tr from-amber-600/40 via-pink-500/20 to-rose-400/40 dark:from-amber-950/60 dark:to-rose-950/60 animate-gradient" style={{ animationDirection: "reverse", animationDuration: "20s" }} />
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(255,255,255,0.12)_0%,transparent_70%)]" />
       </motion.div>
 
@@ -59,7 +59,7 @@ export default function Hero() {
           initial={{ opacity: 0, y: 40 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.8 }}
-          className="text-4xl sm:text-5xl md:text-7xl lg:text-8xl font-serif font-bold text-primary mb-6 leading-tight"
+          className="text-4xl sm:text-5xl md:text-7xl lg:text-8xl font-serif font-bold text-amber-900 dark:text-white mb-6 leading-tight"
         >
           K &amp; S Beauty Centre
         </motion.h1>
@@ -95,7 +95,7 @@ export default function Hero() {
             onClick={() => {
               document.getElementById("services")?.scrollIntoView({ behavior: "smooth" })
             }}
-            className="rounded-full px-8 py-4 h-auto text-base sm:text-lg border-2 border-white/60 text-white hover:bg-white/20 backdrop-blur-md transition-all duration-300 hover:scale-105 active:scale-95 shadow-md"
+            className="rounded-full px-8 py-4 h-auto text-base sm:text-lg border-2 border-white/70 text-white hover:bg-white/20 dark:border-white/70 dark:text-white dark:hover:bg-white dark:hover:text-primary backdrop-blur-md transition-all duration-300 hover:scale-105 active:scale-95 shadow-md"
           >
             Explore Services
             <span aria-hidden>→</span>

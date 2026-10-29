@@ -46,6 +46,7 @@
   /* -- Semantic color name aliases -- */
   --color-amber-primary: var(--color-amber-primary);
   --color-amber-dark: var(--color-amber-dark);
+  --color-amber-text: var(--color-amber-text);
   --color-rose-secondary: var(--color-rose-secondary);
   --color-rose-light: var(--color-rose-light);
   --color-text-dark: var(--text-dark);
@@ -237,14 +238,14 @@ html {
 }
 
 ::-webkit-scrollbar-track {
-  background: var(--color-rose-100, #ffe4e6);
+  background: var(--muted);
 }
 
 ::-webkit-scrollbar-thumb {
-  background: var(--color-rose-300, #fda4af);
+  background: var(--border);
   border-radius: var(--radius-full);
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: var(--color-amber-500, #f59e0b);
+  background: var(--primary);
 }

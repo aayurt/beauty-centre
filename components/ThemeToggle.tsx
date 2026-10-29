@@ -6,51 +6,30 @@ import { Sun, Moon } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { cn } from "@/lib/utils"
 
-const themes = ["light", "dark"] as const
-const icons = { light: Sun, dark: Moon }
-const labels = { light: "Light mode", dark: "Dark mode" }
-
 export default function ThemeToggle({ className }: { className?: string }) {
   const [mounted, setMounted] = useState(false)
-  const { theme, setTheme } = useTheme()
+  const { resolvedTheme, setTheme } = useTheme()
 
-  // Standard next-themes hydration guard: render is identical on server + first
-  // client pass, then flips once mounted. Not a cascading-render concern.
+  // Standard next-themes hydration guard for the accessible label. The icons
+  // themselves are driven by the `.dark` class, so they never flash or shift.
   // eslint-disable-next-line react-hooks/set-state-in-effect
   useEffect(() => setMounted(true), [])
 
-  if (!mounted) {
-    return (
-      <Button
-        variant="ghost"
-        size="icon"
-        className={cn("rounded-full", className)}
-        aria-label="Toggle theme"
-        title="Toggle theme"
-      >
-        <Sun className="size-4" />
-      </Button>
-    )
-  }
-
-  const current = theme === "dark" ? "dark" : "light"
-  const Icon = icons[current]
-
-  const cycle = () => {
-    const idx = themes.indexOf(current)
-    setTheme(themes[(idx + 1) % themes.length])
-  }
+  const isDark = mounted && resolvedTheme === "dark"
+  const label = isDark ? "Switch to light mode" : "Switch to dark mode"
 
   return (
     <Button
+      type="button"
       variant="ghost"
       size="icon"
-      onClick={cycle}
-      className={cn("rounded-full", className)}
-      aria-label={labels[current]}
-      title={labels[current]}
+      onClick={() => setTheme(isDark ? "light" : "dark")}
+      className={cn("relative rounded-full", className)}
+      aria-label={label}
+      title={label}
     >
-      <Icon className="size-4" />
+      <Sun className="size-4 rotate-0 scale-100 transition-transform duration-200 dark:-rotate-90 dark:scale-0" />
+      <Moon className="absolute size-4 rotate-90 scale-0 transition-transform duration-200 dark:rotate-0 dark:scale-100" />
     </Button>
   )
 }

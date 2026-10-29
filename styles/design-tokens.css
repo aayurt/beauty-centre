@@ -52,12 +52,17 @@
   /* -- Semantic Color Aliases (used across components) -- */
   --color-amber-primary: var(--color-amber-500);
   --color-amber-dark: var(--color-amber-600);
+  /* Amber used as text/icon ink. amber-500 only reaches ~2.2:1 on light
+     surfaces, so light mode darkens it; dark mode keeps the warm brand hue. */
+  --color-amber-text: var(--color-amber-800);
   --color-rose-secondary: var(--color-rose-400);
   --color-rose-light: var(--color-rose-100);
 
   /* --------------------------------------------------------------------------
      2. Light Mode — Semantic Tokens
      -------------------------------------------------------------------------- */
+  color-scheme: light;
+
   --background: var(--color-neutral-50);
   --foreground: #2d2d2d;
   --text-dark: #2d2d2d;
@@ -68,7 +73,9 @@
   --popover: var(--color-white);
   --popover-foreground: #2d2d2d;
   --primary: var(--color-amber-500);
-  --primary-foreground: var(--color-white);
+  /* Amber surfaces are light, so the accessible foreground is dark in BOTH
+     themes (white on amber-500 is only ~2.2:1). */
+  --primary-foreground: #1c1a17;
   --secondary: var(--color-rose-400);
   --secondary-foreground: #2d2d2d;
   --muted: var(--color-neutral-100);
@@ -200,28 +207,31 @@
 
   /* --------------------------------------------------------------------------
      8. Opacity Scale
+     Tailwind v4 color modifiers (bg-primary/90, border-white/20, …) expand to
+     color-mix(… var(--opacity-90)), which requires a <percentage>. Keep these
+     as percentages so opacity modifiers resolve instead of becoming transparent.
      -------------------------------------------------------------------------- */
-  --opacity-0: 0;
-  --opacity-5: 0.05;
-  --opacity-10: 0.1;
-  --opacity-15: 0.15;
-  --opacity-20: 0.2;
-  --opacity-25: 0.25;
-  --opacity-30: 0.3;
-  --opacity-35: 0.35;
-  --opacity-40: 0.4;
-  --opacity-45: 0.45;
-  --opacity-50: 0.5;
-  --opacity-55: 0.55;
-  --opacity-60: 0.6;
-  --opacity-65: 0.65;
-  --opacity-70: 0.7;
-  --opacity-75: 0.75;
-  --opacity-80: 0.8;
-  --opacity-85: 0.85;
-  --opacity-90: 0.9;
-  --opacity-95: 0.95;
-  --opacity-100: 1;
+  --opacity-0: 0%;
+  --opacity-5: 5%;
+  --opacity-10: 10%;
+  --opacity-15: 15%;
+  --opacity-20: 20%;
+  --opacity-25: 25%;
+  --opacity-30: 30%;
+  --opacity-35: 35%;
+  --opacity-40: 40%;
+  --opacity-45: 45%;
+  --opacity-50: 50%;
+  --opacity-55: 55%;
+  --opacity-60: 60%;
+  --opacity-65: 65%;
+  --opacity-70: 70%;
+  --opacity-75: 75%;
+  --opacity-80: 80%;
+  --opacity-85: 85%;
+  --opacity-90: 90%;
+  --opacity-95: 95%;
+  --opacity-100: 100%;
 
   /* --------------------------------------------------------------------------
      9. Z-Index Scale
@@ -268,6 +278,10 @@
    11. Dark Mode — Semantic Token Overrides
    -------------------------------------------------------------------------- */
 .dark {
+  color-scheme: dark;
+
+  --color-amber-text: var(--color-amber-400);
+
   --background: #17150f;
   --foreground: #f5f2ed;
   --text-dark: #2d2d2d;

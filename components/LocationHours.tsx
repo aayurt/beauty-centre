@@ -11,12 +11,12 @@ export default function LocationHours() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6">
         {/* Header */}
         <AnimatedSection direction="up" className="text-center max-w-3xl mx-auto mb-16">
-          <span className="inline-block px-4 py-2 bg-rose-light dark:bg-neutral-700 text-amber-primary rounded-full text-sm font-medium mb-6">
+          <span className="inline-block px-4 py-2 bg-rose-light dark:bg-neutral-700 text-amber-text rounded-full text-sm font-medium mb-6">
             Visit Us
           </span>
           <h2 className="text-3xl sm:text-4xl md:text-5xl font-serif font-bold text-foreground mb-6">
             Find Our{" "}
-            <span className="text-amber-primary">Beauty Sanctuary</span>
+            <span className="text-amber-text">Beauty Sanctuary</span>
           </h2>
           <p className="text-muted-foreground text-base sm:text-lg leading-relaxed">
             We&apos;re conveniently located. Come experience the {company.name.split(" ")[0]} difference.
@@ -47,7 +47,7 @@ export default function LocationHours() {
               <div className="bg-rose-light dark:bg-neutral-800 rounded-2xl p-6 sm:p-8 shadow-xl">
                 <div className="flex items-start gap-4">
                   <div className="w-10 h-10 sm:w-14 sm:h-14 rounded-full bg-white dark:bg-neutral-700 dark:text-white flex items-center justify-center flex-shrink-0 shadow-md">
-                    <MapPin className="w-5 h-5 sm:w-6 sm:h-6 text-amber-primary" />
+                    <MapPin className="w-5 h-5 sm:w-6 sm:h-6 text-amber-text" />
                   </div>
                   <div>
                     <h3 className="text-lg sm:text-xl font-serif font-bold text-foreground mb-2">Our Address</h3>
@@ -63,7 +63,7 @@ export default function LocationHours() {
               <div className="bg-rose-light dark:bg-neutral-800 rounded-2xl p-6 sm:p-8 shadow-xl">
                 <div className="flex items-start gap-4">
                   <div className="w-10 h-10 sm:w-14 sm:h-14 rounded-full bg-white dark:bg-neutral-700 dark:text-white flex items-center justify-center flex-shrink-0 shadow-md">
-                    <Clock className="w-5 h-5 sm:w-6 sm:h-6 text-amber-primary" />
+                    <Clock className="w-5 h-5 sm:w-6 sm:h-6 text-amber-text" />
                   </div>
                   <div>
                     <h3 className="text-lg sm:text-xl font-serif font-bold text-foreground mb-2">Opening Hours</h3>
@@ -85,13 +85,13 @@ export default function LocationHours() {
               <div className="bg-rose-light dark:bg-neutral-800 rounded-2xl p-6 sm:p-8 shadow-xl">
                 <div className="flex items-start gap-4">
                   <div className="w-10 h-10 sm:w-14 sm:h-14 rounded-full bg-white dark:bg-neutral-700 dark:text-white flex items-center justify-center flex-shrink-0 shadow-md">
-                    <Phone className="w-5 h-5 sm:w-6 sm:h-6 text-amber-primary" />
+                    <Phone className="w-5 h-5 sm:w-6 sm:h-6 text-amber-text" />
                   </div>
                   <div>
                     <h3 className="text-lg sm:text-xl font-serif font-bold text-foreground mb-2">Call Us</h3>
                     <a
                       href={`tel:${company.phone || "+977144XXXXX"}`}
-                      className="text-muted-foreground hover:text-amber-primary transition-colors text-lg"
+                      className="text-muted-foreground hover:text-amber-text transition-colors text-lg"
                     >
                       {company.phone || "+977-1-4XXXXXX"}
                     </a>

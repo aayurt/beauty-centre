@@ -95,19 +95,19 @@ export default function Contact() {
 
   const borderColor = (name: string) =>
     errors[name as keyof FieldErrors]
-      ? "border-red-400 focus:border-red-400 focus:ring-2 focus:ring-red-400/20"
-      : "border-gray-200 dark:border-neutral-600 dark:focus:border-amber-primary focus:border-amber-primary focus:ring-2 focus:ring-amber-primary/20";
+      ? "border-destructive focus:border-destructive focus:ring-2 focus:ring-destructive/20"
+      : "border-input focus:border-ring focus:ring-2 focus:ring-ring/20";
 
   return (
     <section id="contact" className="py-24 md:py-32 bg-rose-light dark:bg-neutral-900 overflow-hidden">
       <div className="max-w-7xl mx-auto px-4 sm:px-6">
         <AnimatedSection direction="up" className="text-center max-w-3xl mx-auto mb-16">
-          <span className="inline-block px-4 py-2 bg-white dark:bg-neutral-800 text-amber-primary rounded-full text-sm font-medium mb-6">
+          <span className="inline-block px-4 py-2 bg-white dark:bg-neutral-800 text-amber-text rounded-full text-sm font-medium mb-6">
             Contact Us
           </span>
           <h2 className="text-3xl sm:text-4xl md:text-5xl font-serif font-bold text-foreground mb-6">
             Book Your{" "}
-            <span className="text-amber-primary">Appointment</span> Today
+            <span className="text-amber-text">Appointment</span> Today
           </h2>
           <p className="text-muted-foreground text-base sm:text-lg leading-relaxed">
             Ready to experience the {company.name.split(" ")[0]} difference? Reach out to us and let&apos;s create your perfect beauty moment.
@@ -202,8 +202,8 @@ export default function Contact() {
                             htmlFor={field.name}
                             className={`absolute left-4 transition-all duration-200 pointer-events-none ${
                               isFloating(field.name)
-                                ? "top-2 text-xs text-amber-primary font-medium"
-                                : "top-1/2 -translate-y-1/2 text-gray-400 dark:text-neutral-500 text-base"
+                                ? "top-2 text-xs text-amber-text font-medium"
+                                : "top-1/2 -translate-y-1/2 text-muted-foreground text-base"
                             }`}
                           >
                             {field.label}
@@ -229,12 +229,12 @@ export default function Contact() {
                     <button
                       type="submit"
                       disabled={status === "loading"}
-                      className="w-full py-4 bg-amber-primary text-white rounded-lg font-medium flex items-center justify-center gap-2 hover:bg-amber-dark active:bg-amber-dark/80 transition-colors disabled:opacity-70 disabled:cursor-not-allowed group relative overflow-hidden focus-visible:ring-3 focus-visible:ring-ring/50 outline-none"
+                      className="w-full py-4 bg-primary text-primary-foreground rounded-lg font-medium flex items-center justify-center gap-2 hover:bg-primary/90 active:bg-primary/95 transition-colors disabled:opacity-70 disabled:cursor-not-allowed group relative overflow-hidden focus-visible:ring-3 focus-visible:ring-ring/50 outline-none"
                     >
                       {status === "loading" ? (
                         <>
                           <svg
-                            className="animate-spin h-5 w-5 text-white"
+                            className="animate-spin h-5 w-5 text-primary-foreground"
                             viewBox="0 0 24 24"
                             fill="none"
                           >
@@ -293,7 +293,7 @@ export default function Contact() {
                 ].map((item) => (
                   <div key={item.title} className="flex items-start gap-4">
                     <div className="w-12 h-12 rounded-full bg-rose-secondary dark:bg-neutral-700 flex items-center justify-center flex-shrink-0">
-                      <item.icon className="w-5 h-5 text-amber-primary" />
+                      <item.icon className="w-5 h-5 text-amber-text" />
                     </div>
                     <div>
                       <h4 className="font-semibold text-foreground mb-1">{item.title}</h4>

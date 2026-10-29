@@ -71,12 +71,12 @@ export default function Gallery() {
           direction="up"
           className="text-center max-w-3xl mx-auto mb-10"
         >
-          <span className="inline-block px-4 py-2 bg-rose-light dark:bg-neutral-700 text-amber-primary rounded-full text-sm font-medium mb-6">
+          <span className="inline-block px-4 py-2 bg-rose-light dark:bg-neutral-700 text-amber-text rounded-full text-sm font-medium mb-6">
             Our Gallery
           </span>
           <h2 className="text-3xl sm:text-4xl md:text-5xl font-serif font-bold text-foreground mb-6">
             A Glimpse Into{" "}
-            <span className="text-amber-primary">Our World</span>
+            <span className="text-amber-text">Our World</span>
           </h2>
           <p className="text-muted-foreground text-base sm:text-lg leading-relaxed">
             Step inside our sanctuary and experience the ambiance that makes K
@@ -97,8 +97,8 @@ export default function Gallery() {
               className={cn(
                 "rounded-full px-4 py-1.5 text-sm font-medium transition-all",
                 filter === f
-                  ? "bg-amber-primary text-white shadow-md shadow-amber-primary/25"
-                  : "bg-rose-light dark:bg-neutral-800 text-muted-foreground hover:bg-amber-primary/10 hover:text-amber-primary",
+                  ? "bg-primary text-primary-foreground shadow-md shadow-primary/25"
+                  : "bg-rose-light dark:bg-neutral-800 text-foreground hover:bg-primary/10 hover:text-amber-text",
               )}
             >
               {f}

@@ -85,12 +85,12 @@ export default function Services() {
           direction="up"
           className="text-center max-w-3xl mx-auto mb-12"
         >
-          <span className="inline-block px-4 py-2 bg-white dark:bg-neutral-800 text-amber-primary rounded-full text-sm font-medium mb-6">
+          <span className="inline-block px-4 py-2 bg-white dark:bg-neutral-800 text-amber-text rounded-full text-sm font-medium mb-6">
             Our Services
           </span>
           <h2 className="text-3xl sm:text-4xl md:text-5xl font-serif font-bold text-foreground mb-6">
             Pamper Yourself with{" "}
-            <span className="text-amber-primary">Luxury Treatments</span>
+            <span className="text-amber-text">Luxury Treatments</span>
           </h2>
           <p className="text-muted-foreground text-base sm:text-lg leading-relaxed">
             Discover our comprehensive range of beauty and wellness services,
@@ -131,7 +131,7 @@ export default function Services() {
                       className="group relative flex flex-col overflow-hidden rounded-3xl bg-white/80 dark:bg-neutral-800/80 backdrop-blur-lg p-6 shadow-md ring-1 ring-black/5 dark:ring-white/10 hover:ring-amber-500/30 dark:hover:ring-amber-400/30 transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl hover:shadow-amber-500/10"
                     >
                       <div className="mb-4 flex items-start justify-between gap-2">
-                        <span className="flex size-12 items-center justify-center rounded-2xl bg-gradient-to-br from-amber-500/20 to-rose-500/20 text-amber-500 border border-amber-500/20 shadow-inner group-hover:scale-110 transition-transform duration-300">
+                        <span className="flex size-12 items-center justify-center rounded-2xl bg-gradient-to-br from-amber-500/20 to-rose-500/20 text-amber-500 dark:text-amber-400 border border-amber-500/20 shadow-inner group-hover:scale-110 transition-transform duration-300">
                           <Sparkles className="size-5" />
                         </span>
                       </div>
