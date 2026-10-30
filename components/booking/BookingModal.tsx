@@ -155,15 +155,11 @@ export function BookingModal({
         body: JSON.stringify({
           name,
           phone,
+          email: email || undefined,
           service: selectedService,
           preferredDate: selectedDate,
           preferredTime: selectedTime,
-          message: [
-            email ? `Email: ${email}` : null,
-            notes ? `Notes: ${notes}` : null,
-          ]
-            .filter(Boolean)
-            .join("\n"),
+          message: notes || "",
         }),
       });
       if (res.ok) {

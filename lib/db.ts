@@ -33,6 +33,7 @@ export async function createContactEntry(data: {
 export async function createBookingInquiryEntry(data: {
   name: string;
   phone: string;
+  email?: string | null;
   service: string;
   preferredDate: string;
   preferredTime: string;
@@ -48,6 +49,7 @@ export async function createBookingInquiryEntry(data: {
       data: {
         name: data.name,
         phone: data.phone,
+        email: data.email || null,
         service: data.service,
         preferredDate: new Date(data.preferredDate),
         preferredTime: data.preferredTime,

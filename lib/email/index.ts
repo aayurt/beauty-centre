@@ -28,3 +28,4 @@ export {
 export { bookingConfirmationEmail } from "./templates/booking-confirmation";
 export { appointmentReminderEmail } from "./templates/appointment-reminder";
 export { statusUpdateEmail } from "./templates/status-update";
+export { getResendClient, getDefaultFromEmail } from "./client";
