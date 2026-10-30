@@ -89,7 +89,7 @@ function ParallaxImage() {
               <Sparkles className="w-10 h-10" />
             </motion.div>
               <p className="text-xl sm:text-2xl md:text-3xl font-serif font-bold mb-2">Since 1980s</p>
-            <p className="text-white/70 text-sm uppercase tracking-widest">Jamal, Kathmandu</p>
+            <p className="text-white/80 text-sm font-medium">Jamal, Kathmandu</p>
           </div>
         </div>
       </motion.div>

@@ -247,9 +247,9 @@ export function BookingModal({
                   />
                   <span
                     className={cn(
-                      "text-[11px] font-semibold tracking-wider transition-colors",
+                      "text-xs font-medium transition-colors",
                       i === step
-                        ? "text-amber-600 dark:text-amber-400"
+                        ? "text-amber-600 dark:text-amber-400 font-semibold"
                         : "text-muted-foreground",
                     )}
                   >
@@ -280,7 +280,7 @@ export function BookingModal({
                   )}
                   {groupedServices.map((group) => (
                     <div key={group.category}>
-                      <p className="mb-2 text-xs font-semibold uppercase tracking-widest text-muted-foreground">
+                      <p className="mb-2.5 text-xs font-semibold text-muted-foreground">
                         {CATEGORY_LABELS[group.category] ?? group.category}
                       </p>
                       <div className="grid gap-2">

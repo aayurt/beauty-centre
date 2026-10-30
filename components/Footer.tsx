@@ -65,9 +65,7 @@ export default function Footer() {
           </div>
 
           <div>
-            <h4 className="text-sm font-semibold uppercase tracking-widest text-neutral-300">
-              Quick Links
-            </h4>
+            <h4 className="text-sm font-semibold text-neutral-300">Quick Links</h4>
             <ul className="mt-6 space-y-3">
               {[
                 { label: "Home", href: "#home" },
@@ -90,9 +88,7 @@ export default function Footer() {
           </div>
 
           <div>
-            <h4 className="text-sm font-semibold uppercase tracking-widest text-neutral-300">
-              Contact Info
-            </h4>
+            <h4 className="text-sm font-semibold text-neutral-300">Salon Hours</h4>
             <ul className="mt-6 space-y-3 text-sm text-neutral-400">
               {company.address.split("\n").map((line, i) => (
                 <li key={i}>{line}</li>

@@ -85,16 +85,11 @@ export default function Services() {
           direction="up"
           className="text-center max-w-3xl mx-auto mb-12"
         >
-          <span className="inline-block px-4 py-2 bg-white dark:bg-neutral-800 text-amber-text rounded-full text-sm font-medium mb-6">
-            Our Services
-          </span>
           <h2 className="text-3xl sm:text-4xl md:text-5xl font-serif font-bold text-foreground mb-6">
-            Pamper Yourself with{" "}
-            <span className="text-amber-text">Luxury Treatments</span>
+            Luxury Treatments for Hair, Skin &amp; Body
           </h2>
-          <p className="text-muted-foreground text-base sm:text-lg leading-relaxed">
-            Discover our comprehensive range of beauty and wellness services,
-            designed to help you look and feel your absolute best.
+          <p className="text-muted-foreground text-base sm:text-lg leading-relaxed max-w-2xl mx-auto">
+            Discover our masterfully curated salon services in Jamal, Kathmandu.
           </p>
         </AnimatedSection>
 
@@ -140,7 +135,7 @@ export default function Services() {
                         {svc.title}
                       </h3>
                       {svc.duration && (
-                        <p className="text-xs font-semibold tracking-wider text-muted-foreground uppercase mb-3">
+                        <p className="text-xs font-semibold text-muted-foreground mb-3">
                           {svc.duration}
                         </p>
                       )}

@@ -60,7 +60,7 @@ export default async function AdminDashboard() {
             <Card key={stat.label} size="sm" className="relative overflow-hidden rounded-3xl border border-white/40 dark:border-white/10 bg-card/80 backdrop-blur-xl shadow-lg shadow-black/5 hover:shadow-xl hover:shadow-amber-500/10 transition-all duration-300 hover:-translate-y-1">
               <CardContent className="flex items-center justify-between gap-4 p-6">
                 <div className="min-w-0">
-                  <p className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">
+                  <p className="text-xs font-semibold text-muted-foreground">
                     {stat.label}
                   </p>
                   <p className="mt-2 text-4xl font-extrabold font-serif text-foreground">{stat.value}</p>

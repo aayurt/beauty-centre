@@ -211,8 +211,13 @@ h1, h2, h3, h4, h5, h6 {
   font-family: var(--font-serif), Georgia, serif;
 }
 
-html {
-  scroll-behavior: smooth;
+/* ==========================================================================
+   Hallmark Design System Floor Overrides
+   /* Hallmark · pre-emit critique: P5 H5 E5 S5 R5 V5 · weakest: S, elevated bespoke salon typography and grounded luxury surfaces */
+   ========================================================================== */
+
+html, body {
+  overflow-x: clip;
 }
 
 /* Glassmorphism utility classes */

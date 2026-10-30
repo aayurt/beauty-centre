@@ -49,17 +49,17 @@ export default function Hero() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.6 }}
-          className="inline-flex items-center gap-2 px-5 py-2 rounded-full bg-amber-900/10 backdrop-blur-sm border border-amber-900/20 text-amber-900/90 dark:bg-white/10 dark:border-white/20 dark:text-white/90 text-sm uppercase tracking-[0.25em] mb-8 font-medium"
+          className="inline-flex items-center gap-2 px-5 py-2 rounded-full bg-white/15 backdrop-blur-md border border-white/25 text-white text-sm mb-8 font-medium shadow-sm"
         >
           <SparklesIcon className="w-3.5 h-3.5" />
-          Welcome to
+          Established in Jamal, Kathmandu
         </motion.div>
 
         <motion.h1
           initial={{ opacity: 0, y: 40 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.8 }}
-          className="text-4xl sm:text-5xl md:text-7xl lg:text-8xl font-serif font-bold text-amber-900 dark:text-white mb-6 leading-tight"
+          className="text-4xl sm:text-5xl md:text-7xl lg:text-8xl font-serif font-bold text-white mb-6 leading-tight drop-shadow-sm"
         >
           K &amp; S Beauty Centre
         </motion.h1>
@@ -68,10 +68,9 @@ export default function Hero() {
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 1 }}
-          className="text-base sm:text-lg md:text-2xl text-amber-900/95 dark:text-white/95 max-w-2xl mx-auto mb-10 font-light leading-relaxed"
+          className="text-base sm:text-lg md:text-2xl text-white/95 max-w-2xl mx-auto mb-10 font-light leading-relaxed drop-shadow-sm"
         >
-          Elevate your everyday radiance with hair, skin &amp; wellness artistry
-          crafted around you.
+          Hair, skin &amp; wellness artistry crafted in Jamal, Kathmandu.
         </motion.p>
 
         <motion.div
@@ -98,7 +97,6 @@ export default function Hero() {
             className="rounded-full px-8 py-4 h-auto text-base sm:text-lg border-2 border-white/70 text-white hover:bg-white/20 dark:border-white/70 dark:text-white dark:hover:bg-white dark:hover:text-primary backdrop-blur-md transition-all duration-300 hover:scale-105 active:scale-95 shadow-md"
           >
             Explore Services
-            <span aria-hidden>→</span>
           </Button>
         </motion.div>
 
@@ -106,7 +104,7 @@ export default function Hero() {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.8, delay: 1.5 }}
-          className="mt-8 flex items-center justify-center gap-2 text-amber-900/80 dark:text-white/70 text-sm"
+          className="mt-8 flex items-center justify-center gap-2 text-white/80 text-sm font-medium"
         >
           <MapPin className="w-4 h-4" />
           <span>{company.address.split("\n")[0]}</span>
@@ -122,14 +120,14 @@ export default function Hero() {
         <motion.div
           animate={{ y: [0, 8, 0] }}
           transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
-          className="flex flex-col items-center gap-2 text-amber-900/60 dark:text-white/50"
+          className="flex flex-col items-center gap-2 text-white/70"
         >
-          <span className="text-xs uppercase tracking-[0.2em]">Scroll</span>
-          <div className="w-5 h-8 border-2 border-amber-900/50 rounded-full flex items-start justify-center p-1.5 dark:border-white/40">
+          <span className="text-xs font-medium">Scroll down</span>
+          <div className="w-5 h-8 border-2 border-white/50 rounded-full flex items-start justify-center p-1.5">
             <motion.div
               animate={{ y: [0, 6, 0] }}
               transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
-              className="w-1 h-2 bg-amber-900/70 rounded-full dark:bg-white/60"
+              className="w-1 h-2 bg-white/75 rounded-full"
             />
           </div>
         </motion.div>
