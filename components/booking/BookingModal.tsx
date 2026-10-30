@@ -34,9 +34,9 @@ interface Service {
 
 const CATEGORY_LABELS: Record<string, string> = {
   hair: "Hair Care",
-  facials: "Facials & Skin",
-  nails: "Nails & Lash",
-  massage: "Massage & Spa",
+  skincare: "Skincare & Facials",
+  waxing: "Waxing",
+  nails: "Nails & Spa",
   bridal: "Bridal Packages",
 };
 

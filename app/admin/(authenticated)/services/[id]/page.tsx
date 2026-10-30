@@ -27,9 +27,9 @@ interface ServiceFormData {
 
 const CATEGORIES = [
   { value: "hair", label: "Hair Care" },
-  { value: "facials", label: "Facials & Skin" },
-  { value: "nails", label: "Nails & Lash" },
-  { value: "massage", label: "Massage & Spa" },
+  { value: "skincare", label: "Skincare & Facials" },
+  { value: "waxing", label: "Waxing" },
+  { value: "nails", label: "Nails & Spa" },
   { value: "bridal", label: "Bridal Packages" },
 ];
 

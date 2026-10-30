@@ -11,22 +11,23 @@ npm run build
 echo ""
 echo "==> Syncing to $REMOTE_HOST:$REMOTE_DIR..."
 rsync -avz --delete \
-  --exclude '.next/cache' \
-  --exclude '.next/dev' \
-  --exclude '.next/standalone' \
-  --exclude 'node_modules' \
-  --exclude '.git' \
-  --exclude '.env*' \
-  --exclude '*.tsbuildinfo' \
-  --exclude 'public/uploads' \
-  "$LOCAL_DIR/.next" \
-  "$LOCAL_DIR/public" \
-  "$LOCAL_DIR/package.json" \
-  "$LOCAL_DIR/package-lock.json" \
-  "$LOCAL_DIR/next.config.ts" \
-  "$LOCAL_DIR/ecosystem.config.js" \
-  "$LOCAL_DIR/prisma" \
-  "$REMOTE_HOST:$REMOTE_DIR/"
+--exclude '.next/cache' \
+--exclude '.next/dev' \
+--exclude '.next/standalone' \
+--exclude 'node_modules' \
+--exclude '.git' \
+--exclude '.env*' \
+--exclude '*.tsbuildinfo' \
+--exclude 'public/uploads' \
+"$LOCAL_DIR/.next" \
+"$LOCAL_DIR/public" \
+"$LOCAL_DIR/package.json" \
+"$LOCAL_DIR/package-lock.json" \
+"$LOCAL_DIR/next.config.ts" \
+"$LOCAL_DIR/ecosystem.config.js" \
+"$LOCAL_DIR/prisma" \
+"$LOCAL_DIR/tsconfig.json" \
+"$REMOTE_HOST:$REMOTE_DIR/"
 
 echo ""
 echo "==> Installing deps & restarting on $REMOTE_HOST..."
@@ -44,6 +45,7 @@ ssh "$REMOTE_HOST" bash -s <<-REMOTESCRIPT
 
   npx prisma generate 2>&1
   npx prisma db push --skip-generate --accept-data-loss 2>&1
+  npx tsx prisma/sync-services.ts 2>&1
   echo "    Database sync complete."
 
   if pm2 describe beauty-centre &>/dev/null; then
