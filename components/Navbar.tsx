@@ -39,10 +39,24 @@ export default function Navbar() {
   const { openBooking } = useBooking()
 
   useEffect(() => {
+    let ticking = false
     const handleScroll = () => {
-      setIsScrolled(window.scrollY > 50)
+      if (!ticking) {
+        window.requestAnimationFrame(() => {
+          const currentY = window.scrollY
+          setIsScrolled((prev) => {
+            // Hysteresis buffer to eliminate oscillation flicker
+            if (!prev && currentY > 60) return true
+            if (prev && currentY < 30) return false
+            return prev
+          })
+          ticking = false
+        })
+        ticking = true
+      }
     }
     window.addEventListener("scroll", handleScroll, { passive: true })
+    handleScroll()
     return () => window.removeEventListener("scroll", handleScroll)
   }, [])
 
@@ -61,14 +75,12 @@ export default function Navbar() {
   )
 
   return (
-    <motion.nav
-      initial={{ y: -100 }}
-      animate={{ y: 0 }}
-      transition={{ duration: 0.6, ease: "easeOut" }}
+    <nav
       className={cn(
-        "fixed top-0 left-0 right-0 z-50 transition-all duration-500",
+        "fixed top-0 left-0 right-0 z-50 will-change-[background-color,backdrop-filter,border-color,box-shadow,padding]",
+        "transition-[background-color,backdrop-filter,border-color,box-shadow,padding] duration-300 ease-out",
         isScrolled
-          ? "bg-background/80 dark:bg-neutral-900/80 backdrop-blur-xl border-b border-border/60 dark:border-white/10 shadow-lg shadow-black/5 py-3"
+          ? "bg-background/85 dark:bg-neutral-900/85 backdrop-blur-xl border-b border-border/60 dark:border-white/10 shadow-lg shadow-black/5 py-3"
           : "bg-transparent py-5",
       )}
     >
@@ -102,10 +114,10 @@ export default function Navbar() {
                 activeSection === link.id
                   ? isScrolled
                     ? "text-amber-text"
-                    : "text-amber-900 dark:text-amber-300"
+                    : "text-white"
                   : isScrolled
                     ? "text-foreground hover:text-amber-text active:text-amber-text/80"
-                    : "text-amber-900/90 hover:text-amber-900 active:text-amber-900/70 dark:text-white/90 dark:hover:text-white dark:active:text-white/70",
+                    : "text-white/85 hover:text-white active:text-white/70",
               )}
             >
               {link.name}
@@ -114,7 +126,7 @@ export default function Navbar() {
                   layoutId="nav-active"
                   className={cn(
                     "absolute bottom-0 left-3 right-3 h-0.5 rounded-full",
-                    isScrolled ? "bg-amber-primary" : "bg-amber-900 dark:bg-white",
+                    isScrolled ? "bg-amber-primary" : "bg-white",
                   )}
                   transition={{ type: "spring", stiffness: 380, damping: 30 }}
                 />
@@ -124,9 +136,10 @@ export default function Navbar() {
           <div className="ml-2 flex items-center gap-1">
             <ThemeToggle
               className={cn(
+                "transition-colors duration-200",
                 isScrolled
                   ? "text-foreground hover:bg-muted"
-                  : "text-amber-900 hover:bg-amber-900/10 dark:text-white/80 dark:hover:bg-white/10",
+                  : "text-white hover:bg-white/15",
               )}
             />
             <Button
@@ -134,9 +147,9 @@ export default function Navbar() {
               size="sm"
               onClick={() => openBooking()}
               className={cn(
-                "rounded-full px-4",
+                "rounded-full px-4 transition-all duration-200",
                 !isScrolled &&
-                  "border-amber-900/20 bg-amber-900/10 text-amber-900 backdrop-blur-sm hover:bg-amber-900/20 dark:border-white/20 dark:bg-white/10 dark:text-white dark:hover:bg-white/20",
+                  "bg-white/20 text-white border border-white/30 backdrop-blur-md hover:bg-white/30",
               )}
             >
               <Sparkles />
@@ -149,10 +162,10 @@ export default function Navbar() {
           <DrawerTrigger
             data-slot="drawer-trigger"
             className={cn(
-              "inline-flex items-center justify-center rounded-md p-2 focus:outline-none focus-visible:ring-2 focus-visible:ring-ring active:scale-95 md:hidden",
+              "inline-flex items-center justify-center rounded-md p-2 focus:outline-none focus-visible:ring-2 focus-visible:ring-ring active:scale-95 md:hidden transition-colors duration-200",
               isScrolled
                 ? "text-foreground hover:bg-muted active:bg-muted/80"
-                : "text-amber-900 hover:bg-amber-900/10 active:bg-amber-900/20 dark:text-white dark:hover:bg-white/10 dark:active:bg-white/20",
+                : "text-white hover:bg-white/15 active:bg-white/20",
             )}
             aria-label="Open navigation menu"
           >
@@ -236,6 +249,6 @@ export default function Navbar() {
           </DrawerPopup>
         </Drawer>
       </div>
-    </motion.nav>
+    </nav>
   )
 }
