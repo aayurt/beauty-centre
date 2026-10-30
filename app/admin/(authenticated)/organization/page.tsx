@@ -2,7 +2,8 @@
 
 import { useEffect, useState, FormEvent } from "react";
 import { useRouter } from "next/navigation";
-import { Save, Building2 } from "lucide-react";
+import Image from "next/image";
+import { Save, Building2, QrCode, Download } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -245,6 +246,71 @@ export default function OrganizationPage() {
                   onChange={(url) => updateField("logo", url)}
                   label="Logo"
                 />
+              </div>
+            </div>
+          </CardContent>
+        </Card>
+
+        {/* QR Code Card for In-Salon & Social Promotion */}
+        <Card>
+          <CardHeader>
+            <div className="flex items-center gap-2">
+              <QrCode className="size-5 text-primary" />
+              <CardTitle>Booking QR Code</CardTitle>
+            </div>
+            <p className="text-xs text-muted-foreground mt-1">
+              Print or share this QR code for in-salon display stands, reception counters, business cards, and social media flyers.
+            </p>
+          </CardHeader>
+          <CardContent>
+            <div className="flex flex-col sm:flex-row items-center gap-6 p-4 rounded-2xl border bg-muted/30">
+              <div className="relative size-44 shrink-0 rounded-xl overflow-hidden border shadow-sm bg-white p-2">
+                <Image
+                  src="/kands-booking-card.png"
+                  alt="K & S Beauty Centre Booking QR Card"
+                  fill
+                  className="object-contain"
+                />
+              </div>
+              <div className="space-y-3 text-center sm:text-left">
+                <div>
+                  <h4 className="text-sm font-semibold">Salon Booking Stand Card</h4>
+                  <p className="text-xs text-muted-foreground mt-0.5">
+                    Encodes direct link: <code className="text-primary font-mono font-medium">https://kandsbeauty.com.np/#home</code>
+                  </p>
+                </div>
+                <div className="flex flex-wrap gap-2 justify-center sm:justify-start">
+                  <Button
+                    type="button"
+                    variant="outline"
+                    size="sm"
+                    className="gap-2 rounded-xl"
+                    onClick={() => {
+                      const a = document.createElement("a");
+                      a.href = "/kands-booking-card.png";
+                      a.download = "kands-booking-display-card.png";
+                      a.click();
+                    }}
+                  >
+                    <Download className="size-4" />
+                    Download Display Card (PNG)
+                  </Button>
+                  <Button
+                    type="button"
+                    variant="ghost"
+                    size="sm"
+                    className="gap-2 rounded-xl"
+                    onClick={() => {
+                      const a = document.createElement("a");
+                      a.href = "/kands-qr-code.png";
+                      a.download = "kands-qr-code-raw.png";
+                      a.click();
+                    }}
+                  >
+                    <Download className="size-4" />
+                    Raw QR Code (PNG)
+                  </Button>
+                </div>
               </div>
             </div>
           </CardContent>
