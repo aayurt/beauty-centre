@@ -98,6 +98,7 @@ export async function POST(request: NextRequest) {
             await resend.emails.send({
               from: getDefaultFromEmail(),
               to: email,
+              replyTo: "bookings@kandsbeauty.com.np",
               subject: clientTemplate.subject,
               html: clientTemplate.html,
               text: clientTemplate.text,
