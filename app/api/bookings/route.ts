@@ -106,14 +106,21 @@ export async function POST(request: NextRequest) {
           }
 
           // 2. Send notification to the salon owner if business email is configured
-          const notifyRecipient = process.env.ADMIN_NOTIFICATION_EMAIL || company?.email;
-          if (notifyRecipient && notifyRecipient !== email) {
-            await resend.emails.send({
-              from: getDefaultFromEmail(),
-              to: notifyRecipient,
-              subject: `New Booking Inquiry: ${service} - ${name}`,
-              text: `New booking request received:\n\nCustomer: ${name}\nPhone: ${phone}\nEmail: ${email || "N/A"}\nService: ${service}\nDate: ${preferredDate}\nTime: ${preferredTime}\nMessage: ${message || "N/A"}`,
-            });
+          const rawNotification = process.env.ADMIN_NOTIFICATION_EMAIL || company?.email;
+          if (rawNotification) {
+            const recipients = rawNotification
+              .split(",")
+              .map((r) => r.trim())
+              .filter((r) => r && r !== email);
+
+            if (recipients.length > 0) {
+              await resend.emails.send({
+                from: getDefaultFromEmail(),
+                to: recipients,
+                subject: `New Booking Inquiry: ${service} - ${name}`,
+                text: `New booking request received:\n\nCustomer: ${name}\nPhone: ${phone}\nEmail: ${email || "N/A"}\nService: ${service}\nDate: ${preferredDate}\nTime: ${preferredTime}\nMessage: ${message || "N/A"}`,
+              });
+            }
           }
         } catch (err) {
           console.error("Failed to dispatch booking emails via Resend:", err);
