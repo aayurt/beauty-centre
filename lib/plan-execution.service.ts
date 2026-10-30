@@ -41,7 +41,7 @@ export function getRemainingDependents<T extends { id: string; status: string; d
 
   const visited = new Set<string>();
   const queue: string[] = [completedStepId];
-  const remaining: T[] = [];
+  const remainingMap = new Map<string, T>();
 
   while (queue.length > 0) {
     const currentId = queue.shift()!;
@@ -56,13 +56,14 @@ export function getRemainingDependents<T extends { id: string; status: string; d
       if (visited.has(dependent.id)) continue;
 
       if (hasRemainingStatus(dependent.status)) {
-        remaining.push(dependent);
+        remainingMap.set(dependent.id, dependent);
       }
 
       queue.push(dependent.id);
     }
   }
 
+  const remaining = Array.from(remainingMap.values());
   logInfo(`Found ${remaining.length} remaining dependent(s) for step "${completedStepId}"`);
   return remaining;
 }
