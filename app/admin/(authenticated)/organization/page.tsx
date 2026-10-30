@@ -276,7 +276,7 @@ export default function OrganizationPage() {
                 <div>
                   <h4 className="text-sm font-semibold">Salon Booking Stand Card</h4>
                   <p className="text-xs text-muted-foreground mt-0.5">
-                    Encodes direct link: <code className="text-primary font-mono font-medium">https://kandsbeauty.com.np/#home</code>
+                    Direct booking URL: <code className="text-primary font-mono font-medium">https://kandsbeauty.com.np/book</code>
                   </p>
                 </div>
                 <div className="flex flex-wrap gap-2 justify-center sm:justify-start">
