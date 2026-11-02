@@ -27,14 +27,14 @@ export default function AdminLoginPage() {
 
       if (!res.ok) {
         setError(data.error || "Login failed");
+        setLoading(false);
         return;
       }
 
-      // Use hard navigation to ensure session cookie is attached cleanly across server components
+      // Hard redirect to admin dashboard
       window.location.href = "/admin";
     } catch {
       setError("Network error. Please try again.");
-    } finally {
       setLoading(false);
     }
   }
