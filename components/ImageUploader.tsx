@@ -38,11 +38,12 @@ export default function ImageUploader({
         });
 
         const json = await res.json();
+        if (!res.ok || json.error) throw new Error(json.error || "Upload failed");
         if (json.data?.url) {
           onChange(json.data.url);
         }
-      } catch {
-        // silent
+      } catch (err: any) {
+        alert(err?.message || "Upload failed. Please try again.");
       } finally {
         setUploading(false);
       }

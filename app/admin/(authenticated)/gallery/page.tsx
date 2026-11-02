@@ -70,7 +70,9 @@ export default function AdminGalleryPage() {
         body: formData,
       });
       const uploadJson = await uploadRes.json();
-      if (!uploadJson.data?.url) throw new Error("Upload failed");
+      if (!uploadRes.ok || !uploadJson.data?.url) {
+        throw new Error(uploadJson.error || "Upload failed");
+      }
 
       await fetch("/api/gallery", {
         method: "POST",
@@ -83,8 +85,8 @@ export default function AdminGalleryPage() {
       });
 
       await loadItems();
-    } catch {
-      alert("Upload failed");
+    } catch (err: any) {
+      alert(err?.message || "Upload failed");
     } finally {
       setUploading(false);
       if (e.target) e.target.value = "";

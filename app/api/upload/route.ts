@@ -5,7 +5,7 @@ import { existsSync } from "fs";
 import path from "path";
 
 const ALLOWED_TYPES = ["image/jpeg", "image/png", "image/webp", "image/gif", "image/avif"];
-const MAX_SIZE = 5 * 1024 * 1024; // 5MB
+const MAX_SIZE = 25 * 1024 * 1024; // 25MB (supports modern high-res camera photos)
 
 export async function POST(request: NextRequest) {
   try {
@@ -36,7 +36,7 @@ export async function POST(request: NextRequest) {
 
     if (file.size > MAX_SIZE) {
       return NextResponse.json(
-        { data: null, error: "File too large. Maximum size is 5MB" },
+        { data: null, error: `File too large (${(file.size / (1024 * 1024)).toFixed(1)}MB). Maximum size is 25MB` },
         { status: 400 }
       );
     }

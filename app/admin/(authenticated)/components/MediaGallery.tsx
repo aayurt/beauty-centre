@@ -71,6 +71,7 @@ export default function MediaGallery({
         body: formData,
       });
       const json = await res.json();
+      if (!res.ok || json.error) throw new Error(json.error || "Upload failed");
       if (json.data?.url) {
         onChange([
           ...items,
@@ -82,8 +83,8 @@ export default function MediaGallery({
           },
         ]);
       }
-    } catch {
-      // silent
+    } catch (err: any) {
+      alert(err?.message || "Upload failed. Please try again.");
     } finally {
       setUploading(false);
       if (e.target) e.target.value = "";
