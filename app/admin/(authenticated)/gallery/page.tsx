@@ -272,13 +272,15 @@ export default function AdminGalleryPage() {
                       "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='48' height='48' viewBox='0 0 24 24' fill='none' stroke='%23999' stroke-width='2'%3E%3Crect x='3' y='3' width='18' height='18' rx='2'/%3E%3Ccircle cx='8.5' cy='8.5' r='1.5'/%3E%3Cpath d='m21 15-5-5L5 21'/%3E%3C/svg%3E";
                   }}
                 />
-                <div className="absolute inset-0 flex items-center justify-center gap-2 bg-black/0 opacity-0 transition-all group-hover:bg-black/40 group-hover:opacity-100">
+                {/* Direction 1: Mobile-friendly floating action pill. Always visible on mobile, subtle backdrop blur on hover for desktop */}
+                <div className="absolute right-2 top-2 z-10 flex items-center gap-1.5 rounded-full border border-black/10 bg-background/85 p-1 shadow-sm backdrop-blur-md transition-all duration-200 opacity-100 md:opacity-0 md:group-hover:opacity-100 dark:border-white/15 dark:bg-neutral-900/85">
                   <Button
                     type="button"
                     size="icon-xs"
                     variant="destructive"
                     onClick={() => handleDelete(item.id)}
-                    title="Delete"
+                    title="Delete image"
+                    className="size-7 rounded-full transition-transform active:scale-90"
                   >
                     <Trash2 className="size-3.5" />
                   </Button>

@@ -132,23 +132,23 @@ export default function MediaGallery({
                   </div>
                 )}
                 {!readOnly && (
-                  <>
+                  <div className="absolute right-1.5 top-1.5 z-10 flex items-center gap-1 rounded-full border border-black/10 bg-background/85 p-0.5 shadow-sm backdrop-blur-md transition-all duration-200 opacity-100 md:opacity-0 md:group-hover:opacity-100 dark:border-white/15 dark:bg-neutral-900/85">
+                    <button
+                      type="button"
+                      className="cursor-grab rounded-full p-1 text-muted-foreground transition-colors hover:bg-muted active:scale-90"
+                      title="Drag to reorder"
+                    >
+                      <GripVertical className="size-3.5" />
+                    </button>
                     <button
                       type="button"
                       onClick={() => removeMedia(index)}
-                      className="absolute right-1 top-1 rounded-full bg-destructive p-1 text-destructive-foreground opacity-0 transition-opacity group-hover:opacity-100"
+                      className="rounded-full bg-destructive p-1 text-destructive-foreground transition-transform hover:opacity-90 active:scale-90"
                       title="Remove image"
                     >
-                      <X className="size-3" />
+                      <X className="size-3.5" />
                     </button>
-                    <button
-                      type="button"
-                      className="absolute left-1 top-1 cursor-grab rounded-full bg-background/80 p-1 text-muted-foreground opacity-0 transition-opacity group-hover:opacity-100"
-                      title="Drag to reorder"
-                    >
-                      <GripVertical className="size-3" />
-                    </button>
-                  </>
+                  </div>
                 )}
               </div>
               {!readOnly && (
