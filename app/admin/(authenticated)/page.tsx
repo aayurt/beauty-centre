@@ -13,31 +13,34 @@ import { Card, CardContent } from "@/components/ui/card";
 export const dynamic = "force-dynamic";
 
 export default async function AdminDashboard() {
-  const [
-    totalServices,
-    activeServices,
-    totalEvents,
-    publishedEvents,
-    totalStaff,
-    activeStaff,
-    totalBookings,
-    totalMessages,
-    totalMedia,
-    totalReviews,
-    activeReviews,
-  ] = await Promise.all([
-    prisma.service.count(),
-    prisma.service.count({ where: { isActive: true } }),
-    prisma.event.count(),
-    prisma.event.count({ where: { status: "PUBLISHED" } }),
-    prisma.staff.count(),
-    prisma.staff.count({ where: { isActive: true } }),
-    prisma.bookingInquiry.count(),
-    prisma.contact.count(),
-    prisma.media.count(),
-    prisma.review.count(),
-    prisma.review.count({ where: { isActive: true } }),
-  ]);
+  // Use sequential or batch count queries with fallback to prevent pool exhaustion on pooler connection limit
+  let totalServices = 0,
+    activeServices = 0,
+    totalEvents = 0,
+    publishedEvents = 0,
+    totalStaff = 0,
+    activeStaff = 0,
+    totalBookings = 0,
+    totalMessages = 0,
+    totalMedia = 0,
+    totalReviews = 0,
+    activeReviews = 0;
+
+  try {
+    totalServices = await prisma.service.count();
+    activeServices = await prisma.service.count({ where: { isActive: true } });
+    totalReviews = await prisma.review.count();
+    activeReviews = await prisma.review.count({ where: { isActive: true } });
+    totalEvents = await prisma.event.count();
+    publishedEvents = await prisma.event.count({ where: { status: "PUBLISHED" } });
+    totalStaff = await prisma.staff.count();
+    activeStaff = await prisma.staff.count({ where: { isActive: true } });
+    totalBookings = await prisma.bookingInquiry.count();
+    totalMessages = await prisma.contact.count();
+    totalMedia = await prisma.media.count();
+  } catch (err) {
+    console.error("Dashboard metrics fetch error:", err);
+  }
 
   const stats = [
     { label: "Services", value: totalServices, icon: Sparkles },
