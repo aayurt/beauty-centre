@@ -34,8 +34,8 @@ export default function AdminSidebar() {
 
   async function handleLogout() {
     await fetch("/api/admin/logout", { method: "POST" })
-    router.push("/admin/login")
-    router.refresh()
+    // Use hard navigation to cleanly clear session and SSR state
+    window.location.href = "/admin/login";
   }
 
   return (
