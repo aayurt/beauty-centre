@@ -1,6 +1,6 @@
 "use client"
 
-import { X, LogOut, Scissors, LayoutDashboard, Calendar, Users, Inbox, Camera, Image, Building2 } from "lucide-react"
+import { X, LogOut, Scissors, LayoutDashboard, Calendar, Users, Inbox, Camera, Image, Building2, Sparkles, Star } from "lucide-react"
 import { usePathname, useRouter } from "next/navigation"
 import Link from "next/link"
 
@@ -18,7 +18,10 @@ import { cn } from "@/lib/utils"
 const iconMap: Record<string, React.ComponentType<{ className?: string }>> = {
   LayoutDashboard,
   Calendar,
+  Services: Sparkles,
+  Sparkles,
   Users,
+  Star,
   Inbox,
   Camera,
   Image,
@@ -28,7 +31,9 @@ const iconMap: Record<string, React.ComponentType<{ className?: string }>> = {
 const navItems = [
   { href: "/admin", label: "Dashboard", icon: "LayoutDashboard" },
   { href: "/admin/events", label: "Events", icon: "Calendar" },
+  { href: "/admin/services", label: "Services", icon: "Sparkles" },
   { href: "/admin/staff", label: "Staff", icon: "Users" },
+  { href: "/admin/reviews", label: "Reviews", icon: "Star" },
   { href: "/admin/bookings", label: "Inquiries", icon: "Inbox" },
   { href: "/admin/instagram", label: "Instagram", icon: "Camera" },
   { href: "/admin/gallery", label: "Gallery", icon: "Image" },

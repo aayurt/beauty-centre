@@ -12,6 +12,7 @@ import {
   LogOut,
   Scissors,
   Sparkles,
+  Star,
   Users,
 } from "lucide-react"
 import { cn } from "@/lib/utils"
@@ -22,6 +23,7 @@ const navItems = [
   { href: "/admin/events", label: "Events", icon: Calendar },
   { href: "/admin/services", label: "Services", icon: Sparkles },
   { href: "/admin/staff", label: "Staff", icon: Users },
+  { href: "/admin/reviews", label: "Reviews", icon: Star },
   { href: "/admin/bookings", label: "Inquiries", icon: Inbox },
   { href: "/admin/instagram", label: "Instagram", icon: Camera },
   { href: "/admin/gallery", label: "Gallery", icon: Image },

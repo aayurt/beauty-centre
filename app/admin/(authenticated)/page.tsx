@@ -5,6 +5,7 @@ import {
   MessageSquare,
   Sparkles,
   Users,
+  Star,
 } from "lucide-react";
 import { prisma } from "@/lib/prisma";
 import { Card, CardContent } from "@/components/ui/card";
@@ -22,6 +23,8 @@ export default async function AdminDashboard() {
     totalBookings,
     totalMessages,
     totalMedia,
+    totalReviews,
+    activeReviews,
   ] = await Promise.all([
     prisma.service.count(),
     prisma.service.count({ where: { isActive: true } }),
@@ -32,11 +35,15 @@ export default async function AdminDashboard() {
     prisma.bookingInquiry.count(),
     prisma.contact.count(),
     prisma.media.count(),
+    prisma.review.count(),
+    prisma.review.count({ where: { isActive: true } }),
   ]);
 
   const stats = [
     { label: "Services", value: totalServices, icon: Sparkles },
     { label: "Active Services", value: activeServices, icon: Sparkles },
+    { label: "Reviews", value: totalReviews, icon: Star },
+    { label: "Active Reviews", value: activeReviews, icon: Star },
     { label: "Events", value: totalEvents, icon: Calendar },
     { label: "Published Events", value: publishedEvents, icon: Calendar },
     { label: "Staff", value: totalStaff, icon: Users },
