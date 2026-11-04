@@ -133,21 +133,23 @@ export default function MediaGallery({
                   </div>
                 )}
                 {!readOnly && (
-                  <div className="absolute right-1.5 top-1.5 z-10 flex items-center gap-1 rounded-full border border-black/10 bg-background/85 p-0.5 shadow-sm backdrop-blur-md transition-all duration-200 opacity-100 md:opacity-0 md:group-hover:opacity-100 dark:border-white/15 dark:bg-neutral-900/85">
+                  <div className="absolute right-2 top-2 z-10 flex items-center gap-1 rounded-lg border border-border bg-background/85 p-1 shadow-sm backdrop-blur-md transition-all duration-200 opacity-100 md:opacity-0 md:group-hover:opacity-100 md:focus-within:opacity-100">
                     <button
                       type="button"
-                      className="cursor-grab rounded-full p-1 text-muted-foreground transition-colors hover:bg-muted active:scale-90"
+                      className="flex size-9 cursor-grab items-center justify-center rounded-md text-muted-foreground transition-colors hover:bg-muted active:scale-90"
                       title="Drag to reorder"
+                      aria-label="Drag to reorder"
                     >
-                      <GripVertical className="size-3.5" />
+                      <GripVertical className="size-4" />
                     </button>
                     <button
                       type="button"
                       onClick={() => removeMedia(index)}
-                      className="rounded-full bg-destructive p-1 text-destructive-foreground transition-transform hover:opacity-90 active:scale-90"
+                      className="flex size-9 items-center justify-center rounded-md bg-destructive text-destructive-foreground transition-transform hover:opacity-90 active:scale-90"
                       title="Remove image"
+                      aria-label="Remove image"
                     >
-                      <X className="size-3.5" />
+                      <X className="size-4" />
                     </button>
                   </div>
                 )}

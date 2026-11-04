@@ -14,6 +14,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import ImageUploader from "@/components/ImageUploader";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 
 interface ServiceFormData {
@@ -21,6 +22,8 @@ interface ServiceFormData {
   category: string;
   price: string;
   duration: string;
+  imageUrl: string;
+  features: string[];
   displayOrder: number;
   isActive: boolean;
 }
@@ -38,6 +41,8 @@ const emptyForm: ServiceFormData = {
   category: "hair",
   price: "",
   duration: "",
+  imageUrl: "",
+  features: [],
   displayOrder: 0,
   isActive: true,
 };
@@ -70,6 +75,8 @@ export default function ServiceFormPage() {
             category: s.category || "hair",
             price: s.price || "",
             duration: s.duration || "",
+            imageUrl: s.imageUrl || "",
+            features: s.features ?? [],
             displayOrder: s.displayOrder ?? 0,
             isActive: s.isActive ?? true,
           });
@@ -220,6 +227,15 @@ export default function ServiceFormPage() {
                   value={form.duration}
                   onChange={(e) => updateField("duration", e.target.value)}
                   placeholder="e.g. 45 mins"
+                />
+              </div>
+
+              <div className="space-y-1.5">
+                <Label htmlFor="imageUrl">Service Image</Label>
+                <ImageUploader
+                  value={form.imageUrl}
+                  onChange={(url) => updateField("imageUrl", url)}
+                  label="Upload or paste service image"
                 />
               </div>
 

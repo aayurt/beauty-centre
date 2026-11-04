@@ -1,67 +1,71 @@
 import { NextRequest, NextResponse } from "next/server";
 import { verifySession } from "@/lib/auth";
-import { writeFile, mkdir } from "fs/promises";
-import { existsSync } from "fs";
+import sharp from "sharp";
+import fs from "fs/promises";
 import path from "path";
+import crypto from "crypto";
 
-const ALLOWED_TYPES = ["image/jpeg", "image/png", "image/webp", "image/gif", "image/avif"];
-const MAX_SIZE = 25 * 1024 * 1024; // 25MB (supports modern high-res camera photos)
+const MAX_FILE_SIZE = 5 * 1024 * 1024; // 5MB
+const UPLOAD_DIR = path.join(process.cwd(), "public", "uploads");
+const ALLOWED_TYPES = ["image/jpeg", "image/jpg", "image/png", "image/webp", "image/avif", "image/gif"];
+
+function ensureUploadDir() {
+  fs.mkdir(UPLOAD_DIR, { recursive: true }).catch(() => {
+    // directory may already exist
+  });
+}
 
 export async function POST(request: NextRequest) {
   try {
     const authed = await verifySession();
     if (!authed) {
-      return NextResponse.json(
-        { data: null, error: "Unauthorized" },
-        { status: 401 }
-      );
+      return NextResponse.json({ data: null, error: "Unauthorized" }, { status: 401 });
     }
+
+    ensureUploadDir();
 
     const formData = await request.formData();
     const file = formData.get("file") as File | null;
-
     if (!file) {
-      return NextResponse.json(
-        { data: null, error: "No file provided" },
-        { status: 400 }
-      );
+      return NextResponse.json({ data: null, error: "No file provided" }, { status: 400 });
     }
 
     if (!ALLOWED_TYPES.includes(file.type)) {
       return NextResponse.json(
-        { data: null, error: "Invalid file type. Allowed: JPEG, PNG, WebP, GIF, AVIF" },
-        { status: 400 }
+        { data: null, error: "Unsupported file type. Use PNG, JPG, WebP, GIF, or AVIF." },
+        { status: 400 },
       );
     }
 
-    if (file.size > MAX_SIZE) {
+    const arrayBuffer = await file.arrayBuffer();
+    if (arrayBuffer.byteLength > MAX_FILE_SIZE) {
       return NextResponse.json(
-        { data: null, error: `File too large (${(file.size / (1024 * 1024)).toFixed(1)}MB). Maximum size is 25MB` },
-        { status: 400 }
+        { data: null, error: "File too large. Maximum 5MB." },
+        { status: 400 },
       );
     }
 
-    const ext = file.name.split(".").pop() || "jpg";
-    const filename = `${Date.now()}-${Math.random().toString(36).slice(2, 8)}.${ext}`;
-    const uploadDir = path.join(process.cwd(), "public", "uploads");
+    const ext = path.extname(file.name || "").toLowerCase() || ".webp";
+    const baseName = path.basename(file.name || "image", ext).replace(/[^a-z0-9_-]/gi, "_");
+    const fileName = `${baseName}-${crypto.randomBytes(8).toString("hex")}.webp`;
+    const filePath = path.join(UPLOAD_DIR, fileName);
 
-    if (!existsSync(uploadDir)) {
-      await mkdir(uploadDir, { recursive: true });
-    }
+    const buffer = Buffer.from(arrayBuffer);
 
-    const bytes = await file.arrayBuffer();
-    const buffer = Buffer.from(bytes);
-    await writeFile(path.join(uploadDir, filename), buffer);
+    // Compress: convert to WebP, quality 80, cap max dimension at 1600px
+    await sharp(buffer)
+      .resize({ width: 1600, height: 1600, fit: "inside", withoutEnlargement: true })
+      .webp({ quality: 80 })
+      .toFile(filePath);
 
-    return NextResponse.json({
-      data: { url: `/uploads/${filename}` },
-      error: null,
-    });
+    const url = `/uploads/${fileName}`;
+
+    return NextResponse.json({ data: { url }, error: null }, { status: 200 });
   } catch (error) {
-    console.error("Upload failed:", error);
+    console.error("Upload error:", error);
     return NextResponse.json(
-      { data: null, error: "Upload failed" },
-      { status: 500 }
+      { data: null, error: "Internal server error" },
+      { status: 500 },
     );
   }
 }

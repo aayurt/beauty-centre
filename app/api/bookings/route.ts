@@ -62,12 +62,20 @@ export async function POST(request: NextRequest) {
 
     const { name, phone, email, service, preferredDate, preferredTime, message } = parsed.data;
 
+    const parsedDate = new Date(preferredDate);
+    if (Number.isNaN(parsedDate.getTime())) {
+      return NextResponse.json(
+        { data: null, error: "Validation failed", fieldErrors: { preferredDate: ["Enter a valid date"] } },
+        { status: 400 },
+      );
+    }
+
     const result = await createBookingInquiryEntry({
       name,
       phone,
       email: email || undefined,
       service,
-      preferredDate,
+      preferredDate: parsedDate.toISOString(),
       preferredTime,
       message,
     });

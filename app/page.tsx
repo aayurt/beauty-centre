@@ -8,6 +8,7 @@ import Team from "@/components/Team";
 import Testimonials from "@/components/Testimonials";
 import Contact from "@/components/Contact";
 import InstagramFeed from "@/components/InstagramFeed";
+import Products from "@/components/Products";
 
 export default function Home() {
   return (
@@ -21,6 +22,7 @@ export default function Home() {
       <Testimonials />
       <Contact />
       <InstagramFeed />
+      <Products />
     </PublicSiteShell>
   );
 }

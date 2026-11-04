@@ -274,17 +274,18 @@ export default function AdminGalleryPage() {
                       "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='48' height='48' viewBox='0 0 24 24' fill='none' stroke='%23999' stroke-width='2'%3E%3Crect x='3' y='3' width='18' height='18' rx='2'/%3E%3Ccircle cx='8.5' cy='8.5' r='1.5'/%3E%3Cpath d='m21 15-5-5L5 21'/%3E%3C/svg%3E";
                   }}
                 />
-                {/* Direction 1: Mobile-friendly floating action pill. Always visible on mobile, subtle backdrop blur on hover for desktop */}
-                <div className="absolute right-2 top-2 z-10 flex items-center gap-1.5 rounded-full border border-black/10 bg-background/85 p-1 shadow-sm backdrop-blur-md transition-all duration-200 opacity-100 md:opacity-0 md:group-hover:opacity-100 dark:border-white/15 dark:bg-neutral-900/85">
+                {/* Mobile-friendly floating action pill. Always visible on mobile, subtle on hover for desktop */}
+                <div className="absolute right-2 top-2 z-10 flex items-center gap-1 rounded-lg border border-border bg-background/85 p-1 shadow-sm backdrop-blur-md transition-all duration-200 opacity-100 md:opacity-0 md:group-hover:opacity-100 md:focus-within:opacity-100">
                   <Button
                     type="button"
-                    size="icon-xs"
+                    size="icon"
                     variant="destructive"
                     onClick={() => handleDelete(item.id)}
                     title="Delete image"
-                    className="size-7 rounded-full transition-transform active:scale-90"
+                    aria-label="Delete image"
+                    className="size-9 rounded-md transition-transform active:scale-90"
                   >
-                    <Trash2 className="size-3.5" />
+                    <Trash2 className="size-4" />
                   </Button>
                 </div>
               </div>
@@ -301,11 +302,12 @@ export default function AdminGalleryPage() {
                       }))
                     }
                     title="Alt text"
-                    className="h-6 flex-1 px-1.5 py-0.5 text-xs"
+                    aria-label="Alt text"
+                    className="h-9 flex-1 px-2 py-1 text-xs"
                   />
                   <Button
                     type="button"
-                    size="icon-xs"
+                    size="icon"
                     variant={editMode[item.id] ? "secondary" : "ghost"}
                     onClick={() =>
                       setEditMode((prev) => ({
@@ -314,12 +316,14 @@ export default function AdminGalleryPage() {
                       }))
                     }
                     title={editMode[item.id] ? "Stop editing" : "Edit alt text"}
+                    aria-label={editMode[item.id] ? "Stop editing alt text" : "Edit alt text"}
+                    className="size-9 shrink-0 rounded-md"
                   >
-                    <Pencil className="size-3" />
+                    <Pencil className="size-4" />
                   </Button>
                   <Button
                     type="button"
-                    size="icon-xs"
+                    size="icon"
                     variant="ghost"
                     onClick={() => {
                       handleAltSave(item.id);
@@ -327,8 +331,10 @@ export default function AdminGalleryPage() {
                     }}
                     disabled={!editMode[item.id] || !(editingAlt[item.id] ?? "").trim()}
                     title="Save alt text"
+                    aria-label="Save alt text"
+                    className="size-9 shrink-0 rounded-md"
                   >
-                    <Save className="size-3" />
+                    <Save className="size-4" />
                   </Button>
                 </div>
                 <div className="mt-1.5 flex items-center justify-between">

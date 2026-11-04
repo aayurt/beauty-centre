@@ -244,6 +244,24 @@ model InstagramPost {
   @@index([isActive])
 }
 
+model Product {
+  id          Int      @id @default(autoincrement())
+  name        String
+  brand       String?
+  category    String   @default("hair")
+  description String?
+  price       String   @default("")
+  imageUrl    String?
+  isActive    Boolean  @default(true)
+  displayOrder Int     @default(0)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  @@index([isActive])
+  @@index([category])
+  @@index([displayOrder])
+}
+
 model AdminUser {
   id           Int      @id @default(autoincrement())
   username     String   @unique

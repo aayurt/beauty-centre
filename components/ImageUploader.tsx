@@ -89,17 +89,18 @@ export default function ImageUploader({
             }}
           />
           {/* Mobile-accessible action toolbar / hover overlay on desktop */}
-          <div className="absolute top-2 right-2 z-10 flex items-center gap-1.5 rounded-full border border-black/10 bg-background/90 p-1 shadow-md backdrop-blur-md transition-all duration-200 opacity-100 md:opacity-0 md:group-hover:opacity-100 dark:border-white/15 dark:bg-neutral-900/90">
+          <div className="absolute right-2 top-2 z-10 flex items-center gap-1 rounded-lg border border-border bg-background/90 p-1 shadow-md backdrop-blur-md transition-all duration-200 opacity-100 md:opacity-0 md:group-hover:opacity-100 md:focus-within:opacity-100">
             <Button
               type="button"
               variant="ghost"
               size="icon"
-              className="size-8 rounded-full hover:bg-muted"
+              className="size-9 rounded-md hover:bg-muted"
               onClick={() => {
                 setShowUrlInput(true);
                 setUrlValue(value);
               }}
               title="Change URL"
+              aria-label="Change URL"
             >
               <Link className="size-4" />
             </Button>
@@ -107,9 +108,10 @@ export default function ImageUploader({
               type="button"
               variant="ghost"
               size="icon"
-              className="size-8 rounded-full hover:bg-muted"
+              className="size-9 rounded-md hover:bg-muted"
               onClick={() => inputRef.current?.click()}
               title="Upload new"
+              aria-label="Upload new"
             >
               <Upload className="size-4" />
             </Button>
@@ -117,9 +119,10 @@ export default function ImageUploader({
               type="button"
               variant="destructive"
               size="icon"
-              className="size-8 rounded-full"
+              className="size-9 rounded-md"
               onClick={handleRemove}
               title="Remove"
+              aria-label="Remove"
             >
               <X className="size-4" />
             </Button>

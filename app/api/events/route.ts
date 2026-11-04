@@ -69,13 +69,21 @@ export async function POST(request: NextRequest) {
     const { title, description, date, time, location, imageUrl, status } =
       parsed.data;
 
+    const parsedDate = new Date(date);
+    if (Number.isNaN(parsedDate.getTime())) {
+      return NextResponse.json(
+        { data: null, error: "Validation failed", fieldErrors: { date: ["Enter a valid date"] } },
+        { status: 400 },
+      );
+    }
+
     const isActive = status === "PUBLISHED";
 
     const event = await prisma.event.create({
       data: {
         title,
         description: description || "",
-        date: new Date(date),
+        date: parsedDate,
         time: time || null,
         location: location || null,
         imageUrl: imageUrl || null,
